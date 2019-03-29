@@ -1,5 +1,5 @@
 # accounting-system
-ENGG1340 Group 3 (Tam Fung Ching Herbert 3035554828, Park Sangwon 3035556060)
+ENGG1340 Group 3 (Tam Fong Ching Herbert 3035554828, Park Sangwon 3035556060)
 
 ## Problem Statement
 As university students work part time or get allowance, we know first hand the problems of organizing money. We will be building a user-friendly lightweight accounting system catered towards students like us.
