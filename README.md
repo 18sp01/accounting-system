@@ -1,10 +1,10 @@
 # accounting-system
 ENGG1340 Group 3 (Tam Fung Ching Herbert 3035554828, Park Sangwon 3035556060)
 
-## Problem Statement:
+## Problem Statement
 As university students work part time or get allowance, we know first hand the problems of organizing money. We will be building a user-friendly lightweight accounting system catered towards students like us.
 
-## Problem Setting:
+## Problem Setting
 Young people may find it difficult to transition into financial indepedence, yet building a habit to monitor their own spending may prove to be a daunting task, especially when many existing finance managers are complicated and inconvenient to use on a day-to-day basis. This has caused their inability to help motivate students into properly organizing their money.
 
 ## Features
