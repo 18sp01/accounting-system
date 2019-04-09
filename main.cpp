@@ -17,11 +17,11 @@ struct record {
 // Inputs: record newRecord: the data the time needs to be recorded on
 //         local time
 // Outputs: data becomes recorded with current time
-void timeRecord(record newRecord) {
+void timeRecord(record &newRecord) {
     time_t t = time(nullptr);
     tm * tm_local = localtime(&t);
-    newRecord.year = tm_local->tm_year;
-    newRecord.month = tm_local->tm_mon;
+    newRecord.year = tm_local->tm_year + 1900;
+    newRecord.month = tm_local->tm_mon + 1;
     newRecord.day = tm_local->tm_mday;
     newRecord.hour = tm_local->tm_hour;
     newRecord.min = tm_local->tm_min;
@@ -32,16 +32,14 @@ void timeRecord(record newRecord) {
 // Inputs: vector<record> records: vector of records
 //         user input
 // Outputs: new data record
-void addRecord (vector<record> records) {
+void addRecord (vector<record> &records) {
     record newRecord;
+    cin >> newRecord.amount >> newRecord.type >> newRecord.account;
     timeRecord(newRecord);
     records.push_back(newRecord);
 }
 
-// printVector: adds the data to vector of record
-// Inputs: vector<record> records: vector of records
-//         user inputx
-// Outputs: new data record
+// printVector
 void printVector(vector<record> records) {
     cout << records.size() << endl;
     for (record i : records) {
@@ -49,22 +47,16 @@ void printVector(vector<record> records) {
     }
 }
 
+// prints time of record
+void printTime(record record) {
+    cout << record.year << '/' << record.month << '/' << record.day << ' ' << record.hour << ':' << record.min << ':' << record.min << endl;
+}
+
 int main() {
     vector<record> records;
     addRecord(records);
-    //printVector(records);
-    
-    record newRecord;
+    printVector(records);
 
-    time_t t = time(nullptr);
-    tm * tm_local = localtime(&t);
-    newRecord.year = tm_local->tm_year;
-    newRecord.month = tm_local->tm_mon;
-    newRecord.day = tm_local->tm_mday;
-    newRecord.hour = tm_local->tm_hour;
-    newRecord.min = tm_local->tm_min;
-    newRecord.sec = tm_local->tm_sec;
-
-    cout << newRecord.year << '/' << newRecord.month << '/' << newRecord.day;
+    cout << endl;
     return 0;
 }
