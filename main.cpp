@@ -18,7 +18,7 @@ struct record {
 //         local time
 // Outputs: data becomes recorded with current time
 void timeRecord(record newRecord) {
-    time_t t = time(NULL);
+    time_t t = time(nullptr);
     tm * tm_local = localtime(&t);
     newRecord.year = tm_local->tm_year;
     newRecord.month = tm_local->tm_mon;
@@ -34,12 +34,37 @@ void timeRecord(record newRecord) {
 // Outputs: new data record
 void addRecord (vector<record> records) {
     record newRecord;
-    cin >> newRecord.amount >> newRecord.type >> newRecord.account;
     timeRecord(newRecord);
     records.push_back(newRecord);
 }
 
+// printVector: adds the data to vector of record
+// Inputs: vector<record> records: vector of records
+//         user inputx
+// Outputs: new data record
+void printVector(vector<record> records) {
+    cout << records.size() << endl;
+    for (record i : records) {
+        cout << i.amount << " " << i.year << "/" << i.month << "/" << i.day << " " << i.type << "," << i.account << endl;
+    }
+}
+
 int main() {
     vector<record> records;
+    addRecord(records);
+    //printVector(records);
     
+    record newRecord;
+
+    time_t t = time(nullptr);
+    tm * tm_local = localtime(&t);
+    newRecord.year = tm_local->tm_year;
+    newRecord.month = tm_local->tm_mon;
+    newRecord.day = tm_local->tm_mday;
+    newRecord.hour = tm_local->tm_hour;
+    newRecord.min = tm_local->tm_min;
+    newRecord.sec = tm_local->tm_sec;
+
+    cout << newRecord.year << '/' << newRecord.month << '/' << newRecord.day;
+    return 0;
 }
