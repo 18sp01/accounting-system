@@ -3,10 +3,12 @@
 using namespace std;
 
 // optionMenu: prompts option menu
-// Inputs: int maxRow, int maxCol: number of rows and columns of terminal
-//         user input
+// Inputs: user input
 // Outputs: int highlight: index corresponding to the menu item selected
-int optionMenu(int maxRow, int maxCol) {
+int optionMenu() {
+    int maxRow, maxCol;
+    getmaxyx(stdscr,maxRow,maxCol); // gets number of lines and columns on screen
+
     curs_set(0); // hides cursor
     noecho(); // hides user input
     keypad(stdscr, true); // enables keypad
@@ -59,28 +61,69 @@ int optionMenu(int maxRow, int maxCol) {
 }
 
 // userStringInput: prompts input box to allow user to input a string
-// Inputs: int maxRow, int maxCol: number of rows and columns of terminal
-//         user input
+// Inputs: user input
 // Outputs: string s: string with user input
-string userStringInput (int maxRow, int maxCol) {
+string userStringInput () {
+    int maxRow, maxCol;
+    getmaxyx(stdscr,maxRow,maxCol); // gets number of lines and columns on screen
+
     // moves cursor to last line, shows cursor and takes user input
     move(maxRow-1,0);
     curs_set(1);
     echo();
 
-    string s;
-
-    int c = getch();
-
-    while (c != '\n') {
-        s.push_back(c);
-        c = getch();
-    }
+    char str[100];
+    getnstr(str, 100);
 
     move(maxRow-1,0);
     clrtoeol();
 
-    return s;
+    return str;
+}
+
+// clears screen besides the menu section
+void clearScreen() {
+    int maxRow, maxCol;
+    getmaxyx(stdscr,maxRow,maxCol); // gets number of lines and columns on screen
+
+    for (int i = 0; i < maxRow-2; i++) {
+        move(i,0);
+        clrtoeol();
+    }
+}
+
+void addRecordInterface() {
+    int maxRow, maxCol;
+    getmaxyx(stdscr,maxRow,maxCol); // gets number of lines and columns on screen
+
+    clearScreen();
+    int y, x;
+    mvprintw(0,0,"Please enter type of income/expense: ");
+    getyx(stdscr,y,x);  
+    string s = userStringInput();
+    mvprintw(y,x,s.c_str());
+    mvprintw(1,0,"Please enter amount: ");
+    getyx(stdscr,y,x);  
+    s = userStringInput();
+    mvprintw(y,x,s.c_str());
+    mvprintw(2,0,"Please enter account: ");
+    getyx(stdscr,y,x);  
+    s = userStringInput();
+    mvprintw(y,x,s.c_str());
+}
+
+void checkRecordsInterface() {
+    int maxRow, maxCol;
+    getmaxyx(stdscr,maxRow,maxCol); // gets number of lines and columns on screen
+
+    clearScreen();
+}
+
+void editRecordsInterface() {
+    int maxRow, maxCol;
+    getmaxyx(stdscr,maxRow,maxCol); // gets number of lines and columns on screen
+
+    clearScreen();
 }
 
 // main function
@@ -88,19 +131,22 @@ int main(int argc, char ** argv) {
     initscr(); // initializes ncurses interface
     cbreak();
 
-    int maxRow, maxCol;
-    getmaxyx(stdscr,maxRow,maxCol); // gets number of lines and columns on screen
-
     // prompts option menu take records option chosen
-    int option = optionMenu(maxRow, maxCol);
+    int option = optionMenu();
     while (true) {
         if (option == 3) {
             break;
         }
-        if (option == 0) {
-            userStringInput(maxRow, maxCol);
+        else if (option == 0) {
+            addRecordInterface();
         }
-        option = optionMenu(maxRow, maxCol);
+        else if (option == 1) {
+            clearScreen();
+        }
+        else if (option == 2) {
+            clearScreen();
+        }
+        option = optionMenu();
     };
     
 
