@@ -6,5 +6,5 @@ interface:interface.cpp
 main:main.cpp
 	g++ -pedantic-errors -std=c++11 main.cpp -o main
 
-clean:interface main
+clean:
 	rm interface main
