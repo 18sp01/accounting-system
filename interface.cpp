@@ -1,0 +1,110 @@
+#include <ncurses.h>
+#include <iostream>
+using namespace std;
+
+// optionMenu: prompts option menu
+// Inputs: int maxRow, int maxCol: number of rows and columns of terminal
+//         user input
+// Outputs: int highlight: index corresponding to the menu item selected
+int optionMenu(int maxRow, int maxCol) {
+    curs_set(0); // hides cursor
+    noecho(); // hides user input
+    keypad(stdscr, true); // enables keypad
+    move(maxRow-2,0);
+    clrtoeol();
+
+    const int numOptions = 4; // number of options. Remember to update whenever options is changed
+    string options[numOptions] = {"Add Record", "Check Records", "Edit Records", "Exit"}; // string of options
+    
+    printw("%-*s", 20,  "Select Option:");
+    for (int i = 0; i < numOptions; i++) {
+        printw("%-*s", 20,  options[i].c_str());
+    }
+
+    int choice;
+    int highlight = 0;
+
+    // while loop that check which menu item is highlighted by the user, and breaks when the enter key is pressed. Changes int highlight.
+    while (true) {
+        for (int i = 0; i < numOptions; i++) {
+            if (i == highlight)
+                attron(A_REVERSE); // turn on attribute that reverses text colour and bg colour when menu item is highlighted
+            mvprintw(maxRow-2, 20*(i+1), options[i].c_str());
+            attroff(A_REVERSE); // turn off attribute if menu item is not highlighted
+        }
+        choice = getch(); // gets user input
+
+        // switch to allow user to highlight each menu item with arrow keys
+        switch (choice) 
+        {
+            case KEY_LEFT:
+                highlight--;
+                if (highlight < 0)
+                    highlight = 0;
+                break;
+            case KEY_RIGHT:
+                highlight++;
+                if (highlight > numOptions-1)
+                    highlight = numOptions-1;
+                break;
+            default:
+                break;
+        }
+        if (choice == 10) // breaks while loop when enter key is pressed
+            break;
+    }
+
+    keypad(stdscr, false); // disables keypad input
+    return highlight; 
+}
+
+// userStringInput: prompts input box to allow user to input a string
+// Inputs: int maxRow, int maxCol: number of rows and columns of terminal
+//         user input
+// Outputs: string s: string with user input
+string userStringInput (int maxRow, int maxCol) {
+    // moves cursor to last line, shows cursor and takes user input
+    move(maxRow-1,0);
+    curs_set(1);
+    echo();
+
+    string s;
+
+    int c = getch();
+
+    while (c != '\n') {
+        s.push_back(c);
+        c = getch();
+    }
+
+    move(maxRow-1,0);
+    clrtoeol();
+
+    return s;
+}
+
+// main function
+int main(int argc, char ** argv) {
+    initscr(); // initializes ncurses interface
+    cbreak();
+
+    int maxRow, maxCol;
+    getmaxyx(stdscr,maxRow,maxCol); // gets number of lines and columns on screen
+
+    // prompts option menu take records option chosen
+    int option = optionMenu(maxRow, maxCol);
+    while (true) {
+        if (option == 3) {
+            break;
+        }
+        if (option == 0) {
+            userStringInput(maxRow, maxCol);
+        }
+        option = optionMenu(maxRow, maxCol);
+    };
+    
+
+
+    endwin(); // terminates ncurses interface
+    return 0;
+}
