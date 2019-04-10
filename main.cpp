@@ -44,7 +44,7 @@ void addRecord (vector<record> &records) {
 //         int index: index of record to be removed
 // Outputs: 
 void removeRecord (vector<record> &records, int index) {
-    records.erase(records.begin() + index);
+    records.erase(records.begin() + index);//
 }
 
 // sortVector: sort vector in a specific order
@@ -57,7 +57,7 @@ void sortVector (vector<record> &records, string sortType, bool descend = false)
 }
 
 // printVector
-void printVector(vector<record> &records) {
+void printVector(vector<record> records) {
     cout << records.size() << endl;
     for (record i : records) {
         cout << i.amount << " " << i.year << "/" << i.month << "/" << i.day << " " << i.type << "," << i.account << endl;
