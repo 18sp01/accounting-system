@@ -11,7 +11,7 @@ struct record {
     int sec, min, hour, day, month, year; // date and time
     string type; // type of income/expense (e.g. food, game, salary, etc.)
     string account; // account (e.g. cash, bank card, credit card, etc.)
-};
+}
 
 // timeRecord: records the current time the data was inputed
 // Inputs: record newRecord: the data the time needs to be recorded on
