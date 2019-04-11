@@ -1,8 +1,10 @@
 #include <iostream>
+#include <ncurses.h>
 #include <string>
 #include <vector>
 #include <ctime>
 #include <iomanip>
+#include "interface.h"
 using namespace std;
 
 // a structure to hold data of records
@@ -69,11 +71,32 @@ void printTime(record record) {
     cout << record.year << '/' << record.month << '/' << record.day << ' ' << record.hour << ':' << record.min << ':' << record.min << endl;
 }
 
-int main() {
+int main(int argc, char ** argv) {
     vector<record> records;
-    addRecord(records);
-    printVector(records);
 
-    cout << endl;
+    initscr(); // initializes ncurses interface
+    cbreak();
+
+    // prompts option menu take records option chosen
+    int option = optionMenu();
+    while (true) {
+        if (option == 3) {
+            break;
+        }
+        else if (option == 0) {
+            addRecordInterface();
+        }
+        else if (option == 1) {
+            clearScreen();
+        }
+        else if (option == 2) {
+            clearScreen();
+        }
+        option = optionMenu();
+    };
+    
+
+
+    endwin(); // terminates ncurses interface
     return 0;
 }

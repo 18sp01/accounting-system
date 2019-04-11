@@ -1,10 +1,7 @@
-all: interface main
-
-interface:interface.cpp
-	g++ -pedantic-errors -std=c++11 interface.cpp -o interface -lncurses
+all: main
 
 main:main.cpp
-	g++ -pedantic-errors -std=c++11 main.cpp -o main
+	g++ -pedantic-errors -std=c++11 main.cpp interface.cpp -o main -lncurses
 
 clean:
-	rm interface main
+	rm main

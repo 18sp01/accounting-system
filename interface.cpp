@@ -1,5 +1,6 @@
 #include <ncurses.h>
 #include <iostream>
+#include "interface.h"
 using namespace std;
 
 // optionMenu: prompts option menu
@@ -124,33 +125,4 @@ void editRecordsInterface() {
     getmaxyx(stdscr,maxRow,maxCol); // gets number of lines and columns on screen
 
     clearScreen();
-}
-
-// main function
-int main(int argc, char ** argv) {
-    initscr(); // initializes ncurses interface
-    cbreak();
-
-    // prompts option menu take records option chosen
-    int option = optionMenu();
-    while (true) {
-        if (option == 3) {
-            break;
-        }
-        else if (option == 0) {
-            addRecordInterface();
-        }
-        else if (option == 1) {
-            clearScreen();
-        }
-        else if (option == 2) {
-            clearScreen();
-        }
-        option = optionMenu();
-    };
-    
-
-
-    endwin(); // terminates ncurses interface
-    return 0;
 }
