@@ -1,24 +1,37 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "records.h"
+#include "editRecords.h"
 #include "stdInterface.h"
 #include "addRecord.h"
+#include "viewRecords.h"
 using namespace std;
 
+// Function: 
+// Inputs: 
+// Outputs: 
 void printTopRow(int numCol) {
     cout << string(numCol+2,'#') << endl;
 }
 
+// Function: 
+// Inputs: 
+// Outputs: 
 void printBottomRow(int numCol) {
     cout << string(numCol+2,'#') << endl;
 }
 
+// Function: 
+// Inputs: 
+// Outputs: 
 string convertStringtoLine(string s, int numCol);
 
+// Function: 
+// Inputs: 
+// Outputs: 
 void printMainMenu(int numRow, int numCol) {
     printTopRow(numCol);
-    int linesOfText = 9;
+    int linesOfText = 8;
     cout << convertStringtoLine("Easy Accounting System",numCol) << endl;
     cout << convertStringtoLine("by Tam Fong Ching Herbert and Park Sangwon",numCol) << endl;
     cout << convertStringtoLine("",numCol) << endl;
@@ -26,13 +39,15 @@ void printMainMenu(int numRow, int numCol) {
     cout << convertStringtoLine("[a] Add Record",numCol) << endl;
     cout << convertStringtoLine("[v] View Records",numCol) << endl;
     cout << convertStringtoLine("[e] Edit Records",numCol) << endl;
-    cout << convertStringtoLine("",numCol) << endl;
-    cout << convertStringtoLine("[x] Exit",numCol) << endl;
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
-        cout << " " << string(numCol,' ') << " " << endl;
+        cout << string(numCol,' ') << endl;
+    cout << convertStringtoLine("[x] Exit",numCol) << endl;
     printBottomRow(numCol);
 }
 
+// Function: 
+// Inputs: 
+// Outputs: 
 string convertStringtoLine(string s, int numCol) {
     s = " " + s + string(numCol-s.length(),' ') + " ";
     return s;
@@ -60,6 +75,7 @@ int main(int argc, char ** argv) {
                 break;
             }
             case 'v': {
+                printVector(numRow, numCol, records);
                 break;
             }
             case 'e': {

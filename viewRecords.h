@@ -1,0 +1,1 @@
+int printVector(int numRow, int numCol, std::vector<record> records);
