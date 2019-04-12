@@ -1,7 +1,6 @@
 all: main
 
-main:main.cpp
-	g++ -pedantic-errors -std=c++11 main.cpp -o main
-
+stdInterface:stdInterface.cpp addRecord.cpp records.cpp
+	g++ -pedantic-errors -std=c++11 stdInterface.cpp addRecord.cpp records.cpp -o stdInterface
 clean:
-	rm main
+	rm stdInterface
