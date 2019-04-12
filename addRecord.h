@@ -1,0 +1,1 @@
+void printAddRecord(int numRow, int numCol, std::vector<record> &records, record &newRecord);
