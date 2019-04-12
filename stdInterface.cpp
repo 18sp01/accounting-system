@@ -75,7 +75,7 @@ int main(int argc, char ** argv) {
                 break;
             }
             case 'v': {
-                printVector(numRow, numCol, records);
+                printPages(numRow, numCol, records);
                 break;
             }
             case 'e': {
