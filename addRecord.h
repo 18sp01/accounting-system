@@ -1,1 +1,5 @@
-void printAddRecord(int numRow, int numCol, std::vector<record> &records, record &newRecord);
+using namespace std;
+
+void printAddRecord(int numRow, int numCol, vector<record> &records, record &newRecord);
+
+bool isNumber(string s);

@@ -30,7 +30,7 @@ int printAddRecord0(int numRow, int numCol, record &record) {
     printTopRow(numCol);
     int linesOfText = 7;
     cout << "Add Record" << endl;
-    cout << "Please enter type of income/expense (e.g. food, game, salary, etc.)" << endl;
+    cout << "Please enter the type of income/expense (e.g. food, game, salary, etc.)" << endl;
     cout << "" << endl;
     cout << "Type of income/expense: " << endl;
     cout << "Amount: " << endl;
@@ -51,12 +51,10 @@ int printAddRecord0(int numRow, int numCol, record &record) {
     }
 }
 
-bool checkIsNumber (string s) {
+bool isNumber(string s) {
     string temp = s;
-    cout << temp << endl;
     if (temp[0] == '-')
         temp.erase(0,1);
-    cout << temp << endl;
     if (temp.length() == 0) {
         return false;
     }
@@ -74,9 +72,9 @@ int printAddRecord1(int numRow, int numCol, record &record, bool error) {
     printTopRow(numCol);
     int linesOfText = 7;
     cout << "Add Record" << endl;
-    if (error == true)
+    if (error)
         cout << "Error! Please enter a number. ";
-    cout << "Please enter the amount (negative if expense)" << endl;
+    cout << "Please enter the amount (negative for expenses)" << endl;
     cout << "" << endl;
     cout << "Type of income/expense: " + record.type << endl;
     cout << "Amount: " << endl;
@@ -87,12 +85,10 @@ int printAddRecord1(int numRow, int numCol, record &record, bool error) {
     printBottomRow(numCol);
     string input;
     cin >> input;
-    if (input == "x") {
+    if (input == "x")
         return 0;
-    }
-    if (!checkIsNumber(input)) {
+    if (!isNumber(input))
         printAddRecord1(numRow, numCol, record, true);
-    }
     else {
         record.amount = stod(input);
         return 1;
@@ -134,7 +130,7 @@ int printAddRecord3(int numRow, int numCol, record &record) {
     printTopRow(numCol);
     int linesOfText = 7;
     cout << "Add Record" << endl;
-    cout << "Record Saved! Enter [x] to exit." << endl;
+    cout << "Record saved! Enter [x] to exit." << endl;
     cout << "" << endl;
     cout << "Type of income/expense: " + record.type << endl;
     cout << "Amount: " + to_string(record.amount) << endl;
@@ -145,9 +141,8 @@ int printAddRecord3(int numRow, int numCol, record &record) {
     printBottomRow(numCol);
     char input;
     cin >> input;
-    while (input != 'x') {
-        cin >> input;
-    }
+    if (input != 'x')
+        printAddRecord3(numRow, numCol, record);
 }
 
 // Function: prinAddRecord: Prompt AddRecord interface
