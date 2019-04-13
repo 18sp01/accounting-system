@@ -129,8 +129,10 @@ int editRecordPage(int numRow, int numCol, vector<record> &records, int page, st
             x = (int)input - 48;
             if (x > 0 && x < records.size())
                 editRecord (numRow, numCol, records, x);
+                break;
             cin >> input;
         }
+        break;
     }
 }
 

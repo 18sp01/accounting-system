@@ -60,7 +60,8 @@ int editRecord1 (int numRow, int numCol, vector<record> &records, int index, str
     cout << "[x] Cancel" << endl;
     printBottomRow(numCol);
     string input;
-    cin >> input;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+    getline(cin, input);
     if (input == "x")
         return 0;
     else {
@@ -97,6 +98,11 @@ int editRecord2 (int numRow, int numCol, vector<record> &records, int index) {
         cout << " " << string(numCol,' ') << " " << endl;
     cout << "[x] Exit" << endl;
     printBottomRow(numCol);
+    char input;
+    cin >> input;
+    while (input != 'x') {
+        cin >> input;
+    }
     return 0;
 }
 
