@@ -98,12 +98,6 @@ int editRecord2 (int numRow, int numCol, vector<record> &records, int index) {
     cout << "[x] Exit" << endl;
     printBottomRow(numCol);
     return 0;
-    string input;
-    cin >> input;
-    //if (input == "x")
-    //    return 0;
-    //else
-    //    editRecord2 (numRow, numCol, records, index);
 }
 
 void editRecord (int numRow, int numCol, vector<record> &records, int index) {
