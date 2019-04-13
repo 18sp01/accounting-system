@@ -24,42 +24,24 @@ void printBottomRow(int numCol) {
 // Function: 
 // Inputs: 
 // Outputs: 
-string convertStringtoLine(string s, int numCol);
-
-// Function: 
-// Inputs: 
-// Outputs: 
 void printMainMenu(int numRow, int numCol) {
     printTopRow(numCol);
     int linesOfText = 8;
-    cout << convertStringtoLine("Easy Accounting System",numCol) << endl;
-    cout << convertStringtoLine("by Tam Fong Ching Herbert and Park Sangwon",numCol) << endl;
-    cout << convertStringtoLine("",numCol) << endl;
-    cout << convertStringtoLine("Please enter a command:",numCol) << endl;
-    cout << convertStringtoLine("[a] Add Record",numCol) << endl;
-    cout << convertStringtoLine("[v] View Records",numCol) << endl;
-    cout << convertStringtoLine("[e] Edit Records",numCol) << endl;
+    cout << "Easy Accounting System" << endl;
+    cout << "by Tam Fong Ching Herbert and Park Sangwon" << endl;
+    cout << "" << endl;
+    cout << "Please enter a command:" << endl;
+    cout << "[a] Add Record" << endl;
+    cout << "[v] View Records" << endl;
+    cout << "[s] Statistics" << endl;
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
         cout << string(numCol,' ') << endl;
-    cout << convertStringtoLine("[x] Exit",numCol) << endl;
+    cout << "[x] Exit" << endl;
     printBottomRow(numCol);
 }
 
-// Function: 
-// Inputs: 
-// Outputs: 
-string convertStringtoLine(string s, int numCol) {
-    s = " " + s + string(numCol-s.length(),' ') + " ";
-    return s;
-}
-
 int main(int argc, char ** argv) {
-    // w.ws_row give number of rows, w.ws_col gives number of columns
-    // struct winsize w;
-    // ioctl(fileno(stdout), TIOCGWINSZ, &w);
-    // w.ws_col = w.ws_col / 2;
-
-    int numCol = 80;
+    int numCol = 100;
     int numRow = 12;
 
     vector<record> records;
@@ -75,7 +57,7 @@ int main(int argc, char ** argv) {
                 break;
             }
             case 'v': {
-                printPages(numRow, numCol, records);
+                viewRecordPages(numRow, numCol, records);
                 break;
             }
             case 'e': {

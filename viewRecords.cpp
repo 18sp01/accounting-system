@@ -16,42 +16,72 @@ using namespace std;
 // 2 | Amount: 102 | Type: Food | Account: Bank | Date: 12 4 2019 14:09
 // Num | Amount | Type | Account | Date
 // 2 | 102 | Food | Bank | 12 4 2019 14:09
-int printPage(int numRow, int numCol, vector<record> records, int &page) {
-    printTopRow(numCol);
-    cout << convertStringtoLine("View Records",numCol) << endl;
-    cout << convertStringtoLine("",numCol) << endl;
-    if (records.size() - page*(numRow - 8) < numRow - 8) {
-        for (int i = 0; i < records.size() - page*(numRow - 8); i++) {
-            cout << " " << i+(page*(numRow - 8))+1 << " | ";
-            cout << "Amount: " << records[i+(page*(numRow - 8))].amount << " | ";
-            cout << "Type: " << records[i+(page*(numRow - 8))].type << " | ";
-            cout << "Account: " << records[i+(page*(numRow - 8))].account << " | ";
-            cout << "Date: " << records[i+(page*(numRow - 8))].day << " " << records[i+(page*(numRow - 8))].month << " " << records[i+(page*(numRow - 8))].year << " " << records[i+(page*(numRow - 8))].hour << ":" << records[i+(page*(numRow - 8))].min;
-            cout << endl;
-        }            
-        for (int i = 0; i < numRow - (records.size() - page*(numRow - 8)) - 8; i++)
+
+int listRecords(int numRow, int numCol, vector<record> records, int page) {
+    int usedLines = 6;
+    int maxI;
+    if (records.size() - page*(numRow - usedLines) < numRow - usedLines)
+        maxI = records.size() - page*(numRow - usedLines);
+    else
+        maxI = numRow - usedLines;
+    for (int i = 0; i < maxI; i++) {
+        cout << " " << i+(page*(numRow - usedLines))+1 << " | ";
+        cout << "Amount: " << records[i+(page*(numRow - usedLines))].amount << " | ";
+        cout << "Type: " << records[i+(page*(numRow - usedLines))].type << " | ";
+        cout << "Account: " << records[i+(page*(numRow - usedLines))].account << " | ";
+        cout << "Date: " << records[i+(page*(numRow - usedLines))].day << " " << records[i+(page*(numRow - usedLines))].month << " " << records[i+(page*(numRow - usedLines))].year << " " << records[i+(page*(numRow - usedLines))].hour << ":" << records[i+(page*(numRow - usedLines))].min;
+        cout << endl;
+    }
+    if (records.size() - page*(numRow - usedLines) < numRow - usedLines) {
+        for (int i = 0; i < numRow - (records.size() - page*(numRow - usedLines)) - usedLines; i++)
             cout << string(numCol,' ') <<endl;
     }
-    else {
-        for (int i = 0; i < numRow - 8; i++) {
-            cout << " " << i+1 << " | ";
-            cout << "Amount: " << records[i+(page*(numRow - 8))].amount << " | ";
-            cout << "Type: " << records[i+(page*(numRow - 8))].type << " | ";
-            cout << "Account: " << records[i+(page*(numRow - 8))].account << " | ";
-            cout << "Date: " << records[i+(page*(numRow - 8))].day << " " << records[i+(page*(numRow - 8))].month << " " << records[i+(page*(numRow - 8))].year << " " << records[i+(page*(numRow - 8))].hour << ":" << records[i+(page*(numRow - 8))].min;
-            cout << endl;
-        }
-    }
-    cout << convertStringtoLine("[p] Previous Page",numCol) << endl;
-    cout << convertStringtoLine("[n] Next Page",numCol) << endl;
-    cout << convertStringtoLine("[x] Exit",numCol) << endl;
+}
+
+int viewRecordPage (int numRow, int numCol, vector<record> records, int page) {
+    printTopRow(numCol);
+    cout << "View Records" << endl;
+    cout << "" << endl;
+    listRecords(numRow, numCol, records, page);
+    cout << "[p] Previous  [n] Next  [s] Sort  [e] Edit  [x] Exit" << endl;
     printBottomRow(numCol);
 }
 
-int printPages(int numRow, int numCol, vector<record> records) {
+int sortRecordPage(int numRow, int numCol, vector<record> &records, int page) {
+    char input = '0';
+    string sortParameter = "Amount";
+    bool ascend = false;
+    while (input != 'x') {
+        printTopRow(numCol);
+        cout << "Sort Records" << endl;
+        cout << "" << endl;        
+        listRecords(numRow, numCol, records, page);
+        cout << "[t] Toggle Ascend/Descend [1] Amount [2] Type  [3] Account  [4] Date  [5] Amount  [x] Exit" << endl;
+        printBottomRow(numCol);
+        cin >> input;
+        if (input == '1') {
+            sortParameter = "Amount";
+        }
+        if (input == '2') {
+            sortParameter = "Type";
+        }
+        if (input == '3') {
+            sortParameter = "Account";
+        }
+        if (input == '4') {
+            sortParameter = "Date";
+        }
+        if (input == 't') {
+            ascend = !ascend;
+        }
+        //sortVector(records, sortParameter, ascend);
+    }
+}
+
+int viewRecordPages(int numRow, int numCol, vector<record> &records) {
     int page = 0;
     while (true) {
-        printPage(numRow, numCol, records, page);
+        viewRecordPage(numRow, numCol, records, page);
         string input;
         cin >> input;
         if (input == "x") {
@@ -67,6 +97,9 @@ int printPages(int numRow, int numCol, vector<record> records) {
             if (page > (records.size()/(numRow - 8))) {
                 page = records.size()/(numRow - 8);
             }
+        }
+        if (input == "s") {
+            sortRecordPage(numRow, numCol, records, page);
         }
         cin.clear();
     }

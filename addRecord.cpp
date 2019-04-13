@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <ctime>
 #include <limits>
 #include "stdInterface.h"
 #include "addRecord.h"
@@ -27,15 +28,15 @@ void timeRecord(record &newRecord) {
 int printAddRecord0(int numRow, int numCol, record &record) {
     printTopRow(numCol);
     int linesOfText = 7;
-    cout << convertStringtoLine("Add Record",numCol) << endl;
-    cout << convertStringtoLine("",numCol) << endl;
-    cout << convertStringtoLine("Please enter type of income/expense (e.g. food, game, salary, etc.)",numCol) << endl;
-    cout << convertStringtoLine("Type of income/expense: ",numCol) << endl;
-    cout << convertStringtoLine("Amount: ",numCol) << endl;
-    cout << convertStringtoLine("Account: ",numCol) << endl;
+    cout << "Add Record" << endl;
+    cout << "" << endl;
+    cout << "Please enter type of income/expense (e.g. food, game, salary, etc.)" << endl;
+    cout << "Type of income/expense: " << endl;
+    cout << "Amount: " << endl;
+    cout << "Account: " << endl;
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
         cout << " " << string(numCol,' ') << " " << endl;
-    cout << convertStringtoLine("[x] Cancel",numCol) << endl;
+    cout << "[x] Cancel" << endl;
     printBottomRow(numCol);
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
     string input;
@@ -55,15 +56,15 @@ int printAddRecord0(int numRow, int numCol, record &record) {
 int printAddRecord1(int numRow, int numCol, record &record) {
     printTopRow(numCol);
     int linesOfText = 7;
-    cout << convertStringtoLine("Add Record",numCol) << endl;
-    cout << convertStringtoLine("",numCol) << endl;
-    cout << convertStringtoLine("Please enter the amount",numCol) << endl;
-    cout << convertStringtoLine("Type of income/expense: " + record.type,numCol) << endl;
-    cout << convertStringtoLine("Amount: ",numCol) << endl;
-    cout << convertStringtoLine("Account: ",numCol) << endl;
+    cout << "Add Record" << endl;
+    cout << "" << endl;
+    cout << "Please enter the amount" << endl;
+    cout << "Type of income/expense: " + record.type << endl;
+    cout << "Amount: " << endl;
+    cout << "Account: " << endl;
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
         cout << " " << string(numCol,' ') << " " << endl;
-    cout << convertStringtoLine("[x] Cancel",numCol) << endl;
+    cout << "[x] Cancel" << endl;
     printBottomRow(numCol);
     string input;
     cin >> input;
@@ -82,15 +83,15 @@ int printAddRecord1(int numRow, int numCol, record &record) {
 int printAddRecord2(int numRow, int numCol, record &record) {
     printTopRow(numCol);
     int linesOfText = 7;
-    cout << convertStringtoLine("Add Record",numCol) << endl;
-    cout << convertStringtoLine("",numCol) << endl;
-    cout << convertStringtoLine("Please enter the account used (e.g. cash, bank card, credit card, etc.)",numCol) << endl;
-    cout << convertStringtoLine("Type of income/expense: " + record.type,numCol) << endl;
-    cout << convertStringtoLine("Amount: " + to_string(record.amount),numCol) << endl;
-    cout << convertStringtoLine("Account: ",numCol) << endl;
+    cout << "Add Record" << endl;
+    cout << "" << endl;
+    cout << "Please enter the account used (e.g. cash, bank card, credit card, etc.)" << endl;
+    cout << "Type of income/expense: " + record.type << endl;
+    cout << "Amount: " + to_string(record.amount) << endl;
+    cout << "Account: " << endl;
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
         cout << " " << string(numCol,' ') << " " << endl;
-    cout << convertStringtoLine("[x] Cancel",numCol) << endl;
+    cout << "[x] Cancel" << endl;
     printBottomRow(numCol);
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
     string input;
@@ -110,15 +111,15 @@ int printAddRecord2(int numRow, int numCol, record &record) {
 int printAddRecord3(int numRow, int numCol, record &record) {
     printTopRow(numCol);
     int linesOfText = 7;
-    cout << convertStringtoLine("Add Record",numCol) << endl;
-    cout << convertStringtoLine("",numCol) << endl;
-    cout << convertStringtoLine("Record Saved! Enter [x] to exit.",numCol) << endl;
-    cout << convertStringtoLine("Type of income/expense: " + record.type,numCol) << endl;
-    cout << convertStringtoLine("Amount: " + to_string(record.amount),numCol) << endl;
-    cout << convertStringtoLine("Account: " + record.account,numCol) << endl;
+    cout << "Add Record" << endl;
+    cout << "" << endl;
+    cout << "Record Saved! Enter [x] to exit." << endl;
+    cout << "Type of income/expense: " + record.type << endl;
+    cout << "Amount: " + to_string(record.amount) << endl;
+    cout << "Account: " + record.account << endl;
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
         cout << " " << string(numCol,' ') << " " << endl;
-    cout << convertStringtoLine("[x] Exit",numCol) << endl;
+    cout << "[x] Exit" << endl;
     printBottomRow(numCol);
     char input;
     cin >> input;

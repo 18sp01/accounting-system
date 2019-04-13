@@ -1,1 +1,1 @@
-int printPages(int numRow, int numCol, std::vector<record> records);
+int viewRecordPages(int numRow, int numCol, std::vector<record> &records);
