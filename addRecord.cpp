@@ -52,7 +52,15 @@ int printAddRecord0(int numRow, int numCol, record &record) {
 }
 
 bool checkIsNumber (string s) {
-    for (char i : s) {
+    string temp = s;
+    cout << temp << endl;
+    if (temp[0] == '-')
+        temp.erase(0,1);
+    cout << temp << endl;
+    if (temp.length() == 0) {
+        return false;
+    }
+    for (char i : temp) {
         if (!isdigit(i))
             return false;
     }
