@@ -111,6 +111,29 @@ int sortRecordPage(int numRow, int numCol, vector<record> &records, int page, st
     }
 }
 
+int editRecordPage(int numRow, int numCol, vector<record> &records, int page, string sortParameter, bool ascend) {
+    char input;
+    while (input != 'x') {
+        printTopRow(numCol);
+        cout << "Edit Records (Page "<< page + 1 << " of " << records.size()/(numRow - 7) + 1 << ") ";
+        printSortingBy(sortParameter, ascend);
+        cout << endl;
+        cout << "Enter the number of the data you want to edit" << endl;
+        cout << "" << endl;
+        listRecords(numRow, numCol, records, page);
+        cout << "[x] Cancel" << endl;
+        printBottomRow(numCol);
+        cin >> input;
+        int x;
+        while (input != 'x') {            
+            x = (int)input - 48;
+            if (x > 0 && x < records.size())
+                editRecord (numRow, numCol, records, x);
+            cin >> input;
+        }
+    }
+}
+
 int viewRecordPages(int numRow, int numCol, vector<record> &records) {
     int page = 0;
     string sortParameter = "Date";
@@ -133,6 +156,9 @@ int viewRecordPages(int numRow, int numCol, vector<record> &records) {
             if (page > (records.size()/(numRow - 7))) {
                 page = records.size()/(numRow - 7);
             }
+        }
+        if (input == "e") {
+            editRecordPage(numRow, numCol, records, page, sortParameter, ascend);
         }
         if (input == "s") {
             sortRecordPage(numRow, numCol, records, page, sortParameter, ascend);

@@ -3,6 +3,7 @@
 #include <vector>
 #include <ctime>
 #include <limits>
+#include <algorithm>
 #include "stdInterface.h"
 #include "addRecord.h"
 using namespace std;
@@ -50,14 +51,24 @@ int printAddRecord0(int numRow, int numCol, record &record) {
     }
 }
 
+bool checkIsNumber (string s) {
+    for (char i : s) {
+        if (!isdigit(i))
+            return false;
+    }
+    return true;
+}
+
 // Function: int printAddRecord1: Lets user input record.amount
 // Inputs: number of rows for the interface, number of columns for the interface, cin input of record.amount
 // Outputs: changes record.amount
-int printAddRecord1(int numRow, int numCol, record &record) {
+int printAddRecord1(int numRow, int numCol, record &record, bool error) {
     printTopRow(numCol);
     int linesOfText = 7;
     cout << "Add Record" << endl;
-    cout << "Please enter the amount" << endl;
+    if (error == true)
+        cout << "Error! Please enter a number. ";
+    cout << "Please enter the amount (negative if expense)" << endl;
     cout << "" << endl;
     cout << "Type of income/expense: " + record.type << endl;
     cout << "Amount: " << endl;
@@ -70,6 +81,9 @@ int printAddRecord1(int numRow, int numCol, record &record) {
     cin >> input;
     if (input == "x") {
         return 0;
+    }
+    if (!checkIsNumber(input)) {
+        printAddRecord1(numRow, numCol, record, true);
     }
     else {
         record.amount = stod(input);
@@ -133,7 +147,7 @@ int printAddRecord3(int numRow, int numCol, record &record) {
 // Outputs: adds a new record to records
 void printAddRecord(int numRow, int numCol, vector<record> &records, record &newRecord) {
     if (printAddRecord0(numRow, numCol,newRecord) != 0) {
-        if (printAddRecord1(numRow, numCol,newRecord) != 0) {
+        if (printAddRecord1(numRow, numCol,newRecord, false) != 0) {
             if (printAddRecord2(numRow, numCol,newRecord) != 0) {
                 printAddRecord3(numRow, numCol,newRecord);
                 timeRecord(newRecord);

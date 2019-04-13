@@ -18,6 +18,7 @@ struct sortAmount{
 
 void sortByAmount (vector<record> &records, bool ascend) {
     sort(records.begin(), records.end(), sortAmount());
+    reverseVector(records);
     if(ascend) {
         reverseVector(records);
     }

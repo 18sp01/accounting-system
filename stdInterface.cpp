@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "editRecords.h"
 #include "stdInterface.h"
+#include "editRecords.h"
 #include "addRecord.h"
 #include "viewRecords.h"
 #include "fromtoFile.h"
@@ -63,7 +63,7 @@ int main(int argc, char ** argv) {
                 viewRecordPages(numRow, numCol, records);
                 break;
             }
-            case 'e': {
+            case 's': {
                 break;
             }
         }
