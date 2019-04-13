@@ -5,6 +5,8 @@
 #include "stdInterface.h"
 #include "addRecord.h"
 #include "viewRecords.h"
+#include "fromtoFile.h"
+#include "sortRecords.h"
 using namespace std;
 
 // Function: 
@@ -46,6 +48,7 @@ int main(int argc, char ** argv) {
 
     vector<record> records;
 
+    readFromFile(records);
     printMainMenu(numRow, numCol);
     char command;
     cin >> command;
@@ -67,4 +70,5 @@ int main(int argc, char ** argv) {
         printMainMenu(numRow, numCol);
         cin >> command;
     }
+    writeToFile(records);
 }

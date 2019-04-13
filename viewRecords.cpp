@@ -6,6 +6,7 @@
 #include "addRecord.h"
 #include "viewRecords.h"
 #include "editRecords.h"
+#include "sortRecords.h"
 using namespace std;
 
 // Function: int printVector: prints data inside records
@@ -18,7 +19,7 @@ using namespace std;
 // 2 | 102 | Food | Bank | 12 4 2019 14:09
 
 int listRecords(int numRow, int numCol, vector<record> records, int page) {
-    int usedLines = 6;
+    int usedLines = 7;
     int maxI;
     if (records.size() - page*(numRow - usedLines) < numRow - usedLines)
         maxI = records.size() - page*(numRow - usedLines);
@@ -38,50 +39,85 @@ int listRecords(int numRow, int numCol, vector<record> records, int page) {
     }
 }
 
-int viewRecordPage (int numRow, int numCol, vector<record> records, int page) {
+void printSortingBy (string sortParameter, bool ascend) {
+    cout << "(Sorting by ";
+    if (sortParameter != "Date")
+        cout << sortParameter << " ";
+    if (sortParameter == "Account" || sortParameter == "Type")
+        cout << "Alphabetically ";
+    if (sortParameter == "Date") {
+        if (ascend)
+            cout << "Least Recent)";
+        else
+            cout << "Most Recent)";
+    }
+    else {
+        if (ascend)
+            cout << "in Ascending Order)";
+        else
+            cout << "in Descending Order)";
+    }
+}
+
+int viewRecordPage (int numRow, int numCol, vector<record> records, int page, string sortParameter, bool ascend) {
     printTopRow(numCol);
-    cout << "View Records" << endl;
+    cout << "View Records (Page "<< page + 1 << " of " << records.size()/(numRow - 7) + 1 << ") ";
+    printSortingBy(sortParameter, ascend);
+    cout << endl;
+    cout << "Please enter [s] to sort records, or [e] to edit records" << endl;
     cout << "" << endl;
     listRecords(numRow, numCol, records, page);
     cout << "[p] Previous  [n] Next  [s] Sort  [e] Edit  [x] Exit" << endl;
     printBottomRow(numCol);
 }
 
-int sortRecordPage(int numRow, int numCol, vector<record> &records, int page) {
+int sortRecordPage(int numRow, int numCol, vector<record> &records, int page, string &sortParameter, bool &ascend) {
     char input = '0';
-    string sortParameter = "Amount";
-    bool ascend = false;
     while (input != 'x') {
         printTopRow(numCol);
-        cout << "Sort Records" << endl;
-        cout << "" << endl;        
+        cout << "Sort Records (Page "<< page + 1 << " of " << records.size()/(numRow - 7) + 1 << ") ";
+        printSortingBy(sortParameter, ascend);
+        cout << endl;
+        cout << "Please enter [1], [2], [3], or [4] to sort by the corresponding category" << endl;
+        cout << "" << endl;
         listRecords(numRow, numCol, records, page);
-        cout << "[t] Toggle Ascend/Descend [1] Amount [2] Type  [3] Account  [4] Date  [5] Amount  [x] Exit" << endl;
+        cout << "[t] Toggle Ascend/Descend [1] Amount [2] Type  [3] Account  [4] Date  [x] Exit" << endl;
         printBottomRow(numCol);
         cin >> input;
         if (input == '1') {
             sortParameter = "Amount";
+            ascend = false;
+            sortByAmount (records, ascend);   
         }
         if (input == '2') {
             sortParameter = "Type";
+            ascend = true;
+            sortByType (records, ascend);
         }
         if (input == '3') {
             sortParameter = "Account";
+            ascend = true;
+            sortByAccount (records, ascend);
         }
         if (input == '4') {
             sortParameter = "Date";
+            ascend = false;
+            sortByDate (records, ascend);
         }
         if (input == 't') {
             ascend = !ascend;
+            reverseVector(records);
         }
-        //sortVector(records, sortParameter, ascend);
     }
 }
 
 int viewRecordPages(int numRow, int numCol, vector<record> &records) {
     int page = 0;
+    string sortParameter = "Date";
+    bool ascend = false;
+    sortByDate (records, ascend);
     while (true) {
-        viewRecordPage(numRow, numCol, records, page);
+        viewRecordPage(numRow, numCol, records, page, sortParameter, ascend);
         string input;
         cin >> input;
         if (input == "x") {
@@ -94,12 +130,12 @@ int viewRecordPages(int numRow, int numCol, vector<record> &records) {
         }
         if (input == "n") {
             page++;
-            if (page > (records.size()/(numRow - 8))) {
-                page = records.size()/(numRow - 8);
+            if (page > (records.size()/(numRow - 7))) {
+                page = records.size()/(numRow - 7);
             }
         }
         if (input == "s") {
-            sortRecordPage(numRow, numCol, records, page);
+            sortRecordPage(numRow, numCol, records, page, sortParameter, ascend);
         }
         cin.clear();
     }

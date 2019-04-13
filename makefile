@@ -1,10 +1,7 @@
-all: main
+all: stdInterface
 
-stdInterface:stdInterface.cpp addRecord.cpp viewRecords.cpp
-	g++ -pedantic-errors -std=c++11 stdInterface.cpp addRecord.cpp viewRecords.cpp -o stdInterface
-
-fromtoFile:fromtoFile.cpp
-	g++ -pedantic-errors -std=c++11 fromtoFile.cpp -o fromtoFile
+stdInterface:stdInterface.cpp addRecord.cpp viewRecords.cpp fromtoFile.cpp sortRecords.cpp
+	g++ -pedantic-errors -std=c++11 stdInterface.cpp addRecord.cpp viewRecords.cpp fromtoFile.cpp sortRecords.cpp -o stdInterface
 
 clean:
 	rm stdInterface

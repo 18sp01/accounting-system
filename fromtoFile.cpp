@@ -3,17 +3,11 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include "stdInterface.h"
+#include "fromtoFile.h"
 using namespace std;
 
-struct record {
-    double amount; // amount of money
-    int sec, min, hour, day, month, year; // date and time
-    std::string type; // type of income/expense (e.g. food, game, salary, etc.)
-    std::string account; // account (e.g. cash, bank card, credit card, etc.)
-};
-
 void readFromFile(vector<record> &records) {
-
     ifstream fin;
     fin.open("data.txt");
 
@@ -21,14 +15,30 @@ void readFromFile(vector<record> &records) {
         cout << "Error in opening file!" << endl;
         exit(1);
     }
+
+    bool first = true;
     string line;
-    int lineCount;
+    string amount, type, account, day, month, year, hour, min;
     while (getline(fin, line)) {
+        getline(fin, amount, ',');
+        getline(fin, type, ',');
+        getline(fin, account, ',');
+        getline(fin, day, ',');
+        getline(fin, month, ',');
+        getline(fin, year, ',');
+        getline(fin, hour, ',');
+        getline(fin, min, ',');
+        
         record newRecord;
-        fin >> newRecord.amount;
-        getline(fin, newRecord.type, ',');
-        getline(fin, newRecord.account, ',');
-        fin >> newRecord.day >> newRecord.month >> newRecord.year >> newRecord.hour >> newRecord.min;
+        double d = stod(amount);
+        newRecord.amount = d;
+        newRecord.type = type;
+        newRecord.account = account;
+        newRecord.day = stoi(day);
+        newRecord.month = stoi(month);
+        newRecord.year = stoi(year);
+        newRecord.hour = stoi(hour);
+        newRecord.min = stoi(min);
         records.push_back(newRecord);
     }
 
@@ -37,28 +47,17 @@ void readFromFile(vector<record> &records) {
 
 void writeToFile(vector<record> records) {
     ofstream fout;
-    fout.open("data.txt");
+    fout.open("data.txt", ofstream::trunc);
 
     if(fout.fail()) {
         cout << "Error in opening file!" << endl;
         exit(1);
     }
-    
-    fout << newRecord.amount << newRecord.type << ',' << newRecord.account << ',' << ' ' << newRecord.day << ' ' << newRecord.month << ' ' << newRecord.year << ' ' << newRecord.hour << ' ' << newRecord.min << endl;
+    fout << "Amount,Type,Account,Day,Month,Year,Hour,Minutes" << endl;
+    for (int i = 0; i < records.size(); i++) {
+        if (i != 0)
+            fout << endl;
+        fout << records[i].amount << ',' << records[i].type << ',' << records[i].account << ',' << records[i].day << ',' << records[i].month << ',' << records[i].year << ',' << records[i].hour << ',' << records[i].min << ',';
+    }
     fout.close();
-}
-
-int main () {
-    vector<record> records;
-    readFromFile(records);
-    for (record i : records) {
-        cout << "Amount: " << i.amount << " | ";
-        cout << "Type: " << i.type << " | ";
-        cout << "Account: " << i.account << " | ";
-        cout << "Date: " << i.day << " " << i.month << " " << i.year << " " << i.hour << ":" << i.min;
-        cout << endl;
-    }
-    for (record i : records) {
-        writeToFile(i);
-    }
 }

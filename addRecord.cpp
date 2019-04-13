@@ -29,8 +29,8 @@ int printAddRecord0(int numRow, int numCol, record &record) {
     printTopRow(numCol);
     int linesOfText = 7;
     cout << "Add Record" << endl;
-    cout << "" << endl;
     cout << "Please enter type of income/expense (e.g. food, game, salary, etc.)" << endl;
+    cout << "" << endl;
     cout << "Type of income/expense: " << endl;
     cout << "Amount: " << endl;
     cout << "Account: " << endl;
@@ -57,8 +57,8 @@ int printAddRecord1(int numRow, int numCol, record &record) {
     printTopRow(numCol);
     int linesOfText = 7;
     cout << "Add Record" << endl;
-    cout << "" << endl;
     cout << "Please enter the amount" << endl;
+    cout << "" << endl;
     cout << "Type of income/expense: " + record.type << endl;
     cout << "Amount: " << endl;
     cout << "Account: " << endl;
@@ -84,8 +84,8 @@ int printAddRecord2(int numRow, int numCol, record &record) {
     printTopRow(numCol);
     int linesOfText = 7;
     cout << "Add Record" << endl;
-    cout << "" << endl;
     cout << "Please enter the account used (e.g. cash, bank card, credit card, etc.)" << endl;
+    cout << "" << endl;
     cout << "Type of income/expense: " + record.type << endl;
     cout << "Amount: " + to_string(record.amount) << endl;
     cout << "Account: " << endl;
@@ -112,8 +112,8 @@ int printAddRecord3(int numRow, int numCol, record &record) {
     printTopRow(numCol);
     int linesOfText = 7;
     cout << "Add Record" << endl;
-    cout << "" << endl;
     cout << "Record Saved! Enter [x] to exit." << endl;
+    cout << "" << endl;
     cout << "Type of income/expense: " + record.type << endl;
     cout << "Amount: " + to_string(record.amount) << endl;
     cout << "Account: " + record.account << endl;
