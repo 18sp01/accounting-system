@@ -1,1 +1,1 @@
-int viewRecordPages(int numRow, int numCol, std::vector<record> &records);
+int viewRecordPages(int numRow, int numCol, int &sizeArray, record records[]);

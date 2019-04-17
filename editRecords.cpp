@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <vector>
 #include <ctime>
 #include <limits>
 #include <iomanip>
@@ -13,13 +12,13 @@ using namespace std;
 // Inputs: vector<record> &records: vector of records
 //         int index: index of record to be removed
 // Outputs: 
-void removeRecord (vector<record> &records, int index) {
-    records.erase(records.begin() + index);//
-}
+//void removeRecord (vector<record> &records, int index) {
+   // records.erase(records.begin() + index);//
+//}
 
-int editRecord1 (int numRow, int numCol, vector<record> &records, int index, string category, bool error);
+int editRecord1 (int numRow, int numCol, record records[], int index, string category, bool error);
 
-int editRecord0 (int numRow, int numCol, vector<record> &records, int index) {
+int editRecord0 (int numRow, int numCol, record records[], int index) {
     printTopRow(numCol);
     int linesOfText = 5;
     cout << "Edit Record" << endl;
@@ -48,7 +47,7 @@ int editRecord0 (int numRow, int numCol, vector<record> &records, int index) {
     else editRecord0 (numRow, numCol, records, index);
 }
 
-int editRecord1 (int numRow, int numCol, vector<record> &records, int index, string category, bool error) {
+int editRecord1 (int numRow, int numCol, record records[], int index, string category, bool error) {
     printTopRow(numCol);
     int linesOfText = 5;
     cout << "Edit Record" << endl;
@@ -98,7 +97,7 @@ int editRecord1 (int numRow, int numCol, vector<record> &records, int index, str
     }
 }
 
-int editRecord2 (int numRow, int numCol, vector<record> &records, int index) {
+int editRecord2 (int numRow, int numCol, record records[], int index) {
     printTopRow(numCol);
     int linesOfText = 5;
     cout << "Edit Record" << endl;
@@ -120,7 +119,7 @@ int editRecord2 (int numRow, int numCol, vector<record> &records, int index) {
         editRecord2(numRow, numCol, records, index);
 }
 
-void editRecord (int numRow, int numCol, vector<record> &records, int index) {
+void editRecord (int numRow, int numCol, record records[], int index) {
     if (editRecord0(numRow, numCol, records, index)) {
         editRecord2(numRow, numCol, records, index);
     }

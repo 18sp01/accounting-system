@@ -7,7 +7,7 @@
 #include "fromtoFile.h"
 using namespace std;
 
-void readFromFile(vector<record> &records) {
+void readFromFile(int &sizeArray, record records[]) {
     ifstream fin;
     fin.open("data.txt");
 
@@ -39,13 +39,14 @@ void readFromFile(vector<record> &records) {
         newRecord.year = stoi(year);
         newRecord.hour = stoi(hour);
         newRecord.min = stoi(min);
-        records.push_back(newRecord);
+        updateRecordsSize(records, sizeArray, 1);
+        records[0] = newRecord;
     }
 
     fin.close();
 }
 
-void writeToFile(vector<record> records) {
+void writeToFile(int sizeArray, record records[]) {
     ofstream fout;
     fout.open("data.txt", ofstream::trunc);
 
@@ -54,7 +55,7 @@ void writeToFile(vector<record> records) {
         exit(1);
     }
     fout << "Amount,Type,Account,Day,Month,Year,Hour,Minutes" << endl;
-    for (int i = 0; i < records.size(); i++) {
+    for (int i = 0; i < sizeArray; i++) {
         if (i != 0)
             fout << endl;
         fout << records[i].amount << ',' << records[i].type << ',' << records[i].account << ',' << records[i].day << ',' << records[i].month << ',' << records[i].year << ',' << records[i].hour << ',' << records[i].min << ',';

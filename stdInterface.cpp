@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <vector>
 #include "stdInterface.h"
 #include "editRecords.h"
 #include "addRecord.h"
@@ -8,6 +7,20 @@
 #include "fromtoFile.h"
 #include "sortRecords.h"
 using namespace std;
+
+
+// Function:
+// Inputs: 
+// Outputs: 
+void updateRecordsSize(record records[], int &sizeArray, int sizeChange) {
+    cout << 1;
+    cout << 2;
+    for (int i = 0; i < sizeArray; i++) {
+        cout << 3;
+    }
+    sizeArray += sizeChange;
+}
+
 
 // Function: 
 // Inputs: 
@@ -46,9 +59,9 @@ int main(int argc, char ** argv) {
     int numCol = 100;
     int numRow = 12;
 
-    vector<record> records;
-
-    readFromFile(records);
+    int sizeArray = 1;
+    record * records = new record[sizeArray];
+    readFromFile(sizeArray, records);
     printMainMenu(numRow, numCol);
     char command;
     cin >> command;
@@ -56,11 +69,11 @@ int main(int argc, char ** argv) {
         switch (command) {
             case 'a': {
                 record newRecord;
-                printAddRecord(numRow, numCol, records, newRecord);
+                printAddRecord(numRow, numCol, sizeArray, records, newRecord);
                 break;
             }
             case 'v': {
-                viewRecordPages(numRow, numCol, records);
+                viewRecordPages(numRow, numCol, sizeArray, records);
                 break;
             }
             case 's': {
@@ -70,5 +83,6 @@ int main(int argc, char ** argv) {
         printMainMenu(numRow, numCol);
         cin >> command;
     }
-    writeToFile(records);
+    writeToFile(sizeArray, records);
+    delete[] records;
 }
