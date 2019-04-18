@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <vector>
+#include <cctype>
 #include <limits>
 #include <iomanip>
 #include "stdInterface.h"
@@ -23,8 +23,17 @@ int ceilDivision(int number, int divisor) {
     return (number + divisor - 1) / divisor;
 }
 
+bool isInteger(string s) {
+    string temp = s;
+    for (char i : temp) {
+        if (!isdigit(i))
+            return false;
+    }
+    return true;
+}
+
 void printSortingBy (string sortParameter, bool ascend) {
-    cout << "(Sorting by ";
+    cout << "(Sorted by ";
     if (sortParameter != "Date")
         cout << sortParameter << " ";
     if (sortParameter == "Account" || sortParameter == "Type")
@@ -90,7 +99,7 @@ void viewRecordPage (int numRow, int numCol, record *records, int &sizeArray, in
 
 void sortRecordPage(int numRow, int numCol, record *records, int &sizeArray, int page, int usedLines, string &sortParameter, bool &ascend) {
     char input = '0';
-    while (input != 'x') {
+    while (true) {
         printTopRow(numCol);
         cout << "Sort Records (Page "<< page + 1 << " of " << ceilDivision(sizeArray,numRow - usedLines) << ") ";
         printSortingBy(sortParameter, ascend);
@@ -101,6 +110,8 @@ void sortRecordPage(int numRow, int numCol, record *records, int &sizeArray, int
         cout << "[p] Previous [n] Next [t] Toggle Ascend/Descend [1] Amount [2] Type [3] Account [4] Date [x] Exit" << endl;
         printBottomRow(numCol);
         cin >> input;
+        if (input == 'x')
+            break;
         if (input == 'p') {
             page--;
             if (page < 0)
@@ -139,25 +150,37 @@ void sortRecordPage(int numRow, int numCol, record *records, int &sizeArray, int
 }
 
 void editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string sortParameter, bool ascend) {
-    printTopRow(numCol);
-    cout << "Edit Records (Page "<< page + 1 << " of " << sizeArray/(numRow - usedLines) + 1 << ") ";
-    printSortingBy(sortParameter, ascend);
-    cout << endl;
-    cout << "Please enter the number corresponding to the record you want to edit" << endl;
-    cout << endl;
-    listRecords(numRow, numCol, records, sizeArray, page, usedLines);
-    cout << "[x] Cancel" << endl;
-    printBottomRow(numCol);
-    
-    string input;
-    cin >> input;
-    while (input != "x") {            
-        int x = stoi(input);
-        if (x > 0 && x < sizeArray + 1) {
-            editRecord(numRow, numCol, records, sizeArray, x);
-            break;
-        }
+    string input = "0";
+    while (true) {
+        printTopRow(numCol);
+        cout << "Edit Records (Page "<< page + 1 << " of " << sizeArray/(numRow - usedLines) + 1 << ") ";
+        printSortingBy(sortParameter, ascend);
+        cout << endl;
+        cout << "Please enter the number corresponding to the record you want to edit" << endl;
+        cout << endl;
+        listRecords(numRow, numCol, records, sizeArray, page, usedLines);
+        cout << "[p] Previous  [n] Next  [x] Cancel" << endl;
+        printBottomRow(numCol);
         cin >> input;
+        if (input == "x")
+            break;
+        if (input == "p") {
+            page--;
+            if (page < 0)
+                page = 0;
+        }
+        if (input == "n") {
+            page++;
+            if (page > ceilDivision(sizeArray,numRow - usedLines) - 1)
+                page = ceilDivision(sizeArray,numRow - usedLines) - 1;
+        }
+        if (isInteger(input)) {
+            int x = stoi(input);
+            if (x > 0 && x < sizeArray + 1) {
+                editRecord(numRow, numCol, records, sizeArray, x);
+                break;
+            }
+        }
     }
 }
 

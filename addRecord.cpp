@@ -23,31 +23,35 @@ void timeRecord(record &newRecord) {
     newRecord.sec = tm_local->tm_sec;
 }
 
-// Function: int printAddRecord0: Lets user input record.type
+int printAddRecord1(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord);
+
+// Function: int printAddRecord: Lets user input record.type
 // Inputs: number of rows for the interface, number of columns for the interface, cin input of record.type
 // Outputs: changes record.type
-int printAddRecord0(int numRow, int numCol, record &record) {
-    printTopRow(numCol);
+int printAddRecord(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord) {
     int linesOfText = 7;
-    cout << "Add Record" << endl;
-    cout << "Please enter the type of income/expense (e.g. food, game, salary, etc.)" << endl;
-    cout << "" << endl;
-    cout << "Type of income/expense: " << endl;
-    cout << "Amount: " << endl;
-    cout << "Account: " << endl;
-    for (int i = 0; i < numRow - 3 - linesOfText; i++)
-        cout << " " << string(numCol,' ') << " " << endl;
-    cout << "[x] Cancel" << endl;
-    printBottomRow(numCol);
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
-    string input;
-    getline(cin,input);
-    if (input == "x") {
-        return 0;
-    }
-    else {
-        record.type = input;
-        return 1;
+    while (true) {
+        printTopRow(numCol);
+        cout << "Add Record" << endl;
+        cout << "Please enter the type of income/expense (e.g. food, game, salary, etc.)" << endl;
+        cout << "" << endl;
+        cout << "Type of income/expense: " << endl;
+        cout << "Amount: " << endl;
+        cout << "Account: " << endl;
+        for (int i = 0; i < numRow - 3 - linesOfText; i++)
+            cout << " " << string(numCol,' ') << " " << endl;
+        cout << "[x] Cancel" << endl;
+        printBottomRow(numCol);
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        string input;
+        getline(cin,input);
+        if (input == "x")
+            return 0;
+        else {
+            newRecord.type = input;
+            printAddRecord1(numRow, numCol,sizeArray, records, newRecord);
+            return 0;
+        }
     }
 }
 
@@ -71,98 +75,97 @@ bool isNumber(string s) {
     return true;
 }
 
+int printAddRecord2(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord);
+
 // Function: int printAddRecord1: Lets user input record.amount
 // Inputs: number of rows for the interface, number of columns for the interface, cin input of record.amount
 // Outputs: changes record.amount
-int printAddRecord1(int numRow, int numCol, record &record, bool error) {
-    printTopRow(numCol);
+int printAddRecord1(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord) {
+    string input = "0";
     int linesOfText = 7;
-    cout << "Add Record" << endl;
-    if (error)
-        cout << "Error! Please enter a number. ";
-    cout << "Please enter the amount (negative for expenses)" << endl;
-    cout << "" << endl;
-    cout << "Type of income/expense: " + record.type << endl;
-    cout << "Amount: " << endl;
-    cout << "Account: " << endl;
-    for (int i = 0; i < numRow - 3 - linesOfText; i++)
-        cout << " " << string(numCol,' ') << " " << endl;
-    cout << "[x] Cancel" << endl;
-    printBottomRow(numCol);
-    string input;
-    cin >> input;
-    if (input == "x")
-        return 0;
-    if (!isNumber(input))
-        printAddRecord1(numRow, numCol, record, true);
-    else {
-        record.amount = stod(input);
-        return 1;
+    bool error = false;
+    while (input != "x") {
+        printTopRow(numCol);
+        cout << "Add Record" << endl;
+        if (error)
+            cout << "Error! Please enter a number. ";
+        cout << "Please enter the amount (negative for expenses)" << endl;
+        cout << "" << endl;
+        cout << "Type of income/expense: " + newRecord.type << endl;
+        cout << "Amount: " << endl;
+        cout << "Account: " << endl;
+        for (int i = 0; i < numRow - 3 - linesOfText; i++)
+            cout << " " << string(numCol,' ') << " " << endl;
+        cout << "[x] Cancel" << endl;
+        printBottomRow(numCol);
+        cin >> input;
+        if (input == "x")
+            return 0;
+        if (!isNumber(input))
+            error = true;
+        else {
+            newRecord.amount = stod(input);
+            printAddRecord2(numRow, numCol, sizeArray, records, newRecord);
+            return 0;
+        }
     }
 }
+
+int printAddRecord3(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord);
 
 // Function: int printAddRecord2: Lets user input record.account
 // Inputs: number of rows for the interface, number of columns for the interface, cin input of record.account
 // Outputs: changes record.account
-int printAddRecord2(int numRow, int numCol, record &record) {
-    printTopRow(numCol);
-    int linesOfText = 7;
-    cout << "Add Record" << endl;
-    cout << "Please enter the account used (e.g. cash, bank card, credit card, etc.)" << endl;
-    cout << "" << endl;
-    cout << "Type of income/expense: " + record.type << endl;
-    cout << "Amount: " + to_string(record.amount) << endl;
-    cout << "Account: " << endl;
-    for (int i = 0; i < numRow - 3 - linesOfText; i++)
-        cout << " " << string(numCol,' ') << " " << endl;
-    cout << "[x] Cancel" << endl;
-    printBottomRow(numCol);
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
-    string input;
-    getline(cin,input);
-    if (input == "x") {
-        return 0;
-    }
-    else {
-        record.account = input;
-        return 1;
+int printAddRecord2(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord) {
+    string input = "0";
+    while (true) {
+        printTopRow(numCol);
+        int linesOfText = 7;
+        cout << "Add Record" << endl;
+        cout << "Please enter the account used (e.g. cash, bank card, credit card, etc.)" << endl;
+        cout << "" << endl;
+        cout << "Type of income/expense: " + newRecord.type << endl;
+        cout << "Amount: " + to_string(newRecord.amount) << endl;
+        cout << "Account: " << endl;
+        for (int i = 0; i < numRow - 3 - linesOfText; i++)
+            cout << " " << string(numCol,' ') << " " << endl;
+        cout << "[x] Cancel" << endl;
+        printBottomRow(numCol);
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin,input);
+        if (input == "x")
+            return 0;
+        else {
+            newRecord.account = input;
+            printAddRecord3(numRow, numCol, sizeArray, records, newRecord);
+            return 0;
+        }
     }
 }
 
 // Function: int printAddRecord3: end stage, press x to quit
 // Inputs: number of rows for the interface, number of columns for the interface, cin input of x to quit
 // Outputs: exits input of data
-int printAddRecord3(int numRow, int numCol, record &record) {
-    printTopRow(numCol);
-    int linesOfText = 7;
-    cout << "Add Record" << endl;
-    cout << "Record saved! Enter [x] to exit." << endl;
-    cout << "" << endl;
-    cout << "Type of income/expense: " + record.type << endl;
-    cout << "Amount: " + to_string(record.amount) << endl;
-    cout << "Account: " + record.account << endl;
-    for (int i = 0; i < numRow - 3 - linesOfText; i++)
-        cout << " " << string(numCol,' ') << " " << endl;
-    cout << "[x] Exit" << endl;
-    printBottomRow(numCol);
+int printAddRecord3(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord) { 
     char input;
-    cin >> input;
-    if (input != 'x')
-        printAddRecord3(numRow, numCol, record);
-}
-
-// Function: prinAddRecord: Prompt AddRecord interface
-// Inputs: cin input of all record parameters
-// Outputs: adds a new record to records
-void printAddRecord(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord) {
-    if (printAddRecord0(numRow, numCol,newRecord) != 0) {
-        if (printAddRecord1(numRow, numCol,newRecord, false) != 0) {
-            if (printAddRecord2(numRow, numCol,newRecord) != 0) {
-                printAddRecord3(numRow, numCol,newRecord);
-                timeRecord(newRecord);
-                updateRecordsSize(records, sizeArray, 1);
-                records[sizeArray-1] = newRecord;
-            }
-        }
+    int linesOfText = 7;
+    while (true) {
+        printTopRow(numCol);
+        cout << "Add Record" << endl;
+        cout << "Record saved! Enter [x] to exit." << endl;
+        cout << "" << endl;
+        cout << "Type of income/expense: " + newRecord.type << endl;
+        cout << "Amount: " + to_string(newRecord.amount) << endl;
+        cout << "Account: " + newRecord.account << endl;
+        for (int i = 0; i < numRow - 3 - linesOfText; i++)
+            cout << " " << string(numCol,' ') << " " << endl;
+        cout << "[x] Exit" << endl;
+        printBottomRow(numCol);
+        timeRecord(newRecord);
+        updateRecordsSize(records, sizeArray, 1);
+        records[sizeArray-1] = newRecord;
+        cin >> input;
+        if (input == 'x')
+            return 0;
     }
 }
