@@ -53,6 +53,7 @@ int printAddRecord0(int numRow, int numCol, record &record) {
 
 bool isNumber(string s) {
     string temp = s;
+    bool decimal = true;
     if (temp[0] == '-')
         temp.erase(0,1);
     if (temp.length() == 0) {
@@ -60,7 +61,12 @@ bool isNumber(string s) {
     }
     for (char i : temp) {
         if (!isdigit(i))
-            return false;
+            if (i == '.' && decimal) {
+                decimal = false;
+                continue;
+            }
+            else
+                return false;
     }
     return true;
 }

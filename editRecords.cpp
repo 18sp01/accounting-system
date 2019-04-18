@@ -5,6 +5,7 @@
 #include <iomanip>
 #include "stdInterface.h"
 #include "addRecord.h"
+#include "viewRecords.h"
 #include "editRecords.h"
 using namespace std;
 
@@ -38,16 +39,13 @@ int editRecord1 (int numRow, int numCol, record *records, int index, string cate
 
 int editRecord0 (int numRow, int numCol, record *&records, int &sizeArray, int index) {
     printTopRow(numCol);
-    int linesOfText = 5;
+    int linesOfText = 6;
     cout << "Edit Record" << endl;
     cout << "Please enter [1], [2] or [3] to edit the corresponding data, or enter [d] to delete the record" << endl;
-    cout << "" << endl;
-    cout << " " << index << " | ";
-    cout << "Amount: " << records[index-1].amount << " | ";
-    cout << "Type: " << records[index-1].type << " | ";
-    cout << "Account: " << records[index-1].account << " | ";
-    cout << "Date: " << records[index-1].day << " " << records[index-1].month << " " << records[index-1].year << " " << records[index-1].hour << ":" << records[index-1].min;
     cout << endl;
+    printCategories();
+    cout << endl;
+    printRecord(records,index-1);
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
         cout << " " << string(numCol,' ') << " " << endl;
     cout << "[1] Amount  [2] Type  [3] Account  [d] Delete  [x] Cancel" << endl;
@@ -56,10 +54,10 @@ int editRecord0 (int numRow, int numCol, record *&records, int &sizeArray, int i
     cin >> input;
     if (input == 'x')
         return 0;
-    if (input == 'd')
-    
+    if (input == 'd') {
         deleteRecord(records, sizeArray, index);
         return 0;
+    }
     if (input == '1')
         return editRecord1(numRow,numCol,records,index,"amount",false);
     if (input == '2')
@@ -71,18 +69,15 @@ int editRecord0 (int numRow, int numCol, record *&records, int &sizeArray, int i
 
 int editRecord1 (int numRow, int numCol, record *records, int index, string category, bool error) {
     printTopRow(numCol);
-    int linesOfText = 5;
+    int linesOfText = 6;
     cout << "Edit Record" << endl;
     if (error)
         cout << "Error! Please enter a number. ";
     cout << "Please enter the " << category << endl;
     cout << "" << endl;
-    cout << " " << index << " | ";
-    cout << "Amount: " << records[index-1].amount << " | ";
-    cout << "Type: " << records[index-1].type << " | ";
-    cout << "Account: " << records[index-1].account << " | ";
-    cout << "Date: " << records[index-1].day << " " << records[index-1].month << " " << records[index-1].year << " " << records[index-1].hour << ":" << records[index-1].min;
+    printCategories();
     cout << endl;
+    printRecord(records,index-1);
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
         cout << " " << string(numCol,' ') << " " << endl;
     cout << "[x] Cancel" << endl;
@@ -121,16 +116,13 @@ int editRecord1 (int numRow, int numCol, record *records, int index, string cate
 
 int editRecord2 (int numRow, int numCol, record *records, int index) {
     printTopRow(numCol);
-    int linesOfText = 5;
+    int linesOfText = 6;
     cout << "Edit Record" << endl;
     cout << "Record saved! Enter [x] to exit." << endl;
     cout << "" << endl;
-    cout << " " << index << " | ";
-    cout << "Amount: " << records[index-1].amount << " | ";
-    cout << "Type: " << records[index-1].type << " | ";
-    cout << "Account: " << records[index-1].account << " | ";
-    cout << "Date: " << records[index-1].day << " " << records[index-1].month << " " << records[index-1].year << " " << records[index-1].hour << ":" << records[index-1].min;
+    printCategories();
     cout << endl;
+    printRecord(records,index-1);
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
         cout << " " << string(numCol,' ') << " " << endl;
     cout << "[x] Exit" << endl;

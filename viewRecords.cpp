@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <limits>
-#include <cmath>
+#include <iomanip>
 #include "stdInterface.h"
 #include "addRecord.h"
 #include "viewRecords.h"
@@ -21,27 +21,6 @@ using namespace std;
 
 int ceilDivision(int number, int divisor) {
     return (number + divisor - 1) / divisor;
-}
-
-int listRecords(int numRow, int numCol, record *records, int sizeArray, int page) {
-    int usedLines = 7;
-    int maxI;
-    if (sizeArray - page*(numRow - usedLines) < numRow - usedLines)
-        maxI = sizeArray - page*(numRow - usedLines);
-    else
-        maxI = numRow - usedLines;
-    for (int i = 0; i < maxI; i++) {
-        cout << " " << i+(page*(numRow - usedLines))+1 << " | ";
-        cout << "Amount: " << records[i+(page*(numRow - usedLines))].amount << " | ";
-        cout << "Type: " << records[i+(page*(numRow - usedLines))].type << " | ";
-        cout << "Account: " << records[i+(page*(numRow - usedLines))].account << " | ";
-        cout << "Date: " << records[i+(page*(numRow - usedLines))].day << " " << records[i+(page*(numRow - usedLines))].month << " " << records[i+(page*(numRow - usedLines))].year << " " << records[i+(page*(numRow - usedLines))].hour << ":" << records[i+(page*(numRow - usedLines))].min;
-        cout << endl;
-    }
-    if (sizeArray - page*(numRow - usedLines) < numRow - usedLines) {
-        for (int i = 0; i < numRow - (sizeArray - page*(numRow - usedLines)) - usedLines; i++)
-            cout << string(numCol,' ') <<endl;
-    }
 }
 
 void printSortingBy (string sortParameter, bool ascend) {
@@ -64,31 +43,74 @@ void printSortingBy (string sortParameter, bool ascend) {
     }
 }
 
-int viewRecordPage (int numRow, int numCol, record *records, int &sizeArray, int page, string sortParameter, bool ascend) {
+void printCategories() {
+    cout << setw(5) << left << '#' << " | ";
+    cout << setw(15) << left << "Amount" << " | ";
+    cout << setw(22) << left << "Type" << " | ";
+    cout << setw(22) << left << "Account"  << " | ";
+    cout << "Date";
+}
+
+void printRecord(record *records, int index) {
+    cout << setw(5) << left << index+1 << " | ";
+    cout << setw(15) << records[index].amount << " | ";
+    cout << setw(22) << records[index].type << " | ";
+    cout << setw(22) << records[index].account << " | ";
+    cout << setfill('0') << right << setw(2) << records[index].day << '/' << setw(2) << records[index].month << '/' << records[index].year << " " << setw(2) << records[index].hour << ":" << setw(2) << records[index].min;
+    cout << setfill(' ') << endl;
+}
+
+void listRecords(int numRow, int numCol, record *records, int sizeArray, int page, int usedLines) {
+    int maxI;
+    if (sizeArray - page*(numRow - usedLines) < numRow - usedLines)
+        maxI = sizeArray - page*(numRow - usedLines);
+    else
+        maxI = numRow - usedLines;
+    printCategories();
+    cout << endl;
+    for (int i = 0; i < maxI; i++)
+        printRecord(records, i+(page*(numRow - usedLines)));
+    if (sizeArray - page*(numRow - usedLines) < numRow - usedLines) {
+        for (int i = 0; i < numRow - (sizeArray - page*(numRow - usedLines)) - usedLines; i++)
+            cout << string(numCol,' ') <<endl;
+    }
+}
+
+void viewRecordPage (int numRow, int numCol, record *records, int &sizeArray, int page, int usedLines, string sortParameter, bool ascend) {
     printTopRow(numCol);
-    cout << "View Records (Page "<< page + 1 << " of " << ceilDivision(sizeArray,numRow - 7) << ") ";
+    cout << "View Records (Page "<< page + 1 << " of " << ceilDivision(sizeArray,numRow - usedLines) << ") ";
     printSortingBy(sortParameter, ascend);
     cout << endl;
     cout << "Please enter [s] to sort records, or [e] to edit records" << endl;
-    cout << "" << endl;
-    listRecords(numRow, numCol, records, sizeArray, page);
+    cout << endl;
+    listRecords(numRow, numCol, records, sizeArray, page, usedLines);
     cout << "[p] Previous  [n] Next  [s] Sort  [e] Edit  [x] Exit" << endl;
     printBottomRow(numCol);
 }
 
-int sortRecordPage(int numRow, int numCol, record *records, int &sizeArray, int page, string &sortParameter, bool &ascend) {
+void sortRecordPage(int numRow, int numCol, record *records, int &sizeArray, int page, int usedLines, string &sortParameter, bool &ascend) {
     char input = '0';
     while (input != 'x') {
         printTopRow(numCol);
-        cout << "Sort Records (Page "<< page + 1 << " of " << sizeArray/(numRow - 7) + 1 << ") ";
+        cout << "Sort Records (Page "<< page + 1 << " of " << ceilDivision(sizeArray,numRow - usedLines) << ") ";
         printSortingBy(sortParameter, ascend);
         cout << endl;
         cout << "Please enter [1], [2], [3], or [4] to sort by the corresponding category" << endl;
         cout << "" << endl;
-        listRecords(numRow, numCol, records, sizeArray, page);
-        cout << "[t] Toggle Ascend/Descend [1] Amount [2] Type  [3] Account  [4] Date  [x] Exit" << endl;
+        listRecords(numRow, numCol, records, sizeArray, page, usedLines);
+        cout << "[p] Previous [n] Next [t] Toggle Ascend/Descend [1] Amount [2] Type [3] Account [4] Date [x] Exit" << endl;
         printBottomRow(numCol);
         cin >> input;
+        if (input == 'p') {
+            page--;
+            if (page < 0)
+                page = 0;
+        }
+        if (input == 'n') {
+            page++;
+            if (page > ceilDivision(sizeArray,numRow - usedLines) - 1)
+                page = ceilDivision(sizeArray,numRow - usedLines) - 1;
+        }
         if (input == '1') {
             sortParameter = "Amount";
             ascend = false;
@@ -116,14 +138,14 @@ int sortRecordPage(int numRow, int numCol, record *records, int &sizeArray, int 
     }
 }
 
-int editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, int page, string sortParameter, bool ascend) {
+void editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string sortParameter, bool ascend) {
     printTopRow(numCol);
-    cout << "Edit Records (Page "<< page + 1 << " of " << sizeArray/(numRow - 7) + 1 << ") ";
+    cout << "Edit Records (Page "<< page + 1 << " of " << sizeArray/(numRow - usedLines) + 1 << ") ";
     printSortingBy(sortParameter, ascend);
     cout << endl;
     cout << "Please enter the number corresponding to the record you want to edit" << endl;
-    cout << "" << endl;
-    listRecords(numRow, numCol, records, sizeArray, page);
+    cout << endl;
+    listRecords(numRow, numCol, records, sizeArray, page, usedLines);
     cout << "[x] Cancel" << endl;
     printBottomRow(numCol);
     
@@ -141,16 +163,16 @@ int editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, int
 
 int viewRecordPages(int numRow, int numCol, int &sizeArray, record *&records) {
     int page = 0;
+    int usedLines = 8;
     string sortParameter = "Date";
     bool ascend = false;
     sortByDate (records, sizeArray, ascend);
     while (true) {
-        viewRecordPage(numRow, numCol, records, sizeArray, page, sortParameter, ascend);
+        viewRecordPage(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend);
         string input;
         cin >> input;
-        if (input == "x") {
+        if (input == "x")
             return 0;
-        }
         if (input == "p") {
             page--;
             if (page < 0)
@@ -158,17 +180,12 @@ int viewRecordPages(int numRow, int numCol, int &sizeArray, record *&records) {
         }
         if (input == "n") {
             page++;
-            if (page > ceilDivision(sizeArray,numRow - 7) - 1) {
-                page = ceilDivision(sizeArray,numRow - 7) - 1;
-                cout << ceilDivision(sizeArray,numRow - 7) - 1;
-            }
+            if (page > ceilDivision(sizeArray,numRow - usedLines) - 1)
+                page = ceilDivision(sizeArray,numRow - usedLines) - 1;
         }
-        if (input == "e") {
-            editRecordPage(numRow, numCol, records, sizeArray, page, sortParameter, ascend);
-        }
-        if (input == "s") {
-            sortRecordPage(numRow, numCol, records, sizeArray, page, sortParameter, ascend);
-        }
-        cin.clear();
+        if (input == "e")
+            editRecordPage(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend);
+        if (input == "s")
+            sortRecordPage(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend);
     }
 }
