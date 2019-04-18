@@ -16,13 +16,29 @@ using namespace std;
    // records.erase(records.begin() + index);//
 //}
 
-int editRecord1 (int numRow, int numCol, record records[], int index, string category, bool error);
+void deleteRecord(record *&records, int &sizeArray, int index) {
+    record *newRecords = new record[sizeArray-1];
+    bool shifted = false;
+    for (int i = 0; i < sizeArray-1; i++) {
+        cout << i << endl;
+        newRecords[i] = records[i];
+        if (i == index-1 && !shifted) {
+            shifted = true;
+            i--;
+        }
+    }
+    sizeArray -= 1;
+    delete [] records;
+    records = newRecords;
+}
 
-int editRecord0 (int numRow, int numCol, record records[], int index) {
+int editRecord1 (int numRow, int numCol, record *records, int index, string category, bool error);
+
+int editRecord0 (int numRow, int numCol, record *&records, int &sizeArray, int index) {
     printTopRow(numCol);
     int linesOfText = 5;
     cout << "Edit Record" << endl;
-    cout << "Please enter [1], [2] or [3] to edit the corresponding data" << endl;
+    cout << "Please enter [1], [2] or [3] to edit the corresponding data, or enter [d] to delete the record" << endl;
     cout << "" << endl;
     cout << " " << index << " | ";
     cout << "Amount: " << records[index-1].amount << " | ";
@@ -32,11 +48,15 @@ int editRecord0 (int numRow, int numCol, record records[], int index) {
     cout << endl;
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
         cout << " " << string(numCol,' ') << " " << endl;
-    cout << "[1] Amount  [2] Type  [3] Account  [x] Cancel" << endl;
+    cout << "[1] Amount  [2] Type  [3] Account  [d] Delete  [x] Cancel" << endl;
     printBottomRow(numCol);
     char input;
     cin >> input;
     if (input == 'x')
+        return 0;
+    if (input == 'd')
+    
+        deleteRecord(records, sizeArray, index);
         return 0;
     if (input == '1')
         return editRecord1(numRow,numCol,records,index,"amount",false);
@@ -44,10 +64,10 @@ int editRecord0 (int numRow, int numCol, record records[], int index) {
         return editRecord1(numRow,numCol,records,index,"type",false);
     if (input == '3')
         return editRecord1(numRow,numCol,records,index,"account",false);
-    else editRecord0 (numRow, numCol, records, index);
+    else editRecord0(numRow, numCol, records, sizeArray, index);
 }
 
-int editRecord1 (int numRow, int numCol, record records[], int index, string category, bool error) {
+int editRecord1 (int numRow, int numCol, record *records, int index, string category, bool error) {
     printTopRow(numCol);
     int linesOfText = 5;
     cout << "Edit Record" << endl;
@@ -97,7 +117,7 @@ int editRecord1 (int numRow, int numCol, record records[], int index, string cat
     }
 }
 
-int editRecord2 (int numRow, int numCol, record records[], int index) {
+int editRecord2 (int numRow, int numCol, record *records, int index) {
     printTopRow(numCol);
     int linesOfText = 5;
     cout << "Edit Record" << endl;
@@ -119,8 +139,8 @@ int editRecord2 (int numRow, int numCol, record records[], int index) {
         editRecord2(numRow, numCol, records, index);
 }
 
-void editRecord (int numRow, int numCol, record records[], int index) {
-    if (editRecord0(numRow, numCol, records, index)) {
+void editRecord (int numRow, int numCol, record *&records, int &sizeArray, int index) {
+    if (editRecord0(numRow, numCol, records, sizeArray, index)) {
         editRecord2(numRow, numCol, records, index);
     }
 }

@@ -7,7 +7,7 @@
 #include "fromtoFile.h"
 using namespace std;
 
-void readFromFile(int &sizeArray, record records[]) {
+void readFromFile(int &sizeArray, record *&records) {
     ifstream fin;
     fin.open("data.txt");
 
@@ -40,13 +40,13 @@ void readFromFile(int &sizeArray, record records[]) {
         newRecord.hour = stoi(hour);
         newRecord.min = stoi(min);
         updateRecordsSize(records, sizeArray, 1);
-        records[0] = newRecord;
+        records[sizeArray-1] = newRecord;
     }
 
     fin.close();
 }
 
-void writeToFile(int sizeArray, record records[]) {
+void writeToFile(int sizeArray, record *records) {
     ofstream fout;
     fout.open("data.txt", ofstream::trunc);
 

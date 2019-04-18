@@ -12,15 +12,15 @@ using namespace std;
 // Function:
 // Inputs: 
 // Outputs: 
-void updateRecordsSize(record records[], int &sizeArray, int sizeChange) {
-    cout << 1;
-    cout << 2;
+void updateRecordsSize(record *&records, int &sizeArray, int sizeChange) {
+    record *newRecords = new record[sizeArray+sizeChange];
     for (int i = 0; i < sizeArray; i++) {
-        cout << 3;
+        newRecords[i] = records[i];
     }
     sizeArray += sizeChange;
+    delete [] records;
+    records = newRecords;
 }
-
 
 // Function: 
 // Inputs: 
@@ -60,7 +60,7 @@ int main(int argc, char ** argv) {
     int numRow = 12;
 
     int sizeArray = 1;
-    record * records = new record[sizeArray];
+    record *records = new record[sizeArray];
     readFromFile(sizeArray, records);
     printMainMenu(numRow, numCol);
     char command;

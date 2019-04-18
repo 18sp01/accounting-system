@@ -6,7 +6,7 @@
 #include "sortRecords.h"
 using namespace std;
 
-void reverseVector (record records[], int sizeArray) {
+void reverseVector (record *records, int sizeArray) {
     reverse(records, records+sizeArray);
 }
 
@@ -16,7 +16,7 @@ struct sortAmount{
     }
 };
 
-void sortByAmount (record records[], int sizeArray, bool ascend) {
+void sortByAmount (record *records, int sizeArray, bool ascend) {
     sort(records, records+sizeArray, sortAmount());
     reverseVector(records, sizeArray);
     if(ascend) {
@@ -30,7 +30,7 @@ struct sortType{
     }
 };
 
-void sortByType(record records[], int sizeArray, bool ascend) {
+void sortByType(record *records, int sizeArray, bool ascend) {
     sort(records, records+sizeArray, sortType());
     reverseVector(records, sizeArray);
     if(ascend) {
@@ -44,7 +44,7 @@ struct sortAccount{
     }
 };
 
-void sortByAccount (record records[], int sizeArray, bool ascend) {
+void sortByAccount (record *records, int sizeArray, bool ascend) {
     sort(records, records+sizeArray, sortAccount());
     reverseVector(records, sizeArray);
     if(ascend) {
@@ -71,7 +71,7 @@ bool compareDate(record &struct1, record &struct2) {
     return false;
 }
 
-void sortByDate (record records[], int sizeArray, bool ascend) {
+void sortByDate (record *records, int sizeArray, bool ascend) {
     sort(records, records+sizeArray, compareDate);
     reverseVector(records, sizeArray);
     if(ascend) {

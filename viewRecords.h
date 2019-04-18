@@ -1,1 +1,1 @@
-int viewRecordPages(int numRow, int numCol, int &sizeArray, record records[]);
+int viewRecordPages(int numRow, int numCol, int &sizeArray, record *&records);

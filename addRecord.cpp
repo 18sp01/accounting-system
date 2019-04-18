@@ -148,7 +148,7 @@ int printAddRecord3(int numRow, int numCol, record &record) {
 // Function: prinAddRecord: Prompt AddRecord interface
 // Inputs: cin input of all record parameters
 // Outputs: adds a new record to records
-void printAddRecord(int numRow, int numCol, int &sizeArray, record records[], record &newRecord) {
+void printAddRecord(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord) {
     if (printAddRecord0(numRow, numCol,newRecord) != 0) {
         if (printAddRecord1(numRow, numCol,newRecord, false) != 0) {
             if (printAddRecord2(numRow, numCol,newRecord) != 0) {

@@ -18,7 +18,7 @@ using namespace std;
 // Num | Amount | Type | Account | Date
 // 2 | 102 | Food | Bank | 12 4 2019 14:09
 
-int listRecords(int numRow, int numCol, record records[], int sizeArray, int page) {
+int listRecords(int numRow, int numCol, record *records, int sizeArray, int page) {
     int usedLines = 7;
     int maxI;
     if (sizeArray - page*(numRow - usedLines) < numRow - usedLines)
@@ -59,7 +59,7 @@ void printSortingBy (string sortParameter, bool ascend) {
     }
 }
 
-int viewRecordPage (int numRow, int numCol, record records[], int &sizeArray, int page, string sortParameter, bool ascend) {
+int viewRecordPage (int numRow, int numCol, record *records, int &sizeArray, int page, string sortParameter, bool ascend) {
     printTopRow(numCol);
     cout << "View Records (Page "<< page + 1 << " of " << sizeArray/(numRow - 7) + 1 << ") ";
     printSortingBy(sortParameter, ascend);
@@ -71,7 +71,7 @@ int viewRecordPage (int numRow, int numCol, record records[], int &sizeArray, in
     printBottomRow(numCol);
 }
 
-int sortRecordPage(int numRow, int numCol, record records[], int &sizeArray, int page, string &sortParameter, bool &ascend) {
+int sortRecordPage(int numRow, int numCol, record *records, int &sizeArray, int page, string &sortParameter, bool &ascend) {
     char input = '0';
     while (input != 'x') {
         printTopRow(numCol);
@@ -111,7 +111,7 @@ int sortRecordPage(int numRow, int numCol, record records[], int &sizeArray, int
     }
 }
 
-int editRecordPage(int numRow, int numCol, record records[], int &sizeArray, int page, string sortParameter, bool ascend) {
+int editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, int page, string sortParameter, bool ascend) {
     printTopRow(numCol);
     cout << "Edit Records (Page "<< page + 1 << " of " << sizeArray/(numRow - 7) + 1 << ") ";
     printSortingBy(sortParameter, ascend);
@@ -127,13 +127,13 @@ int editRecordPage(int numRow, int numCol, record records[], int &sizeArray, int
     while (input != "x") {            
         int x = stoi(input);
         if (x > 0 && x < sizeArray + 1)
-            editRecord (numRow, numCol, records, x);
+            editRecord (numRow, numCol, records, sizeArray, x);
             break;
         cin >> input;
     }
 }
 
-int viewRecordPages(int numRow, int numCol, int &sizeArray, record records[]) {
+int viewRecordPages(int numRow, int numCol, int &sizeArray, record *&records) {
     int page = 0;
     string sortParameter = "Date";
     bool ascend = false;
