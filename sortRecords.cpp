@@ -6,8 +6,8 @@
 #include "sortRecords.h"
 using namespace std;
 
-void reverseVector (vector<record> &records) {
-    reverse(records.begin(), records.end());
+void reverseVector (record *records, int sizeArray) {
+    reverse(records, records+sizeArray);
 }
 
 struct sortAmount{
@@ -16,11 +16,11 @@ struct sortAmount{
     }
 };
 
-void sortByAmount (vector<record> &records, bool ascend) {
-    sort(records.begin(), records.end(), sortAmount());
-    reverseVector(records);
+void sortByAmount (record *records, int sizeArray, bool ascend) {
+    sort(records, records+sizeArray, sortAmount());
+    reverseVector(records, sizeArray);
     if(ascend) {
-        reverseVector(records);
+        reverseVector(records, sizeArray);
     }
 }
 
@@ -30,11 +30,11 @@ struct sortType{
     }
 };
 
-void sortByType(vector<record> &records, bool ascend) {
-    sort(records.begin(), records.end(), sortType());
-    reverseVector(records);
+void sortByType(record *records, int sizeArray, bool ascend) {
+    sort(records, records+sizeArray, sortType());
+    reverseVector(records, sizeArray);
     if(ascend) {
-        reverseVector(records);
+        reverseVector(records, sizeArray);
     }
 }
 
@@ -44,11 +44,11 @@ struct sortAccount{
     }
 };
 
-void sortByAccount (vector<record> &records, bool ascend) {
-    sort(records.begin(), records.end(), sortAccount());
-    reverseVector(records);
+void sortByAccount (record *records, int sizeArray, bool ascend) {
+    sort(records, records+sizeArray, sortAccount());
+    reverseVector(records, sizeArray);
     if(ascend) {
-        reverseVector(records);
+        reverseVector(records, sizeArray);
     }
 }
 
@@ -71,11 +71,11 @@ bool compareDate(record &struct1, record &struct2) {
     return false;
 }
 
-void sortByDate (vector<record> &records, bool ascend) {
-    sort(records.begin(), records.end(), compareDate);
-    reverseVector(records);
+void sortByDate (record *records, int sizeArray, bool ascend) {
+    sort(records, records+sizeArray, compareDate);
+    reverseVector(records, sizeArray);
     if(ascend) {
-        reverseVector(records);
+        reverseVector(records, sizeArray);
     }
 }
 /*

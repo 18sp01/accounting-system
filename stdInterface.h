@@ -5,6 +5,8 @@ struct record {
     std::string account; // account (e.g. cash, bank card, credit card, etc.)
 };
 
+void updateRecordsSize(record *&records, int &sizeArray, int sizeChange);
+
 void printTopRow(int numCol);
 
 void printBottomRow(int numCol);

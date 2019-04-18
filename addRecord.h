@@ -1,5 +1,5 @@
 using namespace std;
 
-void printAddRecord(int numRow, int numCol, vector<record> &records, record &newRecord);
+void printAddRecord(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord);
 
 bool isNumber(string s);

@@ -1,3 +1,3 @@
-void readFromFile(std::vector<record> &records);
+void readFromFile(int &sizeArray, record *&records);
 
-void writeToFile(std::vector<record> records);
+void writeToFile(int sizeArray, record *records);
