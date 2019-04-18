@@ -19,13 +19,15 @@ using namespace std;
 void deleteRecord(record *&records, int &sizeArray, int index) {
     record *newRecords = new record[sizeArray-1];
     bool shifted = false;
+    int j = 0;
     for (int i = 0; i < sizeArray-1; i++) {
         cout << i << endl;
-        newRecords[i] = records[i];
+        newRecords[i] = records[j];
         if (i == index-1 && !shifted) {
             shifted = true;
             i--;
         }
+        j++;
     }
     sizeArray -= 1;
     delete [] records;
