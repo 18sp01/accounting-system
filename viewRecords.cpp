@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <limits>
+#include <cmath>
 #include "stdInterface.h"
 #include "addRecord.h"
 #include "viewRecords.h"
@@ -17,6 +18,10 @@ using namespace std;
 // 2 | Amount: 102 | Type: Food | Account: Bank | Date: 12 4 2019 14:09
 // Num | Amount | Type | Account | Date
 // 2 | 102 | Food | Bank | 12 4 2019 14:09
+
+int ceilDivision(int number, int divisor) {
+    return (number + divisor - 1) / divisor;
+}
 
 int listRecords(int numRow, int numCol, record *records, int sizeArray, int page) {
     int usedLines = 7;
@@ -61,7 +66,7 @@ void printSortingBy (string sortParameter, bool ascend) {
 
 int viewRecordPage (int numRow, int numCol, record *records, int &sizeArray, int page, string sortParameter, bool ascend) {
     printTopRow(numCol);
-    cout << "View Records (Page "<< page + 1 << " of " << sizeArray/(numRow - 7) + 1 << ") ";
+    cout << "View Records (Page "<< page + 1 << " of " << ceilDivision(sizeArray,numRow - 7) << ") ";
     printSortingBy(sortParameter, ascend);
     cout << endl;
     cout << "Please enter [s] to sort records, or [e] to edit records" << endl;
@@ -126,9 +131,10 @@ int editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, int
     cin >> input;
     while (input != "x") {            
         int x = stoi(input);
-        if (x > 0 && x < sizeArray + 1)
-            editRecord (numRow, numCol, records, sizeArray, x);
+        if (x > 0 && x < sizeArray + 1) {
+            editRecord(numRow, numCol, records, sizeArray, x);
             break;
+        }
         cin >> input;
     }
 }
@@ -152,8 +158,9 @@ int viewRecordPages(int numRow, int numCol, int &sizeArray, record *&records) {
         }
         if (input == "n") {
             page++;
-            if (page > (sizeArray/(numRow - 7))) {
-                page = sizeArray/(numRow - 7);
+            if (page > ceilDivision(sizeArray,numRow - 7) - 1) {
+                page = ceilDivision(sizeArray,numRow - 7) - 1;
+                cout << ceilDivision(sizeArray,numRow - 7) - 1;
             }
         }
         if (input == "e") {

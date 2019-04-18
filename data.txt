@@ -1,9 +1,11 @@
 Amount,Type,Account,Day,Month,Year,Hour,Minutes
 -299.99,Laptop,Cash,30,9,2019,5,13,
+1,salary,cash,19,4,2019,1,6,
+1,game,cash,19,4,2019,1,6,
+1,food,cash,19,4,2019,1,6,
 -200,Game,Cash,18,4,2019,21,39,
 -3000,food,Credit Card,14,4,2019,2,45,
 -124.5,Game,Credit Card,13,4,2019,23,49,
 30000,Salary,Bank,13,4,2019,22,12,
 20,Allowance,Cash,3,4,2019,7,11,
 200,Allowance,Cash,3,4,2019,7,11,
--5,Coke,Cash,17,4,2018,10,13,
