@@ -59,7 +59,7 @@ int main(int argc, char ** argv) {
     int numCol = 100;
     int numRow = 12;
 
-    int sizeArray = 1;
+    int sizeArray = 0;
     record *records = new record[sizeArray];
     readFromFile(sizeArray, records);
     printMainMenu(numRow, numCol);
