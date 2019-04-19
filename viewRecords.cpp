@@ -242,17 +242,17 @@ void filterRecordsPage(int numRow, int numCol, record *&records, int &sizeArray,
             break;
         if (input == '1') {
             filterRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, input);
-            page = 0;
+            break;
         }
         // filter by account
         if (input == '2') {
             filterRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, input);
-            page = 0;
+            break;
         }
         // filter by date
         if (input == '3') {
             filterRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, input);
-            page = 0;
+            break;
         }
     }
 }
