@@ -224,7 +224,9 @@ void editFilteredRecordPage(int numRow, int numCol, record *&fRecords, int &fsiz
     }
 }
 
-void filterRecordsPage(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string &sortParameter, bool &ascend) {
+void filterRecordsPage(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string sortParameter, bool ascend) {
+    sortParameter = "Date";
+    ascend = false;
     char input = '0';
     while (true) {
         printTopRow(numCol);
