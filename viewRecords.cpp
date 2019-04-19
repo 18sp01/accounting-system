@@ -82,7 +82,7 @@ void listRecords(int numRow, int numCol, record *records, int sizeArray, int pag
         printRecord(records, i+(page*(numRow - usedLines)));
     if (sizeArray - page*(numRow - usedLines) < numRow - usedLines) {
         for (int i = 0; i < numRow - (sizeArray - page*(numRow - usedLines)) - usedLines; i++)
-            cout << string(numCol,' ') <<endl;
+            cout << endl;
     }
 }
 
@@ -187,24 +187,44 @@ void editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, in
         }
     }
 }
-/*
-void listFilteredRecords(int numRow, int numCol, record *records, int sizeArray, int *filteredIndices, int filteredSizeArray, int page, int usedLines) {
-    int maxI;
-    if (filteredSizeArray - page*(numRow - usedLines) < numRow - usedLines)
-        maxI = filteredSizeArray - page*(numRow - usedLines);
-    else
-        maxI = numRow - usedLines;
-    printCategories();
-    cout << endl;
-    for (int i = 0; i < maxI; i++)
-        printRecord(records, filteredIndices[i]+(page*(numRow - usedLines)));
-    if (filteredSizeArray - page*(numRow - usedLines) < numRow - usedLines) {
-        for (int i = 0; i < numRow - (sizeArray - page*(numRow - usedLines)) - usedLines; i++)
-            cout << string(numCol,' ') <<endl;
+
+void editFilteredRecordPage(int numRow, int numCol, record *&fRecords, int &fsizeArray, int page, int usedLines, string sortParameter, bool ascend, record *&records, int &sizeArray) {
+    string input = "0";
+    while (true) {
+        printTopRow(numCol);
+        cout << "Edit Records (Page "<< page + 1 << " of " << fsizeArray/(numRow - usedLines) + 1 << ") ";
+        printSortingBy(sortParameter, ascend);
+        cout << endl;
+        cout << "Please enter the number corresponding to the record you want to edit" << endl;
+        cout << endl;
+        listRecords(numRow, numCol, fRecords, fsizeArray, page, usedLines);
+        cout << endl;
+        cout << "[p] Previous  [n] Next  [x] Cancel" << endl;
+        printBottomRow(numCol);
+        cin >> input;
+        if (input == "x")
+            break;
+        if (input == "p") {
+            page--;
+            if (page < 0)
+                page = 0;
+        }
+        if (input == "n") {
+            page++;
+            if (page > ceilDivision(fsizeArray,numRow - usedLines) - 1)
+                page = ceilDivision(fsizeArray,numRow - usedLines) - 1;
+        }
+        if (isInteger(input)) {
+            int x = stoi(input);
+            if (x > 0 && x < fsizeArray + 1) {
+                editfRecord(numRow, numCol, fRecords, fsizeArray, x, records, sizeArray);
+                break;
+            }
+        }
     }
 }
-*/
-void filterRecordsPage(int numRow, int numCol, record *records, int &sizeArray, int page, int usedLines, string &sortParameter, bool &ascend) {
+
+void filterRecordsPage(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string &sortParameter, bool &ascend) {
     char input = '0';
     while (true) {
         printTopRow(numCol);
@@ -233,14 +253,17 @@ void filterRecordsPage(int numRow, int numCol, record *records, int &sizeArray, 
         // filter by type
         if (input == '1') {
             filterRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, input);
+            page = 0;
         }
         // filter by account
         if (input == '2') {
             filterRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, input);
+            page = 0;
         }
         // filter by date
         if (input == '3') {
             filterRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, input);
+            page = 0;
         }
     }
 }

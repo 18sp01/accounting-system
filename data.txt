@@ -1,6 +1,6 @@
 Amount,Type,Account,Day,Month,Year,Hour,Minutes
 -300,Laptop,Cash,30,9,2019,5,13,
-1,1,1,19,4,2019,3,35,
+-100,food,Cash,19,4,2019,18,30,
 20000,salary,bank card,19,4,2019,3,34,
 -39,food,cash,19,4,2019,1,6,
 -289,game,cash,19,4,2019,1,6,

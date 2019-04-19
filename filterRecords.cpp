@@ -6,98 +6,212 @@
 #include "filterRecords.h"
 using namespace std;
 
-string filterByAccount(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray) {
+void filteredRecords(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool &ascend, record *&fRecords, int fsizeArray, string query);
+
+void filterByAccount(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray) {
     printTopRow(numCol);
-    cout << "Filter by Account ";
+    cout << "Filter Records";
     cout << endl;
-    cout << ' ' << endl;
-    cout << "Please enter a keyword to filter by the keyword" << endl;
+    cout << "Please enter the keyword" << endl;
+    cout << endl;
+    cout << "Category: Account" << endl << endl;
+    cout << "Keyword: ";
+    for (int i = 0; i < numRow - 9; i++)
+        cout << endl;
+    cout << "[x] Cancel" << endl;
     printBottomRow(numCol);
     string search;
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
     getline(cin, search);
-    for (int i = 0; i < sizeArray; i++) {
-        if (records[i].account == search) {
-            updateRecordsSize(fRecords, fsizeArray, 1);
-            fRecords[fsizeArray-1] = records[i];
-            fRecords[fsizeArray-1].originalIndex = i;
+    if (search != "x") {
+        for (int i = 0; i < sizeArray; i++) {
+            if (records[i].account == search) {
+                updateRecordsSize(fRecords, fsizeArray, 1);
+                fRecords[fsizeArray-1] = records[i];
+                fRecords[fsizeArray-1].originalIndex = i;
+            }
         }
+        filteredRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray, search);
     }
-    return search;
 }
 
-string filterByType(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray) {
+void filterByType(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray) {
     printTopRow(numCol);
-    cout << "Filter by Type ";
-    printSortingBy(sortParameter, ascend);
+    cout << "Filter Records ";
     cout << endl;
-    cout << ' ' << endl;
-    cout << "Please enter a keyword to filter by the keyword" << endl;
+    cout << "Please enter the keyword" << endl;
+    cout << endl;
+    cout << "Category: Type" << endl << endl;
+    cout << "Keyword: ";
+    for (int i = 0; i < numRow - 9; i++)
+        cout << endl;
+    cout << "[x] Cancel" << endl;
     printBottomRow(numCol);
     string search;
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin, search);
-    for (int i = 0; i < sizeArray; i++) {
-        if (records[i].type == search) {
-            updateRecordsSize(fRecords, fsizeArray, 1);
-            fRecords[fsizeArray-1] = records[i];
-            fRecords[fsizeArray-1].originalIndex = i;
+    if (search != "x") {
+        for (int i = 0; i < sizeArray; i++) {
+            if (records[i].type == search) {
+                updateRecordsSize(fRecords, fsizeArray, 1);
+                fRecords[fsizeArray-1] = records[i];
+                fRecords[fsizeArray-1].originalIndex = i;
+            }
+        }
+        filteredRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray, search);
+    }
+}
+
+void filterByDate1(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray, record &dateRecord);
+
+void filterByDate0(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray) {
+    record dateRecord;
+    string input;
+    bool error = false;
+    while (true) {
+        printTopRow(numCol);
+        cout << "Filter Records" << endl;
+        if (error)
+            cout << "Error! Please enter a valid input. ";
+        cout << "Please enter the year (type * to skip)" << endl;
+        cout << endl;
+        cout << "Category: Date" << endl << endl;
+        cout << "Year: " << endl;
+        cout << "Month: " << endl;
+        cout << "Day: " << endl;
+        for (int i = 0; i < numRow - 12; i++)
+            cout << endl;
+        cout << "[x] Cancel" << endl;
+        printBottomRow(numCol);
+        cin >> input;
+        if (input == "x")
+            break;
+        if (!isInteger(input) && input != "*")
+            error = true;
+        else {
+            if (input == "*")
+                input = "-1";
+            dateRecord.year = stoi(input);
+            filterByDate1(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray, dateRecord);
+            break;
         }
     }
-    return search;
 }
 
+void filterByDate2(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray, record &dateRecord);
 
-void filterByDate(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray) {
-    /*printTopRow(numCol);
-    cout << "Filter by Type";
-    cout << endl;
-    cout << "Please enter a keyword to filter by the keyword" << endl;
-    cout << "" << endl;
-    string search;
-    cin >> search;
-    for (int i = 0; i < sizeArray; i++) {
-        if (records[i].type == search) {
-            updateRecordsSize(fRecords, fsizeArray, 1);
-            fRecords[fsizeArray-1] = records[i];
-            fRecords[fsizeArray-1].originalIndex = i;
+void filterByDate1(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray, record &dateRecord) {
+    string input;
+    bool error = false;
+    while (true) {
+        printTopRow(numCol);
+        cout << "Filter Records" << endl;
+        if (error)
+            cout << "Error! Please enter a valid input. ";
+        cout << "Please enter the month (type * to skip)" << endl;
+        cout << endl;
+        cout << "Category: Date" << endl << endl;
+        cout << "Year: " << (dateRecord.year == -1 ? "*" : to_string(dateRecord.year)) << endl;
+        cout << "Month: " << endl;
+        cout << "Day: " << endl;
+        for (int i = 0; i < numRow - 12; i++)
+            cout << endl;
+        cout << "[x] Cancel" << endl;
+        printBottomRow(numCol);
+        cin >> input;
+        if (input == "x")
+            break;
+        if (!isInteger(input) && input != "*")
+            error = true;
+        else {
+            if (input == "*")
+                input = "-1";
+            dateRecord.month = stoi(input);
+            filterByDate2(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray, dateRecord);
+            break;
         }
-    }*/
-    cout << "filter by date not completed" << endl;
+    }
 }
 
-void filteredRecords(int numRow, int numCol, record *records, int &sizeArray, int page, int usedLines, string &sortParameter, bool &ascend, record *&fRecords, int fsizeArray, string query);
+bool checkDateMatch (record record1, record record2) {
+    if (record1.day != -1 && record1.day != record2.day)
+        return false;
+    if (record1.month != -1 && record1.month != record2.month)
+        return false;
+    if (record1.year != -1 && record1.year != record2.year)
+        return false;
+    return true;
+}
+
+void filterByDate2(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray, record &dateRecord) {
+    string input;
+    bool error = false;
+    while (true) {
+        printTopRow(numCol);
+        cout << "Filter Records" << endl;
+        if (error)
+            cout << "Error! Please enter a valid input. ";
+        cout << "Please enter the day (type * to skip)" << endl;
+        cout << endl;
+        cout << "Category: Date" << endl << endl;
+        cout << "Year: " << (dateRecord.year == -1 ? "*" : to_string(dateRecord.year)) << endl;
+        cout << "Month: " << (dateRecord.month == -1 ? "*" : to_string(dateRecord.month)) << endl;
+        cout << "Day: " << endl;
+        for (int i = 0; i < numRow - 12; i++)
+            cout << endl;
+        cout << "[x] Cancel" << endl;
+        printBottomRow(numCol);
+        cin >> input;
+        if (input == "x")
+            break;
+        if (!isInteger(input) && input != "*")
+            error = true;
+        else {
+            if (input == "*")
+                input = "-1";
+            dateRecord.day = stoi(input);
+            for (int i = 0; i < sizeArray; i++) {
+                if (checkDateMatch(dateRecord, records[i])) {
+                    updateRecordsSize(fRecords, fsizeArray, 1);
+                    fRecords[fsizeArray-1] = records[i];
+                    fRecords[fsizeArray-1].originalIndex = i;
+                }
+            }
+            
+            string search = (dateRecord.day == -1 ? "*" : to_string(dateRecord.day)) + "/" + (dateRecord.month == -1 ? "*" : to_string(dateRecord.month)) + "/" + (dateRecord.year == -1 ? "*" : to_string(dateRecord.year));
+            filteredRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray, search);
+            break;
+        }
+    }
+}
 
 void filterRecords(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string &sortParameter, bool ascend, char category) {
     int fsizeArray = 0;
     record * fRecords = new record[fsizeArray];
     // filter by type
-    if (category == '1') {
-        string query = filterByType(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray);
-        filteredRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray, query);
-    }
+    if (category == '1')
+        filterByType(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray);
     // filter by account
-    if (category == '2') {
-        string query = filterByAccount(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray);
-        filteredRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray, query);
-    }
+    if (category == '2')
+        filterByAccount(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray);
     // filter by date
     if (category == '3') {
-        filterByDate(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray);
-        //filteredRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray, query);
+        filterByDate0(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, fRecords, fsizeArray);
     }
+    delete[] fRecords;
 }
 
-void filteredRecords(int numRow, int numCol, record *records, int &sizeArray, int page, int usedLines, string &sortParameter, bool &ascend, record *&fRecords, int fsizeArray, string query) {
+void filteredRecords(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool &ascend, record *&fRecords, int fsizeArray, string query) {
+    page = 0;
     while (true) {
         printTopRow(numCol);
-        cout << "Filter Records (Page " << page + 1 << " of " << ceilDivision(fsizeArray,numRow - usedLines) << ")";
-        cout << " (Query: " << query << ")" << endl;
+        cout << "Filter Records (Page " << page + 1 << " of " << ceilDivision(fsizeArray,numRow - usedLines) << ") ";
         printSortingBy(sortParameter, ascend);
-        cout << endl;
+        cout << " (Keyword: " << query << ")" << endl;
         cout << "Please enter [s] to sort or [e] to edit" << endl;
         cout << endl;
         listRecords(numRow, numCol, fRecords, fsizeArray, page, usedLines);
+        cout << endl;
         cout << "[p] Previous [n] Next [s] Sort [e] Edit [x] Exit" << endl;
         printBottomRow(numCol);
         string input;
@@ -115,10 +229,10 @@ void filteredRecords(int numRow, int numCol, record *records, int &sizeArray, in
                 page = ceilDivision(fsizeArray,numRow - usedLines) - 1;
         }
         if (input == "s") {
-            cout << "sort not yet implmented" << endl;
+            sortRecordPage(numRow, numCol, fRecords, fsizeArray, page, usedLines, sortParameter, ascend);
         }
         if (input == "e") {
-            cout << "edit not yet implmented" << endl;
+            editFilteredRecordPage(numRow, numCol, fRecords, fsizeArray, page, usedLines, sortParameter, ascend, records, sizeArray);
         }
     }
 }
