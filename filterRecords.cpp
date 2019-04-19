@@ -73,7 +73,7 @@ void filterByDate0(int numRow, int numCol, record *&records, int &sizeArray, int
         cout << "Filter Records" << endl;
         if (error)
             cout << "Error! Please enter a valid input. ";
-        cout << "Please enter the year (type * to skip)" << endl;
+        cout << "Please enter the year (enter * to skip)" << endl;
         cout << endl;
         cout << "Category: Date" << endl << endl;
         cout << "Year: " << endl;
@@ -108,7 +108,7 @@ void filterByDate1(int numRow, int numCol, record *&records, int &sizeArray, int
         cout << "Filter Records" << endl;
         if (error)
             cout << "Error! Please enter a valid input. ";
-        cout << "Please enter the month (type * to skip)" << endl;
+        cout << "Please enter the month (enter * to skip)" << endl;
         cout << endl;
         cout << "Category: Date" << endl << endl;
         cout << "Year: " << (dateRecord.year == -1 ? "*" : to_string(dateRecord.year)) << endl;
@@ -151,7 +151,7 @@ void filterByDate2(int numRow, int numCol, record *&records, int &sizeArray, int
         cout << "Filter Records" << endl;
         if (error)
             cout << "Error! Please enter a valid input. ";
-        cout << "Please enter the day (type * to skip)" << endl;
+        cout << "Please enter the day (enter * to skip)" << endl;
         cout << endl;
         cout << "Category: Date" << endl << endl;
         cout << "Year: " << (dateRecord.year == -1 ? "*" : to_string(dateRecord.year)) << endl;

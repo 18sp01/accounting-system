@@ -95,7 +95,7 @@ void viewRecordPage (int numRow, int numCol, record *records, int &sizeArray, in
     cout << endl;
     listRecords(numRow, numCol, records, sizeArray, page, usedLines);
     cout << endl;
-    cout << "[p] Previous  [n] Next  [s] Sort  [e] Edit  [f] Filter [x] Exit" << endl;
+    cout << "[p] Previous  [n] Next  [s] Sort  [e] Edit  [f] Filter  [x] Exit" << endl;
     printBottomRow(numCol);
 }
 
@@ -237,7 +237,7 @@ void filterRecordsPage(int numRow, int numCol, record *&records, int &sizeArray,
         cout << "Category: ";
         for (int i = 0; i < numRow - 7; i++)
             cout << endl;
-        cout << "[1] Type [2] Account [3] Date [x] Exit" << endl;
+        cout << "[1] Type  [2] Account  [3] Date  [x] Exit" << endl;
         printBottomRow(numCol);
         cin >> input;
         if (input == 'x')
