@@ -228,29 +228,18 @@ void filterRecordsPage(int numRow, int numCol, record *&records, int &sizeArray,
     char input = '0';
     while (true) {
         printTopRow(numCol);
-        cout << "Filter Records (Page "<< page + 1 << " of " << ceilDivision(sizeArray,numRow - usedLines) << ") ";
-        printSortingBy(sortParameter, ascend);
+        cout << "Filter Records";
         cout << endl;
         cout << "Please enter [1], [2], or [3] to filter by the corresponding category" << endl;
         cout << "" << endl;
-        listRecords(numRow, numCol, records, sizeArray, page, usedLines);
-        cout << endl;
-        cout << "[p] Previous [n] Next [1] Type [2] Account [3] Date [x] Exit" << endl;
+        cout << "Category: ";
+        for (int i = 0; i < numRow - 7; i++)
+            cout << endl;
+        cout << "[1] Type [2] Account [3] Date [x] Exit" << endl;
         printBottomRow(numCol);
         cin >> input;
         if (input == 'x')
             break;
-        if (input == 'p') {
-            page--;
-            if (page < 0)
-                page = 0;
-        }
-        if (input == 'n') {
-            page++;
-            if (page > ceilDivision(sizeArray,numRow - usedLines) - 1)
-                page = ceilDivision(sizeArray,numRow - usedLines) - 1;
-        }
-        // filter by type
         if (input == '1') {
             filterRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, input);
             page = 0;
