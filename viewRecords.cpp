@@ -8,6 +8,7 @@
 #include "viewRecords.h"
 #include "editRecords.h"
 #include "sortRecords.h"
+#include "filterRecords.h"
 using namespace std;
 
 // Function: int printVector: prints data inside records
@@ -90,10 +91,11 @@ void viewRecordPage (int numRow, int numCol, record *records, int &sizeArray, in
     cout << "View Records (Page "<< page + 1 << " of " << ceilDivision(sizeArray,numRow - usedLines) << ") ";
     printSortingBy(sortParameter, ascend);
     cout << endl;
-    cout << "Please enter [s] to sort records, or [e] to edit records" << endl;
+    cout << "Please enter [s] to sort records, [e] to edit records, [f] to filter/search records" << endl;
     cout << endl;
     listRecords(numRow, numCol, records, sizeArray, page, usedLines);
-    cout << "[p] Previous  [n] Next  [s] Sort  [e] Edit  [x] Exit" << endl;
+    cout << endl;
+    cout << "[p] Previous  [n] Next  [s] Sort  [e] Edit  [f] Filter [x] Exit" << endl;
     printBottomRow(numCol);
 }
 
@@ -107,6 +109,7 @@ void sortRecordPage(int numRow, int numCol, record *records, int &sizeArray, int
         cout << "Please enter [1], [2], [3], or [4] to sort by the corresponding category" << endl;
         cout << "" << endl;
         listRecords(numRow, numCol, records, sizeArray, page, usedLines);
+        cout << endl;
         cout << "[p] Previous [n] Next [t] Toggle Ascend/Descend [1] Amount [2] Type [3] Account [4] Date [x] Exit" << endl;
         printBottomRow(numCol);
         cin >> input;
@@ -159,6 +162,7 @@ void editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, in
         cout << "Please enter the number corresponding to the record you want to edit" << endl;
         cout << endl;
         listRecords(numRow, numCol, records, sizeArray, page, usedLines);
+        cout << endl;
         cout << "[p] Previous  [n] Next  [x] Cancel" << endl;
         printBottomRow(numCol);
         cin >> input;
@@ -183,10 +187,67 @@ void editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, in
         }
     }
 }
+/*
+void listFilteredRecords(int numRow, int numCol, record *records, int sizeArray, int *filteredIndices, int filteredSizeArray, int page, int usedLines) {
+    int maxI;
+    if (filteredSizeArray - page*(numRow - usedLines) < numRow - usedLines)
+        maxI = filteredSizeArray - page*(numRow - usedLines);
+    else
+        maxI = numRow - usedLines;
+    printCategories();
+    cout << endl;
+    for (int i = 0; i < maxI; i++)
+        printRecord(records, filteredIndices[i]+(page*(numRow - usedLines)));
+    if (filteredSizeArray - page*(numRow - usedLines) < numRow - usedLines) {
+        for (int i = 0; i < numRow - (sizeArray - page*(numRow - usedLines)) - usedLines; i++)
+            cout << string(numCol,' ') <<endl;
+    }
+}
+*/
+void filterRecordsPage(int numRow, int numCol, record *records, int &sizeArray, int page, int usedLines, string &sortParameter, bool &ascend) {
+    char input = '0';
+    while (true) {
+        printTopRow(numCol);
+        cout << "Filter Records (Page "<< page + 1 << " of " << ceilDivision(sizeArray,numRow - usedLines) << ") ";
+        printSortingBy(sortParameter, ascend);
+        cout << endl;
+        cout << "Please enter [1], [2], or [3] to filter by the corresponding category" << endl;
+        cout << "" << endl;
+        listRecords(numRow, numCol, records, sizeArray, page, usedLines);
+        cout << endl;
+        cout << "[p] Previous [n] Next [1] Type [2] Account [3] Date [x] Exit" << endl;
+        printBottomRow(numCol);
+        cin >> input;
+        if (input == 'x')
+            break;
+        if (input == 'p') {
+            page--;
+            if (page < 0)
+                page = 0;
+        }
+        if (input == 'n') {
+            page++;
+            if (page > ceilDivision(sizeArray,numRow - usedLines) - 1)
+                page = ceilDivision(sizeArray,numRow - usedLines) - 1;
+        }
+        // filter by type
+        if (input == '1') {
+            filterRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, input);
+        }
+        // filter by account
+        if (input == '2') {
+            filterRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, input);
+        }
+        // filter by date
+        if (input == '3') {
+            filterRecords(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend, input);
+        }
+    }
+}
 
 int viewRecordPages(int numRow, int numCol, int &sizeArray, record *&records) {
     int page = 0;
-    int usedLines = 8;
+    int usedLines = 9;
     string sortParameter = "Date";
     bool ascend = false;
     sortByDate (records, sizeArray, ascend);
@@ -206,6 +267,8 @@ int viewRecordPages(int numRow, int numCol, int &sizeArray, record *&records) {
             if (page > ceilDivision(sizeArray,numRow - usedLines) - 1)
                 page = ceilDivision(sizeArray,numRow - usedLines) - 1;
         }
+        if (input == "f")
+            filterRecordsPage(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend);
         if (input == "e")
             editRecordPage(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend);
         if (input == "s")

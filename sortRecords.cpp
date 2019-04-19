@@ -78,15 +78,3 @@ void sortByDate (record *records, int sizeArray, bool ascend) {
         reverseVector(records, sizeArray);
     }
 }
-/*
-void sortVector (vector<record> &records, string sortParameter, bool &ascend) {
-    if (sortParameter == "Amount")
-        sortByAmount(records,ascend);
-    if (sortParameter == "Type")
-        sortByType(records,ascend);
-    if (sortParameter == "Account")
-        sortByAccount(records,ascend);
-    if (sortParameter == "Date")
-        sortByDate(records,ascend);
-}
-*/
