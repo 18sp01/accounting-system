@@ -65,7 +65,7 @@ void filterByType(int numRow, int numCol, record *&records, int &sizeArray, int 
     getline(cin, search);
     if (search != "x") {
         for (int i = 0; i < sizeArray; i++) {
-            if (records[i].type == search) {
+            if (stringCompare(records[i].type, search)) {
                 updateRecordsSize(fRecords, fsizeArray, 1);
                 fRecords[fsizeArray-1] = records[i];
                 fRecords[fsizeArray-1].originalIndex = i;
