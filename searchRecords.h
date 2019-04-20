@@ -1,1 +1,0 @@
-void searchRecords(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, std::string &sortParameter, bool ascend, char category);
