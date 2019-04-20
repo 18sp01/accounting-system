@@ -8,6 +8,19 @@ using namespace std;
 
 void filteredRecords(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool &ascend, record *&fRecords, int fsizeArray, string query);
 
+bool stringCompare0(char a, char b) {
+    return std::tolower(a) == std::tolower(b);
+}
+
+bool stringCompare(string a, string b) {
+    if (a.length() == b.length()) {
+        return equal(b.begin(), b.end(), a.begin(), stringCompare0);
+    }
+    else {
+        return false;
+    }
+}
+
 void filterByAccount(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray) {
     printTopRow(numCol);
     cout << "Filter Records";
@@ -25,7 +38,7 @@ void filterByAccount(int numRow, int numCol, record *&records, int &sizeArray, i
     getline(cin, search);
     if (search != "x") {
         for (int i = 0; i < sizeArray; i++) {
-            if (records[i].account == search) {
+            if (stringCompare(records[i].account, search)) {
                 updateRecordsSize(fRecords, fsizeArray, 1);
                 fRecords[fsizeArray-1] = records[i];
                 fRecords[fsizeArray-1].originalIndex = i;
