@@ -8,7 +8,7 @@
 #include "addRecord.h"
 using namespace std;
 
-// timeRecord: records the current time the data was inputed
+// Function: records the current time the data was inputed
 // Inputs: record newRecord: the data the time needs to be recorded on
 //         local time
 // Outputs: data becomes recorded with current time
@@ -25,7 +25,7 @@ void timeRecord(record &newRecord) {
 
 int printAddRecord1(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord);
 
-// Function: int printAddRecord: Lets user input record.type
+// Function: Lets user input record.type
 // Inputs: number of rows for the interface, number of columns for the interface, cin input of record.type
 // Outputs: changes record.type
 int printAddRecord(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord) {
@@ -55,6 +55,9 @@ int printAddRecord(int numRow, int numCol, int &sizeArray, record *&records, rec
     }
 }
 
+// Function: 
+// Inputs: 
+// Outputs: 
 bool isNumber(string s) {
     string temp = s;
     bool decimal = true;
@@ -77,7 +80,7 @@ bool isNumber(string s) {
 
 int printAddRecord2(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord);
 
-// Function: int printAddRecord1: Lets user input record.amount
+// Function: Lets user input record.amount
 // Inputs: number of rows for the interface, number of columns for the interface, cin input of record.amount
 // Outputs: changes record.amount
 int printAddRecord1(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord) {
@@ -113,7 +116,7 @@ int printAddRecord1(int numRow, int numCol, int &sizeArray, record *&records, re
 
 int printAddRecord3(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord);
 
-// Function: int printAddRecord2: Lets user input record.account
+// Function: Lets user input record.account
 // Inputs: number of rows for the interface, number of columns for the interface, cin input of record.account
 // Outputs: changes record.account
 int printAddRecord2(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord) {
@@ -143,7 +146,7 @@ int printAddRecord2(int numRow, int numCol, int &sizeArray, record *&records, re
     }
 }
 
-// Function: int printAddRecord3: end stage, press x to quit
+// Function: end stage, press x to quit
 // Inputs: number of rows for the interface, number of columns for the interface, cin input of x to quit
 // Outputs: exits input of data
 int printAddRecord3(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord) { 

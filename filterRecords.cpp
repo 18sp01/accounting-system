@@ -8,10 +8,17 @@ using namespace std;
 
 void filteredRecords(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool &ascend, record *&fRecords, int fsizeArray, string query);
 
+
+// Function: 
+// Inputs: 
+// Outputs: 
 bool stringCompare0(char a, char b) {
     return std::tolower(a) == std::tolower(b);
 }
 
+// Function: 
+// Inputs: 
+// Outputs: 
 bool stringCompare(string a, string b) {
     if (a.length() == b.length()) {
         return equal(b.begin(), b.end(), a.begin(), stringCompare0);
@@ -21,6 +28,9 @@ bool stringCompare(string a, string b) {
     }
 }
 
+// Function: 
+// Inputs: 
+// Outputs: 
 void filterByAccount(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray) {
     printTopRow(numCol);
     cout << "Filter Records";

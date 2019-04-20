@@ -6,6 +6,7 @@
 #include "viewRecords.h"
 #include "fromtoFile.h"
 #include "sortRecords.h"
+#include "statReport.h"
 using namespace std;
 
 
@@ -77,6 +78,7 @@ int main(int argc, char ** argv) {
                 break;
             }
             case 's': {
+                statReports(numRow, numCol, records, sizeArray);
                 break;
             }
         }
