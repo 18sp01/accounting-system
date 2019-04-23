@@ -9,16 +9,16 @@ using namespace std;
 void filteredRecords(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool &ascend, record *&fRecords, int fsizeArray, string query);
 
 
-// Function: 
-// Inputs: 
-// Outputs: 
+// Function: takes in two characters to compare whether they are same
+// Inputs: character a, character b
+// Outputs: true if same, false if not same
 bool stringCompare0(char a, char b) {
     return std::tolower(a) == std::tolower(b);
 }
 
-// Function: 
-// Inputs: 
-// Outputs: 
+// Function: takes in two strings to compare whether they are same
+// Inputs: string a, string b
+// Outputs: true if same, false if not same
 bool stringCompare(string a, string b) {
     if (a.length() == b.length()) {
         return equal(b.begin(), b.end(), a.begin(), stringCompare0);
@@ -28,9 +28,12 @@ bool stringCompare(string a, string b) {
     }
 }
 
-// Function: 
-// Inputs: 
-// Outputs: 
+// Function: filters the records data by account keyword
+// Inputs: number of rows for interface, number of columns for interface,
+//         array of records, size of array of records, page number,
+//         used lines in interface, ascending or descending,
+//         temperary array of records for filtered records, size of fRecords
+// Outputs: updates filtered records
 void filterByAccount(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray) {
     printTopRow(numCol);
     cout << "Filter Records";
@@ -58,6 +61,12 @@ void filterByAccount(int numRow, int numCol, record *&records, int &sizeArray, i
     }
 }
 
+// Function: filters the records data by type keyword
+// Inputs: number of rows for interface, number of columns for interface,
+//         array of records, size of array of records, page number,
+//         used lines in interface, ascending or descending,
+//         temperary array of records for filtered records, size of fRecords
+// Outputs: updates filtered records
 void filterByType(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray) {
     printTopRow(numCol);
     cout << "Filter Records ";
@@ -87,6 +96,12 @@ void filterByType(int numRow, int numCol, record *&records, int &sizeArray, int 
 
 void filterByDate1(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray, record &dateRecord);
 
+// Function: prints interface for filtering by date (year), gets input for the year variable
+// Inputs: number of rows for interface, number of columns for interface,
+//         array of records, size of array of records, page number,
+//         used lines in interface, ascending or descending,
+//         temperary array of records for filtered records, size of fRecords, record to store dates
+// Outputs: proceeds to month interface
 void filterByDate0(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray) {
     record dateRecord;
     string input;
@@ -123,6 +138,13 @@ void filterByDate0(int numRow, int numCol, record *&records, int &sizeArray, int
 
 void filterByDate2(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray, record &dateRecord);
 
+
+// Function: prints interface for filtering by date (month), gets input for the month variable
+// Inputs: number of rows for interface, number of columns for interface,
+//         array of records, size of array of records, page number,
+//         used lines in interface, ascending or descending,
+//         temperary array of records for filtered records, size of fRecords, record to store dates
+// Outputs: proceeds to day interface
 void filterByDate1(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray, record &dateRecord) {
     string input;
     bool error = false;
@@ -166,6 +188,13 @@ bool checkDateMatch (record record1, record record2) {
     return true;
 }
 
+
+// Function: prints interface for filtering by date (day), gets input for the year variable
+// Inputs: number of rows for interface, number of columns for interface,
+//         array of records, size of array of records, page number,
+//         used lines in interface, ascending or descending,
+//         temperary array of records for filtered records, size of fRecords, record to store dates
+// Outputs: updates filtered records
 void filterByDate2(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool ascend, record *&fRecords, int &fsizeArray, record &dateRecord) {
     string input;
     bool error = false;
@@ -208,6 +237,9 @@ void filterByDate2(int numRow, int numCol, record *&records, int &sizeArray, int
     }
 }
 
+// Function: 
+// Inputs: 
+// Outputs: 
 void filterRecords(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string &sortParameter, bool ascend, char category) {
     int fsizeArray = 0;
     record * fRecords = new record[fsizeArray];
@@ -224,6 +256,9 @@ void filterRecords(int numRow, int numCol, record *&records, int &sizeArray, int
     delete[] fRecords;
 }
 
+// Function: 
+// Inputs: 
+// Outputs:
 void filteredRecords(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool &ascend, record *&fRecords, int fsizeArray, string query) {
     page = 0;
     while (true) {
