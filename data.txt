@@ -4,7 +4,7 @@ Amount,Type,Account,Day,Month,Year,Hour,Minutes
 -124.5,Game,Credit Card,13,4,2019,23,49,
 30000,Salary,Bank,13,4,2019,22,12,
 20,Allowance,Cash,3,4,2019,7,11,
-200,Allowance,Cash,3,4,2019,7,11,
+1000,Allowance,Cash,3,4,2019,7,11,
 -39,Food,cash,19,2,2019,14,43,
 20000,Salary,Bank Card,1,1,2019,12,34,
 -2599,desktop,Bank Card,13,9,2018,23,12,

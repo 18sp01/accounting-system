@@ -27,14 +27,14 @@ void updateRecordsSize(record *&records, int &sizeArray, int sizeChange) {
 // Inputs: 
 // Outputs: 
 void printTopRow(int numCol) {
-    cout << string(numCol+2,'#') << endl;
+    cout << string(numCol,'#') << endl;
 }
 
 // Function: 
 // Inputs: 
 // Outputs: 
 void printBottomRow(int numCol) {
-    cout << string(numCol+2,'#') << endl;
+    cout << string(numCol,'#') << endl;
 }
 
 // Function: 

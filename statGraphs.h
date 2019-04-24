@@ -1,1 +1,1 @@
-void statGraph(int numRow, int numCol, record *&records, int &sizeArray);
+int statGraph(int numRow, int numCol, record *&records, int &sizeArray);

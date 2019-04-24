@@ -595,7 +595,7 @@ void statReports(int numRow, int numCol, record *&records, int &sizeArray) {
         }
         // graph
         if (input == '3') {
-            //statGraph(numRow, numCol, records, sizeArray);
+            statGraph(numRow, numCol, records, sizeArray);
         }
     }
 }
