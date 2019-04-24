@@ -57,7 +57,7 @@ void printMainMenu(int numRow, int numCol) {
 }
 
 int main(int argc, char ** argv) {
-    int numCol = 100;
+    int numCol = 99;
     int numRow = 14;
 
     int sizeArray = 0;

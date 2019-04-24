@@ -1,22 +1,14 @@
 #include <iostream>
-#include <ios>
 #include <string>
 #include <limits>
 #include <iomanip>
 #include "stdInterface.h"
 #include "viewRecords.h"
 #include "filterRecords.h"
+#include "statGraphs.h"
 using namespace std;
 
 void listReports(int numRow, int numCol, string *&reports, int sizeReports) {
-    /*cout << setw(5) << left << '#' << " | ";
-    cout << setw(15) << left << "Type";
-    cout << endl;
-    for (int i = 0; i < sizeReports; i++) {
-        cout << setw(5) << left << i+1 << " | ";
-        cout << setw(15) << reports[i];
-        cout << endl;
-    }*/
     for (int i = 0; i < sizeReports; i++) {
         cout << "[" << i+1 << "] ";
         cout << reports[i];
@@ -593,16 +585,17 @@ void statReports(int numRow, int numCol, record *&records, int &sizeArray) {
         cin >> input;
         if (input == 'x')
             break;
+        // income
         if (input == '1') {
             incomeReports(numRow, numCol, records, sizeArray);
         }
-        // filter by account
+        // expense
         if (input == '2') {
             expenseReports(numRow, numCol, records, sizeArray);
         }
-        // filter by date
+        // graph
         if (input == '3') {
-            //other;
+            //statGraph(numRow, numCol, records, sizeArray);
         }
     }
 }
