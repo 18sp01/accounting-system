@@ -106,7 +106,7 @@ int searchIncomeDetails(int numRow, int numCol, record *&records, int &sizeArray
             cout << endl << endl;
             double query_income = 0;
             for (int i = 0; i < sizeArray; i++) {
-                if (stringCompare(records[i].account, query) && records[i].amount > 0)
+                if (stringCompare(records[i].type, query) && records[i].amount > 0)
                     query_income += records[i].amount;
             }
             cout << "Your total " << query << " is " << query_income << endl;
