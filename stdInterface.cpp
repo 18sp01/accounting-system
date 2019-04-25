@@ -7,6 +7,7 @@
 #include "fromtoFile.h"
 #include "sortRecords.h"
 #include "statReport.h"
+#include "budgeting.h"
 using namespace std;
 
 
@@ -50,7 +51,8 @@ void printMainMenu(int numRow, int numCol) {
     cout << "[a] Add Record" << endl;
     cout << "[v] View Records" << endl;
     cout << "[s] Statistics" << endl;
-    for (int i = 0; i < numRow - 3 - linesOfText; i++)
+    cout << "[b] Budgeting" << endl;
+    for (int i = 0; i < numRow - 4 - linesOfText; i++)
         cout << string(numCol,' ') << endl;
     cout << "[x] Exit" << endl;
     printBottomRow(numCol);
@@ -79,6 +81,10 @@ int main(int argc, char ** argv) {
             }
             case 's': {
                 statReports(numRow, numCol, records, sizeArray);
+                break;
+            }
+            case 'b': {
+                budgetingMenu(numRow, numCol, records, sizeArray);
                 break;
             }
         }

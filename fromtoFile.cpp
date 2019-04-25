@@ -18,7 +18,7 @@ void readFromFile(int &sizeArray, record *&records) {
 
     bool first = true;
     string line;
-    string amount, type, account, day, month, year, hour, min;
+    string amount, type, account, day, month, year, hour, min, sec;
     while (getline(fin, line)) {
         getline(fin, amount, ',');
         getline(fin, type, ',');
@@ -28,6 +28,7 @@ void readFromFile(int &sizeArray, record *&records) {
         getline(fin, year, ',');
         getline(fin, hour, ',');
         getline(fin, min, ',');
+        getline(fin, sec, ',');
         
         record newRecord;
         double d = stod(amount);
@@ -39,6 +40,7 @@ void readFromFile(int &sizeArray, record *&records) {
         newRecord.year = stoi(year);
         newRecord.hour = stoi(hour);
         newRecord.min = stoi(min);
+        newRecord.sec = stoi(sec);
         updateRecordsSize(records, sizeArray, 1);
         records[sizeArray-1] = newRecord;
     }
@@ -54,11 +56,11 @@ void writeToFile(int sizeArray, record *records) {
         cout << "Error in opening file!" << endl;
         exit(1);
     }
-    fout << "Amount,Type,Account,Day,Month,Year,Hour,Minutes" << endl;
+    fout << "Amount,Type,Account,Day,Month,Year,Hour,Minutes,Seconds" << endl;
     for (int i = 0; i < sizeArray; i++) {
         if (i != 0)
             fout << endl;
-        fout << records[i].amount << ',' << records[i].type << ',' << records[i].account << ',' << records[i].day << ',' << records[i].month << ',' << records[i].year << ',' << records[i].hour << ',' << records[i].min << ',';
+        fout << records[i].amount << ',' << records[i].type << ',' << records[i].account << ',' << records[i].day << ',' << records[i].month << ',' << records[i].year << ',' << records[i].hour << ',' << records[i].min << ',' << records[i].sec << ',';
     }
     fout.close();
 }

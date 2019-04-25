@@ -1,0 +1,1 @@
+void budgetingMenu(int numRow, int numCol, record *&records, int &sizeArray);

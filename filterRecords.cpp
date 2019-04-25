@@ -178,6 +178,9 @@ void filterByDate1(int numRow, int numCol, record *&records, int &sizeArray, int
     }
 }
 
+// Function: checks if dates of the record match one another
+// Inputs: two records
+// Outputs: true if they the dates are same, false if they are different
 bool checkDateMatch (record record1, record record2) {
     if (record1.day != -1 && record1.day != record2.day)
         return false;
@@ -237,9 +240,12 @@ void filterByDate2(int numRow, int numCol, record *&records, int &sizeArray, int
     }
 }
 
-// Function: 
-// Inputs: 
-// Outputs: 
+// Function: creates a temperary record array to store the filtered records and calls functions based on category
+// Inputs: number of rows for interface, number of columns for interface,
+//         array of records, size of array of records, page number,
+//         used lines in interface, sorting parameter, ascending or descending,
+//         character of category
+// Outputs: filters by category
 void filterRecords(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string &sortParameter, bool ascend, char category) {
     int fsizeArray = 0;
     record * fRecords = new record[fsizeArray];
@@ -256,9 +262,12 @@ void filterRecords(int numRow, int numCol, record *&records, int &sizeArray, int
     delete[] fRecords;
 }
 
-// Function: 
-// Inputs: 
-// Outputs:
+// Function: prints out the filter records interface and shows sort and edit fuctions
+// Inputs: number of rows for interface, number of columns for interface,
+//         array of records, size of array of records, page number,
+//         used lines in interface, sorting parameter, ascending or descending,
+//         temperary filtered record array, size of filtered array, string of filtered category
+// Outputs: interface of filtered data
 void filteredRecords(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string &sortParameter, bool &ascend, record *&fRecords, int fsizeArray, string query) {
     page = 0;
     while (true) {
