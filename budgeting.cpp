@@ -82,6 +82,9 @@ int getSetBudgetTime(struct tm &setBudgetTime, int &periodSeconds, double &budge
     return 0;
 }
 
+// Function: setBudget: Gets user's budgeting information from interface
+// Inputs: reference to struct tm object setBudgetTime (time object which hold when user set the budget), reference to the integer in seconds of the duration of their budgeting period, and reference to the double budgetAmount
+// Outputs: If the user finishes editing the information, returns 1, else returns 0
 int setBudget(int numRow, int numCol, struct tm &setBudgetTime, int &periodSeconds, double &budgetAmount) {
     string input;
     int pSeconds;
@@ -101,7 +104,7 @@ int setBudget(int numRow, int numCol, struct tm &setBudgetTime, int &periodSecon
         if (input == "x")
             return 0;
         if (isInteger(input)) {
-            pSeconds = stoi(input) * 86400;
+            pSeconds = stoi(input) * 86400; // saves the informtion in a temporary variable
             break;
         }
     }
@@ -137,7 +140,7 @@ void writeBudgetToFile(struct tm setBudgetTime, int periodSeconds, double budget
     fout.open("budgeting.txt", ofstream::trunc);
 
     if(fout.fail()) {
-        cout << "budgeting.txt not found!" << endl;
+        cout << "budgeting.txt not found! Please create a new empty budgeting.txt if this message appears." << endl;
         exit(1);
     }
     if (remove == false) {

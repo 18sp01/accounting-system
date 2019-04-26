@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "stdInterface.h"
 #include "editRecords.h"
 #include "addRecord.h"
@@ -38,6 +39,109 @@ void printBottomRow(int numCol) {
     cout << string(numCol,'#') << endl;
 }
 
+void writeConfigToFile(int numRow, int numCol) {
+    ofstream fout;
+    fout.open("configurations.txt", ofstream::trunc);
+    if(fout.fail()) {
+        cout << "configurations.txt not found! Please create a new empty configurations.txt if this message appears." << endl;
+        exit(1);
+    }
+    fout << "numRow,numCol" << endl;
+    fout << numRow << ',' << numCol;
+    fout.close();
+}
+
+void configurationsMenu(int &numRow, int &numCol) {
+    while (true) {
+        printTopRow(numCol);
+        cout << "Configurations" << endl;
+        cout << " Please enter the number of corresponding to the item you want to change, or enter r to reset" << endl;
+        cout << endl;
+        cout << "1. Number of rows to display (>= 14): " << numRow << endl;
+        cout << "2. Number of columns to display (>= 99):  " << numCol << endl;
+        for (int i = 0; i < numRow - 9; i++)
+            cout << endl;
+        cout << "[1/2] Edit item  [r] Reset  [x] Exit" << endl;
+        printBottomRow(numCol);
+        char input;
+        cin >> input;
+        if (input == 'x')
+            break;
+        if (input == '1') {
+            while (true) {
+                string rows;
+                printTopRow(numCol);
+                cout << "Configurations" << endl;
+                cout << " Please enter the number of rows you want to display (integer larger or equal to 14)." << endl;
+                cout << endl;
+                cout << "1. Number of rows to display (>= 14): " << numRow << endl;
+                cout << "2. Number of columns to display (>= 99):  " << numCol << endl;
+                for (int i = 0; i < numRow - 9; i++)
+                    cout << endl;
+                cout << "[x] Cancel" << endl;
+                printBottomRow(numCol);
+                cin >> rows;
+                if (rows == "x")
+                    break;
+                if (isInteger(rows) && stoi(rows) >= 14) {
+                    numRow = stoi(rows);
+                    writeConfigToFile(numRow, numCol);
+                    break;
+                }
+            }
+        }
+        if (input == '2') {
+            while (true) {
+                string columns;
+                printTopRow(numCol);
+                cout << "Configurations" << endl;
+                cout << " Please enter the number of columns you want to display (integer larger or equal to 14)." << endl;
+                cout << endl;
+                cout << "1. Number of rows to display (>= 14): " << numRow << endl;
+                cout << "2. Number of columns to display (>= 99):  " << numCol << endl;
+                for (int i = 0; i < numRow - 9; i++)
+                    cout << endl;
+                cout << "[x] Cancel" << endl;
+                printBottomRow(numCol);
+                cin >> columns;
+                if (columns == "x")
+                    break;
+                if (isInteger(columns) && stoi(columns) >= 99) {
+                    numCol = stoi(columns);
+                    writeConfigToFile(numRow, numCol);
+                    break;
+                }
+            }
+        }
+        if (input == 'r') {
+            numCol = 99;
+            numRow = 14;
+            writeConfigToFile(numRow, numCol);
+        }
+    }
+}
+
+int getConfigFromFile(int &numRow, int &numCol) {
+    ifstream fin;
+    fin.open("configurations.txt");
+    if(fin.fail()) {
+        cout << "configurations.txt not found! Please create a new empty configurations.txt if this message appears." << endl;
+        exit(1);
+    }
+    string line;
+    string nRow, nCol;
+    while (getline(fin, line)) {
+        getline(fin, nRow, ',');
+        getline(fin, nCol, ',');
+        numRow = stoi(nRow);
+        numCol = stod(nCol);
+        fin.close();
+        return 1;
+    }
+    fin.close();
+    return 0;
+}
+
 // Function: 
 // Inputs: 
 // Outputs: 
@@ -52,16 +156,19 @@ void printMainMenu(int numRow, int numCol) {
     cout << "[v] View Records" << endl;
     cout << "[s] Statistics" << endl;
     cout << "[b] Budgeting" << endl;
-    for (int i = 0; i < numRow - 4 - linesOfText; i++)
+    cout << "[c] Configurations" << endl;
+    for (int i = 0; i < numRow - 5 - linesOfText; i++)
         cout << string(numCol,' ') << endl;
     cout << "[x] Exit" << endl;
     printBottomRow(numCol);
 }
 
 int main(int argc, char ** argv) {
-    int numCol = 99;
-    int numRow = 14;
-
+    int numCol, numRow;
+    if (getConfigFromFile(numRow,numCol) == 0) {
+        numCol = 99;
+        numRow = 14;
+    }
     int sizeArray = 0;
     record *records = new record[sizeArray];
     readFromFile(sizeArray, records);
@@ -85,6 +192,10 @@ int main(int argc, char ** argv) {
             }
             case 'b': {
                 budgetingMenu(numRow, numCol, records, sizeArray);
+                break;
+            }
+            case 'c': {
+                configurationsMenu(numRow, numCol);
                 break;
             }
         }
