@@ -30,20 +30,25 @@ Since it could be difficult for users to build a habit to track their spending, 
 Expanding on a simple budget setting function, we created a planner where the user can choose how long they want to budget (e.g. 1 day for daily, 7 days for weekly, etc.). The accouting system tracks in real time how much money the user can spend until the budget time is over.
 
 ## Getting started
-In the terminal of your linux server, please clone the repository using
+In the terminal of your linux server, please clone the repository using:
 ```
 git clone https://github.com/18sp01/accounting-system.git
 ```
-After it is finished cloning, move into the master folder by entering
+After it is finished cloning, move into the master folder by entering:
 ```
 cd accounting-system
 ```
-To compile the program, type
+To compile the program, type:
 ```
 make
 ```
-and then type
+**_Note:_ Before executing the accounting system, please drag your terminal window and set it to 99 (width) by 14 (height) for the best experience.**
+
+When ready, to start the accounting system, type:
 ```
 ./eas
 ```
-to start the accounting system.
+
+## Guide to the Easy Accounting System
+
+![Main Menu](https://imgur.com/XfrjHnX)
