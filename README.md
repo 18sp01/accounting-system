@@ -22,14 +22,19 @@ Users have access to a wide range of statistical reports (e.g. monthly income an
 The system also allows users to set a budget. And when expenses reach the budget, there is an alarm system in place to remind the user.
 
 ## Additional Features
-### 1. Finacial Status and Budgeting Visuslizer
-One of the additional features is a new function which helps users visualize their spendings and savings. Through the use of graphs, we remind users of their progress towards their financial goals.
-### 2. Simple Interface and User Flow
+### 1. Statistical graphs
+One of the additional features is a new function which helps users visualize their spendings and savings. Through the use of graphs, we remind users of their progress towards their financial goals. Common statistics such as total income, total expenses, and total income + expenses are available and users can enter what type and what account to compare theses statistics to.
+### 2. Simple user interface
 Since it could be difficult for users to build a habit to track their spending, we hope to make doing so as easy as possible. We have created a simple user interface where users can give commands by entering a single letter. 
-### 3. As a result, another one of our features is 'keywords'. The user can set keywords for some of their usual spendings, therefore instead of typing the whole name of the item, just typing the keyword would do. The user could also attach expenses to usual spendings, which means they would not have to type in the expense everytime.
-
-for how ever long they choose (e.g. 1 day for daily, 7 days for weekly, etc.)
+### 3. Budget planner
+Expanding on a simple budget setting function, we created a planner where the user can choose how long they want to budget (e.g. 1 day for daily, 7 days for weekly, etc.). The accouting system tracks in real time how much money the user can spend until the budget time is over.
 
 ## Getting started
-
+In the terminal of your linux server, please clone the repository using
+```
+git clone https://github.com/18sp01/accounting-system.git
+```
+After it is finished cloning, move into the master folder by entering
+```
+cd accounting-system
 ```
