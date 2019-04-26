@@ -51,4 +51,6 @@ When ready, to start the accounting system, type:
 
 ## Guide to the Easy Accounting System
 
-![Main Menu](https://imgur.com/XfrjHnX)
+Once you start, the main menu will look like this:
+![Main Menu](https://i.imgur.com/XfrjHnX.png)
+From here, you have 
