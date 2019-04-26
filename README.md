@@ -1,4 +1,4 @@
-# accounting-system (Project 4)
+# accounting-system (Idea 4)
 ENGG1340 Group 3 (Tam Fong Ching Herbert 3035554828, Park Sangwon 3035556060)
 
 ## Problem Statement
@@ -38,3 +38,12 @@ After it is finished cloning, move into the master folder by entering
 ```
 cd accounting-system
 ```
+To compile the program, type
+```
+make
+```
+and then type
+```
+./eas
+```
+to start the accounting system.
