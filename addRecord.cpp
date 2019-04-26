@@ -127,7 +127,7 @@ int printAddRecord2(int numRow, int numCol, int &sizeArray, record *&records, re
         int linesOfText = 7;
         cout << "Add Record" << endl;
         cout << "Please enter the account used (e.g. cash, bank card, credit card, etc.)" << endl;
-        cout << "" << endl;
+        cout << endl;
         cout << "Type of income/expense: " + newRecord.type << endl;
         cout << "Amount: " + to_string(newRecord.amount) << endl;
         cout << "Account: " << endl;
@@ -162,7 +162,7 @@ int printAddRecord3(int numRow, int numCol, int &sizeArray, record *&records, re
         cout << "Amount: " + to_string(newRecord.amount) << endl;
         cout << "Account: " + newRecord.account << endl;
         for (int i = 0; i < numRow - 3 - linesOfText; i++)
-            cout << " " << string(numCol,' ') << " " << endl;
+            cout << endl;
         cout << "[x] Exit" << endl;
         printBottomRow(numCol);
         timeRecord(newRecord);
