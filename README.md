@@ -24,10 +24,12 @@ The system also allows users to set a budget. And when expenses reach the budget
 ## Additional Features
 ### 1. Statistical graphs
 One of the additional features is a new function which helps users visualize their spendings and savings. Through the use of graphs, we remind users of their progress towards their financial goals. Common statistics such as total income, total expenses, and total income + expenses are available and users can enter what type and what account to compare theses statistics to.
-### 2. Simple user interface
-Since it could be difficult for users to build a habit to track their spending, we hope to make doing so as easy as possible. We have created a simple user interface where users can give commands by entering a single letter. 
-### 3. Budget planner
+### 2. Budget planner
 Expanding on a simple budget setting function, we created a planner where the user can choose how long they want to budget (e.g. 1 day for daily, 7 days for weekly, etc.). The accouting system tracks in real time how much money the user can spend until the budget time is over.
+### 3. Simple user interface
+Since it could be difficult for users to build a habit to track their spending, we hope to make doing so as easy as possible. We have created a simple user interface where users can give commands by entering a single letter. 
+### 4. Interface configuration
+Users can adjust the interface dimensions to view more records and have a wider and longer view.
 
 ## Getting started
 In the terminal of your linux server, please clone the repository using:
@@ -42,7 +44,7 @@ To compile the program, type:
 ```
 make
 ```
-**_Note:_ Before executing the accounting system, please drag your terminal window and set it to 99 (width) by 14 (height) for the best experience.**
+**_Note:_ Before executing the accounting system, please make sure your terminal window is greater than 99 in width and 14 in height for the best experience.**
 
 When ready, to start the accounting system, type:
 ```
@@ -52,5 +54,16 @@ When ready, to start the accounting system, type:
 ## Guide to the Easy Accounting System
 
 Once you start, the main menu will look like this:
-![Main Menu](https://i.imgur.com/XfrjHnX.png)
-From here, you have 
+
+![Main Menu](https://i.imgur.com/R0a3IRT.png)
+
+From here, you have 5 options to choose from: \[a\] to add record, \[v\] to view record, \[s\] to view user statistics, \[b\] to view the user's budget plan, and \[c\] to configure the accounting system interface.
+
+### Add Record
+
+Once you type "a" to add record, you will see a menu that looks like this:
+
+![AddRecord_Menu](https://i.imgur.com/UKjOOkv.png)
+
+Now, you can type, in order, the type of income/expense (food, game, etc.), the amount (negative for expenses), and type of account (cash, credit card, etc.).
+
