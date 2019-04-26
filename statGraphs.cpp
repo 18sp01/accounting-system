@@ -189,7 +189,7 @@ int statGraph(int numRow, int numCol, record *&records, int &sizeArray) {
         cout << "5. " << graphName[4] << endl;
         for (int i = 0; i < numRow - 13; i++)
             cout << endl;
-        cout << "[1/2/3/4/5] Add  [s] Show  [x] Exit" << endl;
+        cout << "[1/2/3/4/5] Add/Remove graph [s] Show graphs [x] Exit" << endl;
         printBottomRow(numCol);
         char input;
         cin >> input;

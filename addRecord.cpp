@@ -78,6 +78,7 @@ bool isNumber(string s) {
     return true;
 }
 
+// initialize header to allow use for printAddRecord1
 int printAddRecord2(int numRow, int numCol, int &sizeArray, record *&records, record &newRecord);
 
 // Function: Lets user input record.amount

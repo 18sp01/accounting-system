@@ -12,7 +12,7 @@ void readFromFile(int &sizeArray, record *&records) {
     fin.open("data.txt");
 
     if(fin.fail()) {
-        cout << "Error in opening file!" << endl;
+        cout << "budgeting.txt not found! Please create a new empty data.txt if this message appears." << endl;
         exit(1);
     }
 
@@ -53,7 +53,7 @@ void writeToFile(int sizeArray, record *records) {
     fout.open("data.txt", ofstream::trunc);
 
     if(fout.fail()) {
-        cout << "Error in opening file!" << endl;
+        cout << "data.txt not found! Please create a new empty data.txt if this message appears." << endl;
         exit(1);
     }
     fout << "Amount,Type,Account,Day,Month,Year,Hour,Minutes,Seconds" << endl;
