@@ -39,7 +39,7 @@ int printAddRecord(int numRow, int numCol, int &sizeArray, record *&records, rec
         cout << "Amount: " << endl;
         cout << "Account: " << endl;
         for (int i = 0; i < numRow - 3 - linesOfText; i++)
-            cout << " " << string(numCol,' ') << " " << endl;
+            cout <<  endl;
         cout << "[x] Cancel" << endl;
         printBottomRow(numCol);
         cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
@@ -99,7 +99,7 @@ int printAddRecord1(int numRow, int numCol, int &sizeArray, record *&records, re
         cout << "Amount: " << endl;
         cout << "Account: " << endl;
         for (int i = 0; i < numRow - 3 - linesOfText; i++)
-            cout << " " << string(numCol,' ') << " " << endl;
+            cout << endl;
         cout << "[x] Cancel" << endl;
         printBottomRow(numCol);
         cin >> input;
@@ -132,7 +132,7 @@ int printAddRecord2(int numRow, int numCol, int &sizeArray, record *&records, re
         cout << "Amount: " + to_string(newRecord.amount) << endl;
         cout << "Account: " << endl;
         for (int i = 0; i < numRow - 3 - linesOfText; i++)
-            cout << " " << string(numCol,' ') << " " << endl;
+            cout << endl;
         cout << "[x] Cancel" << endl;
         printBottomRow(numCol);
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
