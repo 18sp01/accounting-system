@@ -107,7 +107,7 @@ void sortRecordPage(int numRow, int numCol, record *records, int &sizeArray, int
         printSortingBy(sortParameter, ascend);
         cout << endl;
         cout << "Please enter [1], [2], [3], or [4] to sort by the corresponding category" << endl;
-        cout << "" << endl;
+        cout << endl;
         listRecords(numRow, numCol, records, sizeArray, page, usedLines);
         cout << endl;
         cout << "[p] Previous [n] Next [t] Toggle Ascend/Descend [1] Amount [2] Type [3] Account [4] Date [x] Exit" << endl;

@@ -47,7 +47,7 @@ int editRecord0 (int numRow, int numCol, record *&records, int &sizeArray, int i
     cout << endl;
     printRecord(records,index-1);
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
-        cout << " " << string(numCol,' ') << " " << endl;
+        cout << endl;
     cout << "[1] Amount  [2] Type  [3] Account  [d] Delete  [x] Cancel" << endl;
     printBottomRow(numCol);
     char input;
@@ -79,7 +79,7 @@ int editRecord1 (int numRow, int numCol, record *records, int index, string cate
     cout << endl;
     printRecord(records,index-1);
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
-        cout << " " << string(numCol,' ') << " " << endl;
+        cout << endl;
     cout << "[x] Cancel" << endl;
     printBottomRow(numCol);
     string input;
@@ -124,7 +124,7 @@ int editRecord2 (int numRow, int numCol, record *records, int index) {
     cout << endl;
     printRecord(records,index-1);
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
-        cout << " " << string(numCol,' ') << " " << endl;
+        cout << endl;
     cout << "[x] Exit" << endl;
     printBottomRow(numCol);
     char input;
@@ -151,7 +151,7 @@ int editfRecord0 (int numRow, int numCol, record *&fRecords, int &fsizeArray, in
     cout << endl;
     printRecord(fRecords,index-1);
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
-        cout << " " << string(numCol,' ') << " " << endl;
+        cout << endl;
     cout << "[1] Amount  [2] Type  [3] Account  [d] Delete  [x] Cancel" << endl;
     printBottomRow(numCol);
     char input;
@@ -184,7 +184,7 @@ int editfRecord1 (int numRow, int numCol, record *&fRecords, int &fsizeArray, in
     cout << endl;
     printRecord(fRecords,index-1);
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
-        cout << " " << string(numCol,' ') << " " << endl;
+        cout << endl;
     cout << "[x] Cancel" << endl;
     printBottomRow(numCol);
     string input;
@@ -231,7 +231,7 @@ int editfRecord2 (int numRow, int numCol, record *&fRecords, int &fsizeArray, in
     cout << endl;
     printRecord(fRecords,index-1);
     for (int i = 0; i < numRow - 3 - linesOfText; i++)
-        cout << " " << string(numCol,' ') << " " << endl;
+        cout << endl;
     cout << "[x] Exit" << endl;
     printBottomRow(numCol);
     char input;
