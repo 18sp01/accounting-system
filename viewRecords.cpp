@@ -211,9 +211,9 @@ void editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, in
 }
 
 // Function: editFilteredRecordPage: prints out a filtered sort records page
-// Inputs: reference to dynamic array records and size of the array, reference to dynamic array of filtered records and size of the array, reference to the page the user is currently on, integer of number of used lines, reference to information regarding the user's sorting mode
+// Inputs: reference to dynamic array records and size of the array, reference to dynamic array of filtered records and size of the array, reference to the page the user is currently on, reference to integer of number of used lines, reference to information regarding the user's sorting mode
 // Outputs: output the page of filtered records to be edited to the iostream
-void editFilteredRecordPage(int numRow, int numCol, record *&fRecords, int &fsizeArray, int &page, int usedLines, string sortParameter, bool ascend, record *&records, int &sizeArray) {
+void editFilteredRecordPage(int numRow, int numCol, record *&fRecords, int &fsizeArray, int &page, int usedLines, string &sortParameter, bool &ascend, record *&records, int &sizeArray) {
     string input;
     while (true) {
         printTopRow(numCol);
@@ -254,10 +254,8 @@ void editFilteredRecordPage(int numRow, int numCol, record *&fRecords, int &fsiz
 // Function: filterRecordsPage: print out interface that guides the user to filter their records
 // Inputs: reference to dynamic array records and size of the array, integer of number of used lines, reference to information regarding the user's sorting mode
 // Outputs: interface that guides the user to filter their records
-void filterRecordsPage(int numRow, int numCol, record *&records, int &sizeArray, int usedLines, string sortParameter, bool ascend) {
+void filterRecordsPage(int numRow, int numCol, record *&records, int &sizeArray, int usedLines, string &sortParameter, bool &ascend) {
     int page = 0;
-    sortParameter = "Date";
-    ascend = false;
     char input;
     while (true) {
         printTopRow(numCol);
@@ -298,8 +296,15 @@ int viewRecordPages(int numRow, int numCol, int &sizeArray, record *&records) {
     int usedLines = 9;
     string sortParameter = "Date";
     bool ascend = false;
-    sortByDate (records, sizeArray, ascend);
     while (true) {
+        if (sortParameter == "Date")
+            sortByDate(records, sizeArray, ascend);
+        else if (sortParameter == "Account")
+            sortByAccount(records, sizeArray, ascend);
+        else if (sortParameter == "Amount")
+            sortByAmount(records, sizeArray, ascend);
+        else if (sortParameter == "Type")
+            sortByType(records, sizeArray, ascend);
         viewRecordPage(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend);
         string input;
         cin >> input;

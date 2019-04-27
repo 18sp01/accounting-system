@@ -7,4 +7,4 @@ void printSortingBy (string sortParameter, bool ascend);
 void listRecords(int numRow, int numCol, record *records, int sizeArray, int page, int usedLines);
 bool isInteger(string s);
 void sortRecordPage(int numRow, int numCol, record *records, int sizeArray, int &page, int usedLines, string &sortParameter, bool &ascend);
-void editFilteredRecordPage(int numRow, int numCol, record *&fRecords, int &fsizeArray, int &page, int usedLines, string sortParameter, bool ascend, record *&records, int &sizeArray);
+void editFilteredRecordPage(int numRow, int numCol, record *&fRecords, int &fsizeArray, int &page, int usedLines, string &sortParameter, bool &ascend, record *&records, int &sizeArray);
