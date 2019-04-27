@@ -73,13 +73,13 @@ You've added your inheritance to the accounting system!
 
 ### View Record
 
-Back at the main menu, type "v" to view your added record.
-
 ![ViewRecord1](https://i.imgur.com/kgsYo7V.png)
 
-Eventually after a while of usage, it will become like this.
+Back at the main menu, type "v" to view your added record.
 
 ![ViewRecord2](https://i.imgur.com/LrGQu1y.png)
+
+Eventually after a while of usage, it will become like this.
 
 You can check other records by using the next and previous page functions. (Or head to configurations in the main menu to increase your interface size.)
 
@@ -87,21 +87,21 @@ You can check other records by using the next and previous page functions. (Or h
 
 In the view records menu, the user has a variety of options to customize the user's data. One of them is sorting. Users can sort by amount, type of income/expense, account, and date.
 
-Sorting by Most Recent (Default):
-
 ![SortRecord](https://i.imgur.com/QvHPSKn.png)
 
-Sorting by Amount:
+Sorting by Most Recent (Default)
 
 ![SortAmount](https://i.imgur.com/QEbym9M.png)
 
-Sorting by Type:
+Sorting by Amount
 
 ![SortType](https://i.imgur.com/e6Ba6f4.png)
 
-Sorting by Account:
+Sorting by Type
 
 ![SortAccount](https://i.imgur.com/KSHkVzP.png)
+
+Sorting by Account
 
 ### Edit Record
 
@@ -109,17 +109,17 @@ Back at view record, the user can edit amount, type, and account of the data.
 
 Because of inheritance tax law, your inheritance has decreased by 75%. We are going to edit the amount of the inheritance.
 
-First we find the inheritance from the view records menu and type "e" to go to the edit records menu.
-
 ![EditRecords](https://i.imgur.com/dGaqLfD.png)
 
-We choose amount:
+First we find the inheritance from the view records menu and type "e" to go to the edit records menu.
 
 ![EditAmount](https://i.imgur.com/oeO2PLs.png)
 
-and enter 50000 to change the data.
+We choose amount
 
 ![EditAmount1](https://i.imgur.com/GDd2IpR.png)
+
+and enter 50000 to change the data.
 
 ### Filter Record
 
