@@ -67,3 +67,72 @@ Once you type "a" to add record, you will see a menu that looks like this:
 
 Now, you can type, in order, the type of income/expense (food, game, etc.), the amount (negative for expenses), and type of account (cash, credit card, etc.).
 
+![AddRecord](https://i.imgur.com/Zx7ax1F.png)
+
+So now you've added your inheritance to the accounting system.
+
+### View Record
+
+Back at the main menu, type "v" to view your added record.
+
+![ViewRecord1](https://i.imgur.com/kgsYo7V.png)
+
+Eventually after a while of usage, it will become like this.
+
+![ViewRecord2](https://i.imgur.com/LrGQu1y.png)
+
+You can check other records by using the next and previous page functions. (Or head to configurations in the main menu to increase your interface size.)
+
+### Sort Record
+
+In the view records menu, the user has a variety of options to customize the user's data. One of them is sorting. Users can sort by amount, type of income/expense, account, and date.
+
+Sorting by Most Recent (Default):
+
+![SortRecord](https://i.imgur.com/QvHPSKn.png)
+
+Sorting by Amount:
+
+![SortAmount](https://i.imgur.com/QEbym9M.png)
+
+Sorting by Type:
+
+![SortType](https://i.imgur.com/e6Ba6f4.png)
+
+Sorting by Account:
+
+![SortAccount](https://i.imgur.com/KSHkVzP.png)
+
+### Edit Record
+
+Back at view record, the user can edit amount, type, and account of the data.
+
+Because of inheritance tax law, your inheritance has decreased by 75%. We are going to edit the amount of the inheritance.
+
+First we find the inheritance from the view records menu and type "e" to go to the edit records menu.
+
+![EditRecords](https://i.imgur.com/dGaqLfD.png)
+
+We choose amount:
+
+![EditAmount](https://i.imgur.com/oeO2PLs.png)
+
+and enter 50000 to change the data.
+
+![EditAmount1](https://i.imgur.com/GDd2IpR.png)
+
+### Filter Record
+
+The user can filter the records to only see what the user want to see.
+
+![FilterRecord](https://i.imgur.com/LVsxHmr.png)
+
+Let's say we only want to see the data for my purchases of games.
+
+We type "1" to choose type and write "Game" to find all the records that have the game type.
+
+![FilterRecord1](https://i.imgur.com/y779Zbs.png)
+
+From here, the user can further sort or edit the filtered data like in the view records menu.
+
+### Statistics Report
