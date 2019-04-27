@@ -44,7 +44,7 @@ To compile the program, type:
 ```
 make
 ```
-**_Note:_ Before executing the accounting system, please make sure your terminal window is greater than 99 in width and 14 in height for the best experience.**
+**_Note:_ Before executing the accounting system, please make sure your terminal window is greater or equal to 113 in width and 14 in height for the best experience.**
 
 When ready, to start the accounting system, type:
 ```
@@ -61,15 +61,15 @@ From here, you have 5 options to choose from: \[a\] to add record, \[v\] to view
 
 ### Add Record
 
-Once you type "a" to add record, you will see a menu that looks like this:
-
 ![AddRecord_Menu](https://i.imgur.com/UKjOOkv.png)
 
-Now, you can type, in order, the type of income/expense (food, game, etc.), the amount (negative for expenses), and type of account (cash, credit card, etc.).
+Once you type "a" to add record, you will see a menu that looks like this.
 
 ![AddRecord](https://i.imgur.com/Zx7ax1F.png)
 
-So now you've added your inheritance to the accounting system.
+Now, you can type, in order, the type of income/expense (food, game, etc.), the amount (negative for expenses), and type of account (cash, credit card, etc.).
+
+You've added your inheritance to the accounting system!
 
 ### View Record
 
@@ -137,11 +137,63 @@ From here, the user can further sort or edit the filtered data like in the view 
 
 ### Income/Expense Report
 
+From the main menu, going into "s" statistics gives you 3 options of statistical reports. The income and expense reports give you detailed information on the amount of money that comes to you and goes out from you.
+
+![Income](https://i.imgur.com/vArKH9w.png)
+
+Clicking on income first gives you the total income. 
+
+![IncomeInheritance](https://i.imgur.com/iMTAYiA.png)
+
+From here, you can type "s" to get a more detailed report comparing your income in a particular area to your total income.
+
+![Expense](https://i.imgur.com/HyJQfVJ.png)
+
+Expense reports works the same way with income reports.
+
 ### Graphs
+
+![Graph](https://i.imgur.com/oYnEjXY.png)
+
+You can create a bar graph comparing your income and expenses by using the graphs function. Choose a slot to add a graph into.
+
+![Graph1](https://i.imgur.com/481Zoij.png)
+
+Pick one of the statistics that you want to be shown on the graph.
+
+![Graph2](https://i.imgur.com/aYzaEu4.png)
+
+It will fill the screen (i.e. max) for the first data but will resize as more data is inputted into the other bar slots.
+
+![Graph3](https://i.imgur.com/CtUv6BN.png)
+
+Feel free to put different data into different slots.
 
 ### Budget Planner
 
+![Bud1](https://i.imgur.com/4CCpz1N.png)
+
+The special thing about our budget setter is that the user can specify the number of days the user want to budget for and set the amount.
+
+![Bud2](https://i.imgur.com/o6NzDnc.png)
+
+For example, I will set a week long 300 dollar budget plan.
+
+![Bud3](https://i.imgur.com/HIV1XKI.png)
+
+Say 43 seconds later, I make a 130.5 dollar purhcase and add it through the function add records. Then in my budgeting plan, it will say the remaining amount that I can spend for the next 6 days 23 hours 59 minutes and 17 seconds.
+
+![Bud4](https://i.imgur.com/4fl3d2L.png)
+
+However, if I spend more than my remaining amount, I will get an alarm in the budgeting menu that I have overspent.
+
+![Bud5](https://i.imgur.com/4CCpz1N.png)
+
+Then, I can type "r", exit, and come back to the budgeting function to remove the old plan and set a new one.
+
 ### Configurations
+
+
 
 ## Input Specifications
 
