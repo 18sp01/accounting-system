@@ -55,9 +55,9 @@ int printAddRecord(int numRow, int numCol, int &sizeArray, record *&records, rec
     }
 }
 
-// Function: 
-// Inputs: 
-// Outputs: 
+// Function: isNumber: checks if a string is a float (including positive and negative)
+// Inputs: a string containing a potential float
+// Outputs: true if string is a float, false if otherwise
 bool isNumber(string s) {
     string temp = s;
     bool decimal = true;
@@ -68,6 +68,7 @@ bool isNumber(string s) {
     }
     for (char i : temp) {
         if (!isdigit(i))
+            // deals with first decimal point
             if (i == '.' && decimal) {
                 decimal = false;
                 continue;

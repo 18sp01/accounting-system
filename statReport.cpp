@@ -11,9 +11,9 @@ using namespace std;
 // header to allow incomeReports to call searchIncomeDetails
 int searchIncomeDetails(int numRow, int numCol, record *records, int sizeArray, double total_income);
 
-// Function: incomeReports: displays the interface that shows the graphs slots
-// Inputs: dynamic array of records, size of records
-// Outputs: interface that shows the graphs slots
+// Function: incomeReports: the first interface of displaying income details, shows total income
+// Inputs: dynamic array of records, size of records, user input
+// Outputs: inferface with total income displayed
 int incomeReports(int numRow, int numCol, record *records, int sizeArray) {
     while(true) {
         printTopRow(numCol);
@@ -40,6 +40,9 @@ int incomeReports(int numRow, int numCol, record *records, int sizeArray) {
     }
 }
 
+// Function: searchIncomeDetails: takes input from user to determine the income detail to display
+// Inputs: dynamic array of records, size of records, the total income calculated from incomeReports, user input
+// Outputs: inferface with the income details regarding the query displayed
 int searchIncomeDetails(int numRow, int numCol, record *records, int sizeArray, double total_income) {
     string category;
     while(true) {
@@ -288,8 +291,12 @@ int searchIncomeDetails(int numRow, int numCol, record *records, int sizeArray, 
     }
 }
 
+// header to allow expenseReports to call searchExpenseDetails
 int searchExpenseDetails(int numRow, int numCol, record *records, int sizeArray, double total_expense);
 
+// Function: expenseReports: the first interface of displaying expense details, shows total expense
+// Inputs: dynamic array of records, size of records, user input
+// Outputs: inferface with total expense displayed
 int expenseReports(int numRow, int numCol, record *records, int sizeArray) {
     while(true) {
         printTopRow(numCol);
@@ -316,6 +323,9 @@ int expenseReports(int numRow, int numCol, record *records, int sizeArray) {
     }
 }
 
+// Function: searchExpenseDetails: takes input from user to determine the expense detail to display
+// Inputs: dynamic array of records, size of records, the total expense calculated from expenseReports, user input
+// Outputs: inferface with the expense details regarding the query displayed
 int searchExpenseDetails(int numRow, int numCol, record *records, int sizeArray, double total_expense) {
     string category;
     while(true) {
@@ -564,6 +574,9 @@ int searchExpenseDetails(int numRow, int numCol, record *records, int sizeArray,
     }
 }
 
+// Function: statReports: main interface of statistical reports
+// Inputs: dynamic array of records, size of records, user input
+// Outputs: inferface corresponding to the user input
 void statReports(int numRow, int numCol, record *records, int sizeArray) {
     char input;
     while (true) {

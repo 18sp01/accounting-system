@@ -57,7 +57,7 @@ void configurationsMenu(int &numRow, int &numCol) {
     while (true) {
         printTopRow(numCol);
         cout << "Configurations" << endl;
-        cout << " Please enter the number of corresponding to the item you want to change, or enter r to reset" << endl;
+        cout << " Please enter the number of corresponding to the item you want to change, or enter [r] to reset" << endl;
         cout << endl;
         cout << "1. Number of rows to display (>= 14): " << numRow << endl;
         cout << "2. Number of columns to display (>= 99):  " << numCol << endl;

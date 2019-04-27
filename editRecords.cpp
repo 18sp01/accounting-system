@@ -39,14 +39,14 @@ int editRecord1 (int numRow, int numCol, record *records, int index, string cate
 int editRecord0 (int numRow, int numCol, record *&records, int &sizeArray, int index) {
     printTopRow(numCol);
     cout << "Edit Record" << endl;
-    cout << "Please enter [1], [2] or [3] to edit the corresponding data, or enter [r] to remove the record" << endl;
+    cout << "Please enter [1], [2] or [3] to edit the corresponding data, or enter [d] to delete the record" << endl;
     cout << endl;
     printCategories(); // categories
     cout << endl;
     printRecord(records,index-1);
     for (int i = 0; i < numRow - 9; i++)
         cout << endl;
-    cout << "[1] Amount  [2] Type  [3] Account  [d] Remove  [x] Cancel" << endl;
+    cout << "[1] Amount  [2] Type  [3] Account  [d] Delete  [x] Cancel" << endl;
     printBottomRow(numCol);
     char input;
     cin >> input;

@@ -11,10 +11,16 @@
 #include "filterRecords.h"
 using namespace std;
 
+// Function: ceilDivision: a functions that returns the ceil division of two numbers
+// Inputs: a number and its divisor
+// Outputs: the ceil division of the two numbers
 int ceilDivision(int number, int divisor) {
     return (number + divisor - 1) / divisor;
 }
 
+// Function: isInteger: a functions check whether a number is a positive integer
+// Inputs: a string with a potential integer
+// Outputs: true if the string is a positive integer, false if otherwise
 bool isInteger(string s) {
     string temp = s;
     for (char i : temp) {
@@ -24,6 +30,9 @@ bool isInteger(string s) {
     return true;
 }
 
+// Function: printSortingBy: prints a string "(Sorted by...)" depending on sort parameter and bool ascend
+// Inputs: a string containing the sortParameter, and bool indicating whether it is sorting by ascend or descending order
+// Outputs: outputs a string to iostream
 void printSortingBy (string sortParameter, bool ascend) {
     cout << "(Sorted by ";
     if (sortParameter != "Date")
@@ -44,6 +53,9 @@ void printSortingBy (string sortParameter, bool ascend) {
     }
 }
 
+// Function: printCategories: prints the first line of the view records list
+// Inputs: none
+// Outputs: outputs a string to iostream
 void printCategories() {
     cout << setw(5) << left << '#' << " | ";
     cout << setw(15) << left << "Amount" << " | ";
@@ -52,6 +64,9 @@ void printCategories() {
     cout << "Date";
 }
 
+// Function: printRecord: prints the details of the record corresponding to the input index
+// Inputs: dynamic array records, index corresponding to the record to display
+// Outputs: outputs a string to iostream
 void printRecord(record *records, int index) {
     cout << setw(5) << left << index+1 << " | ";
     cout << setw(15) << records[index].amount << " | ";
@@ -61,6 +76,9 @@ void printRecord(record *records, int index) {
     cout << setfill(' ') << endl;
 }
 
+// Function: listRecords: prints out a list of records depending on the page and used line
+// Inputs: dynamic array records, size of the array, the page the user is currently on, integer of number of used lines
+// Outputs: outputs multiple lines to iostream
 void listRecords(int numRow, int numCol, record *records, int sizeArray, int page, int usedLines) {
     int maxI;
     if (sizeArray - page*(numRow - usedLines) < numRow - usedLines)
@@ -77,7 +95,10 @@ void listRecords(int numRow, int numCol, record *records, int sizeArray, int pag
     }
 }
 
-void viewRecordPage (int numRow, int numCol, record *records, int &sizeArray, int page, int usedLines, string sortParameter, bool ascend) {
+// Function: viewRecordPage: prints out a view records page
+// Inputs: dynamic array records, size of the array, the page the user is currently on, integer of number of used lines, information regarding the user's sorting mode
+// Outputs: output the page of records to the iostream
+void viewRecordPage (int numRow, int numCol, record *records, int sizeArray, int page, int usedLines, string sortParameter, bool ascend) {
     printTopRow(numCol);
     cout << "View Records (Page "<< page + 1 << " of " << ceilDivision(sizeArray,numRow - usedLines) << ") ";
     printSortingBy(sortParameter, ascend);
@@ -90,8 +111,11 @@ void viewRecordPage (int numRow, int numCol, record *records, int &sizeArray, in
     printBottomRow(numCol);
 }
 
-void sortRecordPage(int numRow, int numCol, record *records, int &sizeArray, int page, int usedLines, string &sortParameter, bool &ascend) {
-    char input = '0';
+// Function: sortRecordPage: prints out a sort records page
+// Inputs: dynamic array records, size of the array, the page the user is currently on, integer of number of used lines, reference to information regarding the user's sorting mode
+// Outputs: output the page of records to be sorted to the iostream
+void sortRecordPage(int numRow, int numCol, record *records, int sizeArray, int &page, int usedLines, string &sortParameter, bool &ascend) {
+    char input;
     while (true) {
         printTopRow(numCol);
         cout << "Sort Records (Page "<< page + 1 << " of " << ceilDivision(sizeArray,numRow - usedLines) << ") ";
@@ -143,9 +167,14 @@ void sortRecordPage(int numRow, int numCol, record *records, int &sizeArray, int
     }
 }
 
-void editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string sortParameter, bool ascend) {
-    string input = "0";
+// Function: editRecordPage: prints out a sort records page
+// Inputs: reference to dynamic array records and size of the array,reference to the page the user is currently on, integer of number of used lines, reference to information regarding the user's sorting mode
+// Outputs: output the page of records to be sorted to the iostream
+void editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, int &page, int usedLines, string sortParameter, bool ascend) {
+    string input;
     while (true) {
+        if (page > ceilDivision(sizeArray,numRow - usedLines) - 1)
+            page = ceilDivision(sizeArray,numRow - usedLines) - 1;
         printTopRow(numCol);
         cout << "Edit Records (Page "<< page + 1 << " of " << sizeArray/(numRow - usedLines) + 1 << ") ";
         printSortingBy(sortParameter, ascend);
@@ -173,14 +202,19 @@ void editRecordPage(int numRow, int numCol, record *&records, int &sizeArray, in
             int x = stoi(input);
             if (x > 0 && x < sizeArray + 1) {
                 editRecord(numRow, numCol, records, sizeArray, x);
+                if (page > ceilDivision(sizeArray,numRow - usedLines) - 1)
+                    page = ceilDivision(sizeArray,numRow - usedLines) - 1;
                 break;
             }
         }
     }
 }
 
-void editFilteredRecordPage(int numRow, int numCol, record *&fRecords, int &fsizeArray, int page, int usedLines, string sortParameter, bool ascend, record *&records, int &sizeArray) {
-    string input = "0";
+// Function: editFilteredRecordPage: prints out a filtered sort records page
+// Inputs: reference to dynamic array records and size of the array, reference to dynamic array of filtered records and size of the array, reference to the page the user is currently on, integer of number of used lines, reference to information regarding the user's sorting mode
+// Outputs: output the page of filtered records to be edited to the iostream
+void editFilteredRecordPage(int numRow, int numCol, record *&fRecords, int &fsizeArray, int &page, int usedLines, string sortParameter, bool ascend, record *&records, int &sizeArray) {
+    string input;
     while (true) {
         printTopRow(numCol);
         cout << "Edit Records (Page "<< page + 1 << " of " << fsizeArray/(numRow - usedLines) + 1 << ") ";
@@ -209,16 +243,22 @@ void editFilteredRecordPage(int numRow, int numCol, record *&fRecords, int &fsiz
             int x = stoi(input);
             if (x > 0 && x < fsizeArray + 1) {
                 editfRecord(numRow, numCol, fRecords, fsizeArray, x, records, sizeArray);
+                if (page > ceilDivision(fsizeArray,numRow - usedLines) - 1)
+                    page = ceilDivision(fsizeArray,numRow - usedLines) - 1;
                 break;
             }
         }
     }
 }
 
-void filterRecordsPage(int numRow, int numCol, record *&records, int &sizeArray, int page, int usedLines, string sortParameter, bool ascend) {
+// Function: filterRecordsPage: print out interface that guides the user to filter their records
+// Inputs: reference to dynamic array records and size of the array, integer of number of used lines, reference to information regarding the user's sorting mode
+// Outputs: interface that guides the user to filter their records
+void filterRecordsPage(int numRow, int numCol, record *&records, int &sizeArray, int usedLines, string sortParameter, bool ascend) {
+    int page = 0;
     sortParameter = "Date";
     ascend = false;
-    char input = '0';
+    char input;
     while (true) {
         printTopRow(numCol);
         cout << "Filter Records";
@@ -228,7 +268,7 @@ void filterRecordsPage(int numRow, int numCol, record *&records, int &sizeArray,
         cout << "Category: ";
         for (int i = 0; i < numRow - 7; i++)
             cout << endl;
-        cout << "[1] Type  [2] Account  [3] Date  [x] Exit" << endl;
+        cout << "[1] Type  [2] Account  [3] Date  [x] Cancel" << endl;
         printBottomRow(numCol);
         cin >> input;
         if (input == 'x')
@@ -250,6 +290,9 @@ void filterRecordsPage(int numRow, int numCol, record *&records, int &sizeArray,
     }
 }
 
+// Function: viewRecordPages: the main interface that shows the user's records
+// Inputs: reference to dynamic array records and size of the array, user input
+// Outputs: the interface with the users records
 int viewRecordPages(int numRow, int numCol, int &sizeArray, record *&records) {
     int page = 0;
     int usedLines = 9;
@@ -273,7 +316,7 @@ int viewRecordPages(int numRow, int numCol, int &sizeArray, record *&records) {
                 page = ceilDivision(sizeArray,numRow - usedLines) - 1;
         }
         if (input == "f")
-            filterRecordsPage(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend);
+            filterRecordsPage(numRow, numCol, records, sizeArray, usedLines, sortParameter, ascend);
         if (input == "e")
             editRecordPage(numRow, numCol, records, sizeArray, page, usedLines, sortParameter, ascend);
         if (input == "s")
