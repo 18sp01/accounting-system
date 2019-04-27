@@ -193,7 +193,9 @@ Then, I can type "r", exit, and come back to the budgeting function to remove th
 
 ### Configurations
 
+![conf1](https://i.imgur.com/E1dzTX1.png)
 
+The last yet defining feature of our program is the ability to expand the height and width of our interface based on the user's terminal window. If you don't want to keep pressing "n"(next page) in the view records menu to see the rest of the data, go to configurations and increase your rows. If you want to compare the data in your graphs more precisely, go to configurations and increase your columns. Make sure to drag your terminal to the correct length if you decide to change the values through the configurator.
 
 ## Input Specifications
 
