@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <limits>
+#include <cctype>
 #include "stdInterface.h"
 #include "viewRecords.h"
 #include "filterRecords.h"
@@ -13,7 +14,7 @@ void filteredRecords(int numRow, int numCol, record *&records, int &sizeArray, i
 // Inputs: character a, character b
 // Outputs: true if same, false if not same
 bool stringCompare0(char a, char b) {
-    return std::tolower(a) == std::tolower(b);
+    return tolower(a) == tolower(b);
 }
 
 // Function: takes in two strings to compare whether they are same

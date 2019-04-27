@@ -12,9 +12,9 @@
 using namespace std;
 
 
-// Function:
-// Inputs: 
-// Outputs: 
+// Function: Updates the size of the records array with sizeChange
+// Inputs: Reference to the dynamic array records, the current size of the records, and the desired sizeChange
+// Outputs: Changes size of records
 void updateRecordsSize(record *&records, int &sizeArray, int sizeChange) {
     record *newRecords = new record[sizeArray+sizeChange];
     for (int i = 0; i < sizeArray; i++) {
@@ -25,20 +25,19 @@ void updateRecordsSize(record *&records, int &sizeArray, int sizeChange) {
     records = newRecords;
 }
 
-// Function: 
-// Inputs: 
-// Outputs: 
+// Function: Simple functions that prints the top row with '#' characters
 void printTopRow(int numCol) {
     cout << string(numCol,'#') << endl;
 }
 
-// Function: 
-// Inputs: 
-// Outputs: 
+// Function: Simple functions that prints the bottom row with '#' characters
 void printBottomRow(int numCol) {
     cout << string(numCol,'#') << endl;
 }
 
+// Function: writeConfigToFile: writes the data numRow and numCol to the file configurations.txt
+// Inputs: integers numRow and numCol
+// Outputs: updates configurations.txt
 void writeConfigToFile(int numRow, int numCol) {
     ofstream fout;
     fout.open("configurations.txt", ofstream::trunc);
@@ -51,6 +50,9 @@ void writeConfigToFile(int numRow, int numCol) {
     fout.close();
 }
 
+// Function: configurationsMenu: The configurations interface, allows users to change the dimensions of the program
+// Inputs: integers numRow and numCol
+// Outputs: updates configurations.txt
 void configurationsMenu(int &numRow, int &numCol) {
     while (true) {
         printTopRow(numCol);
@@ -121,6 +123,9 @@ void configurationsMenu(int &numRow, int &numCol) {
     }
 }
 
+// Function: getConfigFromFile: get config info from configurations.txt
+// Inputs: reference to the integers numRow and numCol
+// Outputs: updated numRow and numCol
 int getConfigFromFile(int &numRow, int &numCol) {
     ifstream fin;
     fin.open("configurations.txt");
@@ -142,9 +147,9 @@ int getConfigFromFile(int &numRow, int &numCol) {
     return 0;
 }
 
-// Function: 
-// Inputs: 
-// Outputs: 
+// Function: printMainMenu: Prints the main menu
+// Inputs: number of rows and number of columns
+// Outputs: none
 void printMainMenu(int numRow, int numCol) {
     printTopRow(numCol);
     int linesOfText = 8;
@@ -158,11 +163,14 @@ void printMainMenu(int numRow, int numCol) {
     cout << "[b] Budgeting" << endl;
     cout << "[c] Configurations" << endl;
     for (int i = 0; i < numRow - 5 - linesOfText; i++)
-        cout << string(numCol,' ') << endl;
+        cout << endl;
     cout << "[x] Exit" << endl;
     printBottomRow(numCol);
 }
 
+// Function: main: prints the first interface when users enter the program
+// Inputs: user input
+// Outputs: exit or calls other interfaces
 int main(int argc, char ** argv) {
     int numCol, numRow;
     if (getConfigFromFile(numRow,numCol) == 0) {

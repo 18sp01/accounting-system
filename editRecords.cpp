@@ -9,14 +9,9 @@
 #include "editRecords.h"
 using namespace std;
 
-// removeRecord: remove record from records
-// Inputs: vector<record> &records: vector of records
-//         int index: index of record to be removed
-// Outputs: 
-//void removeRecord (vector<record> &records, int index) {
-   // records.erase(records.begin() + index);//
-//}
-
+// Function: removeRecord: remove a record from records
+// Inputs: reference to dynamic array records, reference to size of records, the index of the record to be removed
+// Outputs: changes to records, changes to sizeArray
 void deleteRecord(record *&records, int &sizeArray, int index) {
     record *newRecords = new record[sizeArray-1];
     bool shifted = false;
@@ -35,20 +30,23 @@ void deleteRecord(record *&records, int &sizeArray, int index) {
     records = newRecords;
 }
 
+// header to allow editRecord0 to call editRecord1
 int editRecord1 (int numRow, int numCol, record *records, int index, string category, bool error);
 
+// Function: editRecord0: first edit record interface
+// Inputs: reference to dynamic array records, reference to size of records, the index of the record, user input
+// Outputs: changes to records, changes to sizeArray, editRecord1
 int editRecord0 (int numRow, int numCol, record *&records, int &sizeArray, int index) {
     printTopRow(numCol);
-    int linesOfText = 6;
     cout << "Edit Record" << endl;
-    cout << "Please enter [1], [2] or [3] to edit the corresponding data, or enter [d] to delete the record" << endl;
+    cout << "Please enter [1], [2] or [3] to edit the corresponding data, or enter [r] to remove the record" << endl;
     cout << endl;
-    printCategories();
+    printCategories(); // categories
     cout << endl;
     printRecord(records,index-1);
-    for (int i = 0; i < numRow - 3 - linesOfText; i++)
+    for (int i = 0; i < numRow - 9; i++)
         cout << endl;
-    cout << "[1] Amount  [2] Type  [3] Account  [d] Delete  [x] Cancel" << endl;
+    cout << "[1] Amount  [2] Type  [3] Account  [d] Remove  [x] Cancel" << endl;
     printBottomRow(numCol);
     char input;
     cin >> input;
@@ -64,12 +62,14 @@ int editRecord0 (int numRow, int numCol, record *&records, int &sizeArray, int i
         return editRecord1(numRow,numCol,records,index,"type",false);
     if (input == '3')
         return editRecord1(numRow,numCol,records,index,"account",false);
-    else editRecord0(numRow, numCol, records, sizeArray, index);
+    else editRecord0(numRow, numCol, records, sizeArray, index); // calls editRecord0 recursively
 }
 
+// Function: editRecord1: second edit record interface, gets input for the value to edit with
+// Inputs: dynamic array records, the index of the record, string category, bool error, user input
+// Outputs: changes to records, changes to sizeArray
 int editRecord1 (int numRow, int numCol, record *records, int index, string category, bool error) {
     printTopRow(numCol);
-    int linesOfText = 6;
     cout << "Edit Record" << endl;
     if (error)
         cout << "Error! Please enter a number. ";
@@ -78,7 +78,7 @@ int editRecord1 (int numRow, int numCol, record *records, int index, string cate
     printCategories();
     cout << endl;
     printRecord(records,index-1);
-    for (int i = 0; i < numRow - 3 - linesOfText; i++)
+    for (int i = 0; i < numRow - 9; i++)
         cout << endl;
     cout << "[x] Cancel" << endl;
     printBottomRow(numCol);
@@ -88,7 +88,7 @@ int editRecord1 (int numRow, int numCol, record *records, int index, string cate
         cin >> input;
     }
     else {
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');  // handles multi word inputs
         getline(cin, input);
     }
     if (input == "x")
@@ -114,16 +114,18 @@ int editRecord1 (int numRow, int numCol, record *records, int index, string cate
     }
 }
 
+// Function: editRecord2: third edit record interface
+// Inputs: dynamic array records, the index of the record
+// Outputs: changes to records, changes to sizeArray, editRecord1
 int editRecord2 (int numRow, int numCol, record *records, int index) {
     printTopRow(numCol);
-    int linesOfText = 6;
     cout << "Edit Record" << endl;
     cout << "Record saved! Enter [x] to exit." << endl;
     cout << "" << endl;
     printCategories();
     cout << endl;
     printRecord(records,index-1);
-    for (int i = 0; i < numRow - 3 - linesOfText; i++)
+    for (int i = 0; i < numRow - 9; i++)
         cout << endl;
     cout << "[x] Exit" << endl;
     printBottomRow(numCol);
@@ -133,14 +135,22 @@ int editRecord2 (int numRow, int numCol, record *records, int index) {
         editRecord2(numRow, numCol, records, index);
 }
 
+// function to call editRecord0 and editRecord2 properly
 void editRecord (int numRow, int numCol, record *&records, int &sizeArray, int index) {
-    if (editRecord0(numRow, numCol, records, sizeArray, index)) {
+    if (editRecord0(numRow, numCol, records, sizeArray, index))
         editRecord2(numRow, numCol, records, index);
-    }
 }
 
-int editfRecord1 (int numRow, int numCol, record *&fRecords, int &fsizeArray, int index, record *&records, int &sizeArray, string category, bool error);
 
+/*
+the editfRecord functions is are versions of the original editRecord functions but tuned to edit filter records instead. Therefore
+besides editing the filtered fRecords, it also edits the original records array.
+*/
+int editfRecord1 (int numRow, int numCol, record *fRecords, int index, record *records, string category, bool error);
+
+// Function: editfRecord0: first edit record interface in filterRecords
+// Inputs: reference to dynamic array records and fRecords, reference to size of records and fRecords, the index of the record, user input
+// Outputs: changes to records and fRecords, changes to sizeArray and fsizeArray, editfRecord1
 int editfRecord0 (int numRow, int numCol, record *&fRecords, int &fsizeArray, int index, record *&records, int &sizeArray) {
     printTopRow(numCol);
     int linesOfText = 6;
@@ -164,17 +174,19 @@ int editfRecord0 (int numRow, int numCol, record *&fRecords, int &fsizeArray, in
         return 0;
     }
     if (input == '1')
-        return editfRecord1(numRow, numCol, fRecords, fsizeArray, index, records, sizeArray,"amount",false);
+        return editfRecord1(numRow, numCol, fRecords, index, records,"amount",false);
     if (input == '2')
-        return editfRecord1(numRow, numCol, fRecords, fsizeArray, index, records, sizeArray,"type",false);
+        return editfRecord1(numRow, numCol, fRecords, index, records,"type",false);
     if (input == '3')
-        return editfRecord1(numRow, numCol, fRecords, fsizeArray, index, records, sizeArray,"account",false);
+        return editfRecord1(numRow, numCol, fRecords, index, records,"account",false);
     else editfRecord0(numRow, numCol, fRecords, fsizeArray, index, records, sizeArray);
 }
 
-int editfRecord1 (int numRow, int numCol, record *&fRecords, int &fsizeArray, int index, record *&records, int &sizeArray, string category, bool error) {
+// Function: editfRecord1: second edit record interface in filterRecords, gets input for the value to edit with
+// Inputs: dynamic array records and fRecords, the index of the record, user input, string category, bool error
+// Outputs: changes to records and fRecords, changes to sizeArray and fsizeArray, editfRecord1
+int editfRecord1 (int numRow, int numCol, record *fRecords, int index, record *records, string category, bool error) {
     printTopRow(numCol);
-    int linesOfText = 6;
     cout << "Edit Record" << endl;
     if (error)
         cout << "Error! Please enter a number. ";
@@ -183,7 +195,7 @@ int editfRecord1 (int numRow, int numCol, record *&fRecords, int &fsizeArray, in
     printCategories();
     cout << endl;
     printRecord(fRecords,index-1);
-    for (int i = 0; i < numRow - 3 - linesOfText; i++)
+    for (int i = 0; i < numRow - 9; i++)
         cout << endl;
     cout << "[x] Cancel" << endl;
     printBottomRow(numCol);
@@ -206,7 +218,7 @@ int editfRecord1 (int numRow, int numCol, record *&fRecords, int &fsizeArray, in
         }
         if (category == "amount") {
             if (!isNumber(input))
-                editfRecord1(numRow, numCol, fRecords, fsizeArray, index, records, sizeArray, category, true);
+                editfRecord1(numRow, numCol, fRecords, index, records, category, true);
             else {
                 fRecords[index-1].amount = stod(input);
                 records[fRecords[index-1].originalIndex].amount = stod(input);
@@ -221,27 +233,29 @@ int editfRecord1 (int numRow, int numCol, record *&fRecords, int &fsizeArray, in
     }
 }
 
-int editfRecord2 (int numRow, int numCol, record *&fRecords, int &fsizeArray, int index, record *&records, int &sizeArray) {
+// Function: editRecord2: third edit record interface in filterRecords
+// Inputs: reference to dynamic array records and fRecords, the index of the record
+// Outputs: changes to records and fRecords
+int editfRecord2 (int numRow, int numCol, record *fRecords, int index, record *records) {
     printTopRow(numCol);
-    int linesOfText = 6;
     cout << "Edit Record" << endl;
     cout << "Record saved! Enter [x] to exit." << endl;
     cout << "" << endl;
     printCategories();
     cout << endl;
     printRecord(fRecords,index-1);
-    for (int i = 0; i < numRow - 3 - linesOfText; i++)
+    for (int i = 0; i < numRow - 9; i++)
         cout << endl;
     cout << "[x] Exit" << endl;
     printBottomRow(numCol);
     char input;
     cin >> input;
     if (input != 'x')
-        editfRecord2(numRow, numCol, fRecords, fsizeArray, index, records, sizeArray);
+        editfRecord2(numRow, numCol, fRecords, index, records);
 }
 
 void editfRecord (int numRow, int numCol, record *&fRecords, int &fsizeArray, int index, record *&records, int &sizeArray) {
     if (editfRecord0(numRow, numCol, fRecords, fsizeArray, index, records, sizeArray)) {
-        editfRecord2(numRow, numCol, fRecords, fsizeArray, index, records, sizeArray);
+        editfRecord2(numRow, numCol, fRecords, index, records);
     }
 }

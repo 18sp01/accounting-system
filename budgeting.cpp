@@ -135,6 +135,9 @@ int setBudget(int numRow, int numCol, struct tm &setBudgetTime, int &periodSecon
     return 1;
 }
 
+// Function: writeBudgetToFile: Writes user's budgeting information to budgeting.txt
+// Inputs: struct tm object setBudgetTime (time object which hold when user set the budget), the integer in seconds of the duration of their budgeting period, and the double budgetAmount
+// Outputs: information written to budgeting.txt
 void writeBudgetToFile(struct tm setBudgetTime, int periodSeconds, double budgetAmount, bool remove) {
     ofstream fout;
     fout.open("budgeting.txt", ofstream::trunc);
@@ -150,6 +153,9 @@ void writeBudgetToFile(struct tm setBudgetTime, int periodSeconds, double budget
     fout.close();
 }
 
+// Function: budgetingMenu: Prints the budgeting menu, with info about the users current budgeting plan
+// Inputs: int number of rows, int number of columns, reference to dynamic array records, int size of records
+// Outputs: exit or other interfaces
 void budgetingMenu(int numRow, int numCol, record *&records, int &sizeArray) {
     int periodSeconds;
     struct tm setBudgetTime;
@@ -163,6 +169,7 @@ void budgetingMenu(int numRow, int numCol, record *&records, int &sizeArray) {
     bool overspent = false;
     while (true) {
         time_t now = time(NULL);
+        // if no budgeting plan is set currently, budgetingActive stays false, and no calculation is performed
         if (getSetBudgetTime(setBudgetTime, periodSeconds, budgetAmount) != 0) {
             budgetingActive = true;
             diffSeconds = difftime(now,mktime(&setBudgetTime));

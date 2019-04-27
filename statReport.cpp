@@ -8,17 +8,13 @@
 #include "statGraphs.h"
 using namespace std;
 
-void listReports(int numRow, int numCol, string *&reports, int sizeReports) {
-    for (int i = 0; i < sizeReports; i++) {
-        cout << "[" << i+1 << "] ";
-        cout << reports[i];
-        cout << endl;
-    }
-}
+// header to allow incomeReports to call searchIncomeDetails
+int searchIncomeDetails(int numRow, int numCol, record *records, int sizeArray, double total_income);
 
-int searchIncomeDetails(int numRow, int numCol, record *&records, int &sizeArray, double total_income);
-
-int incomeReports(int numRow, int numCol, record *&records, int &sizeArray) {
+// Function: incomeReports: displays the interface that shows the graphs slots
+// Inputs: dynamic array of records, size of records
+// Outputs: interface that shows the graphs slots
+int incomeReports(int numRow, int numCol, record *records, int sizeArray) {
     while(true) {
         printTopRow(numCol);
         cout << "Income Report" << endl;
@@ -44,7 +40,7 @@ int incomeReports(int numRow, int numCol, record *&records, int &sizeArray) {
     }
 }
 
-int searchIncomeDetails(int numRow, int numCol, record *&records, int &sizeArray, double total_income) {
+int searchIncomeDetails(int numRow, int numCol, record *records, int sizeArray, double total_income) {
     string category;
     while(true) {
         printTopRow(numCol);
@@ -292,9 +288,9 @@ int searchIncomeDetails(int numRow, int numCol, record *&records, int &sizeArray
     }
 }
 
-int searchExpenseDetails(int numRow, int numCol, record *&records, int &sizeArray, double total_expense);
+int searchExpenseDetails(int numRow, int numCol, record *records, int sizeArray, double total_expense);
 
-int expenseReports(int numRow, int numCol, record *&records, int &sizeArray) {
+int expenseReports(int numRow, int numCol, record *records, int sizeArray) {
     while(true) {
         printTopRow(numCol);
         cout << "Expense Report" << endl;
@@ -320,7 +316,7 @@ int expenseReports(int numRow, int numCol, record *&records, int &sizeArray) {
     }
 }
 
-int searchExpenseDetails(int numRow, int numCol, record *&records, int &sizeArray, double total_expense) {
+int searchExpenseDetails(int numRow, int numCol, record *records, int sizeArray, double total_expense) {
     string category;
     while(true) {
         printTopRow(numCol);
@@ -568,17 +564,17 @@ int searchExpenseDetails(int numRow, int numCol, record *&records, int &sizeArra
     }
 }
 
-void statReports(int numRow, int numCol, record *&records, int &sizeArray) {
-    char input = '0';
-    int sizeReports = 3;
-    string * reports = new string[sizeReports] {"Income", "Expense", "Graphs"};
+void statReports(int numRow, int numCol, record *records, int sizeArray) {
+    char input;
     while (true) {
         printTopRow(numCol);
         cout << "Statistical Reports" << endl;
         cout << "Please enter a number to view the corresponding report, or enter [x] to exit" << endl;
         cout << endl;
-        listReports(numRow, numCol, reports, sizeReports);
-        for (int i = 0; i < numRow - 7 - sizeReports; i++)
+        cout << "[1] Income" << endl;
+        cout << "[2] Expense" << endl;
+        cout << "[3] Graphs" << endl;
+        for (int i = 0; i < numRow - 10; i++)
             cout << endl;
         cout << "[x] Exit" << endl;
         printBottomRow(numCol);

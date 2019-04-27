@@ -11,15 +11,6 @@
 #include "filterRecords.h"
 using namespace std;
 
-// Function: int printVector: prints data inside records
-// Inputs: number of rows for the interface, number of columns for the interface, vector of records
-// Outputs: prints records
-// Example:
-// 1 | Amount: 9998 | Type: Dinner Ingredient | Account: Credit Card | Date: 12 4 2019 12:23
-// 2 | Amount: 102 | Type: Food | Account: Bank | Date: 12 4 2019 14:09
-// Num | Amount | Type | Account | Date
-// 2 | 102 | Food | Bank | 12 4 2019 14:09
-
 int ceilDivision(int number, int divisor) {
     return (number + divisor - 1) / divisor;
 }
@@ -147,7 +138,7 @@ void sortRecordPage(int numRow, int numCol, record *records, int &sizeArray, int
         }
         if (input == 't') {
             ascend = !ascend;
-            reverseVector(records, sizeArray);
+            reverseArray(records, sizeArray);
         }
     }
 }

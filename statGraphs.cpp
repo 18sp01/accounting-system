@@ -8,12 +8,14 @@
 #include "filterRecords.h"
 using namespace std;
 
+// Function: calculatePercent: scales graphValues from to range -1 to 1
+// Inputs: array of 5 graph values, array of 5 graph value percentages
+// Outputs: updates graphValuePercent
 void calculatePercent(double graphValue[5], double graphValuePercent[5]) {
     double maxVal = graphValue[0];
     for (int i = 0; i < 5; i++) {
-        if (maxVal < abs(graphValue[i])) {
+        if (maxVal < abs(graphValue[i]))
             maxVal = abs(graphValue[i]);
-        }
     }
     for (int i = 0; i < 5; i++) {
         if (maxVal != 0)
@@ -23,7 +25,10 @@ void calculatePercent(double graphValue[5], double graphValuePercent[5]) {
     }
 }
 
-int addGraph(int numRow, int numCol, record *&records, int &sizeArray, int graphNumber, string graphName[5], double graphValue[5], double graphValuePercent[5]) {
+// Function: addGraph: adds a new graph or deletes a graph according to user input
+// Inputs: dynamic array of records, size of records, the number corresponding to the graph slot, array of 5 graph names, array of 5 graph values, array of 5 graph value percentages
+// Outputs: updates the 3 arrays according to user input
+int addGraph(int numRow, int numCol, record *records, int sizeArray, int graphNumber, string graphName[5], double graphValue[5], double graphValuePercent[5]) {
     while(true) {
         printTopRow(numCol);
         cout << "Edit Graphs" << endl;
@@ -146,7 +151,10 @@ int addGraph(int numRow, int numCol, record *&records, int &sizeArray, int graph
     }
 }
 
-int showGraph(int numRow, int numCol, record *&records, int &sizeArray, string graphName[5], double graphValue[5], double graphValuePercent[5]) {
+// Function: showGraph: displays the interface that shows the graphs
+// Inputs: dynamic array of records, size of records, array of 5 graph names, array of 5 graph values, array of 5 graph value percentages
+// Outputs: the interface that shows the graphs
+int showGraph(int numRow, int numCol, record *records, int sizeArray, string graphName[5], double graphValue[5], double graphValuePercent[5]) {
     int maxlen = (numCol-1)/2;
     while(true) {
         calculatePercent(graphValue, graphValuePercent);
@@ -171,8 +179,10 @@ int showGraph(int numRow, int numCol, record *&records, int &sizeArray, string g
     }
 }
 
-
-int statGraph(int numRow, int numCol, record *&records, int &sizeArray) {
+// Function: statGraph: displays the interface that shows the graphs slots
+// Inputs: dynamic array of records, size of records
+// Outputs: interface that shows the graphs slots
+int statGraph(int numRow, int numCol, record *records, int sizeArray) {
     string graphName[5] = {"", "", "", "", ""}; 
     double graphValue[5] = {0, 0, 0, 0, 0};
     double graphValuePercent[5];
