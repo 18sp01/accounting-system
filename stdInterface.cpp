@@ -60,7 +60,7 @@ void configurationsMenu(int &numRow, int &numCol) {
         cout << " Please enter the number of corresponding to the item you want to change, or enter [r] to reset" << endl;
         cout << endl;
         cout << "1. Number of rows to display (>= 14): " << numRow << endl;
-        cout << "2. Number of columns to display (>= 99):  " << numCol << endl;
+        cout << "2. Number of columns to display (>= 113):  " << numCol << endl;
         for (int i = 0; i < numRow - 9; i++)
             cout << endl;
         cout << "[1/2] Edit item  [r] Reset  [x] Exit" << endl;
@@ -77,7 +77,7 @@ void configurationsMenu(int &numRow, int &numCol) {
                 cout << " Please enter the number of rows you want to display (integer larger or equal to 14)." << endl;
                 cout << endl;
                 cout << "1. Number of rows to display (>= 14): " << numRow << endl;
-                cout << "2. Number of columns to display (>= 99):  " << numCol << endl;
+                cout << "2. Number of columns to display (>= 113):  " << numCol << endl;
                 for (int i = 0; i < numRow - 9; i++)
                     cout << endl;
                 cout << "[x] Cancel" << endl;
@@ -97,10 +97,10 @@ void configurationsMenu(int &numRow, int &numCol) {
                 string columns;
                 printTopRow(numCol);
                 cout << "Configurations" << endl;
-                cout << " Please enter the number of columns you want to display (integer larger or equal to 14)." << endl;
+                cout << " Please enter the number of columns you want to display (integer larger or equal to 113)." << endl;
                 cout << endl;
                 cout << "1. Number of rows to display (>= 14): " << numRow << endl;
-                cout << "2. Number of columns to display (>= 99):  " << numCol << endl;
+                cout << "2. Number of columns to display (>= 113):  " << numCol << endl;
                 for (int i = 0; i < numRow - 9; i++)
                     cout << endl;
                 cout << "[x] Cancel" << endl;
@@ -108,7 +108,7 @@ void configurationsMenu(int &numRow, int &numCol) {
                 cin >> columns;
                 if (columns == "x")
                     break;
-                if (isInteger(columns) && stoi(columns) >= 99) {
+                if (isInteger(columns) && stoi(columns) >= 113) {
                     numCol = stoi(columns);
                     writeConfigToFile(numRow, numCol);
                     break;
@@ -116,7 +116,7 @@ void configurationsMenu(int &numRow, int &numCol) {
             }
         }
         if (input == 'r') {
-            numCol = 99;
+            numCol = 113;
             numRow = 14;
             writeConfigToFile(numRow, numCol);
         }
@@ -174,7 +174,7 @@ void printMainMenu(int numRow, int numCol) {
 int main(int argc, char ** argv) {
     int numCol, numRow;
     if (getConfigFromFile(numRow,numCol) == 0) {
-        numCol = 99;
+        numCol = 113;
         numRow = 14;
     }
     int sizeArray = 0;
