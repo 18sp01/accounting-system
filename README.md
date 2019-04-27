@@ -211,3 +211,9 @@ For budgeting, the "budgeting.txt" file will look like this if you have inputted
 Day,Month,Year,Hour,Minute,Second,periodSeconds,budgetAmount
 27,3,119,22,36,36,604800,300,
 ```
+
+## Conclusion
+
+Thank you for reading and checking out our project.
+
+Feel free to contact us if there are any errors or bugs!
