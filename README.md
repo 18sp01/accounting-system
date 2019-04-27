@@ -127,7 +127,7 @@ The user can filter the records to only see what the user want to see.
 
 ![FilterRecord](https://i.imgur.com/LVsxHmr.png)
 
-Let's say we only want to see the data for my purchases of games.
+Let's say we only want to see the data for the purchases of games.
 
 We type "1" to choose type and write "Game" to find all the records that have the game type.
 
@@ -135,4 +135,25 @@ We type "1" to choose type and write "Game" to find all the records that have th
 
 From here, the user can further sort or edit the filtered data like in the view records menu.
 
-### Statistics Report
+### Income/Expense Report
+
+### Graphs
+
+### Budget Planner
+
+### Configurations
+
+## Input Specifications
+
+If you want to manually change the data records through the text file, please find "data.txt" and write the data on the text file like this (**with** the first line of text if there is data starting from the 2nd line or **without** the first line of text if there is no data):
+```
+Amount,Type,Account,Day,Month,Year,Hour,Minutes,Seconds
+30000,Salary,Bank Card,26,4,2019,1,2,23,
+-2599,Smartphone,Bank Card,13,9,2018,23,12,9,
+```
+
+For budgeting, the "budgeting.txt" file will look like this if you have inputted a budgeting plan in the system and nothing if there is no plan in place:
+```
+Day,Month,Year,Hour,Minute,Second,periodSeconds,budgetAmount
+27,3,119,22,36,36,604800,300,
+```
